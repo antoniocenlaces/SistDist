@@ -41,6 +41,7 @@ func findPrimes(interval com.TPInterval) (primes []int) {
 }
 
 func processRequest(conn net.Conn) {
+	defer conn.Close()
 	var request com.Request
 	decoder := gob.NewDecoder(conn)
 	err := decoder.Decode(&request)
@@ -71,9 +72,8 @@ func main() {
 		conn, err := listener.Accept()
 		com.CheckError(err)
 		log.Println("New connection from ", conn.RemoteAddr())
-		processRequest(conn)
+		go processRequest(conn)
 
-		//conn.Close()
 	}
 
 }
