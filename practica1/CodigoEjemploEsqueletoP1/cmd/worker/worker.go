@@ -61,7 +61,7 @@ func processRequest(conn net.Conn, quitChan chan bool, listner *net.Listener) {
 func main() {
 	args := os.Args
 	if len(args) != 2 {
-		log.Println("Error: endpoint missing: go run server.go ip:port")
+		log.Println("Error: endpoint missing: go run worker.go ip:port")
 		os.Exit(1)
 	}
 	endpoint := args[1] //endpoint del worker

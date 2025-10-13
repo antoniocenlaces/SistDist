@@ -99,7 +99,7 @@ func processRequest(endpoint string, requestChan chan com.Request, replyChan cha
 			//Leo la respuesta del worker y la añado al canal
 			err = readMsg(conn, &reply)
 			com.CheckError(err)
-			log.Println("Reply recivida del worker ", conn.RemoteAddr())
+			log.Println("Reply recibida del worker ", conn.RemoteAddr())
 			replyChan <- reply
 		case <-quit: //El trabajo finaliza hay que cerrar el worker
 			conn, err := net.Dial("tcp", endpoint)
