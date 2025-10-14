@@ -94,9 +94,10 @@ func acceptAndHandleConnections(listener net.Listener, quitChannel chan bool,
 
 func notifyOtherDistributedProcesses(endPoints []string, lineNumber int, barrierChan chan bool) {
 	sendMap := make(map[int]bool) // Mapa de a cuantos procesos se les ha enviado el mensaje
+	var mu sync.Mutex
 	for i, ep := range endPoints {
 		if i+1 != lineNumber {
-			go func(ep string, sendMap *map[int]bool, barrierChan chan bool, n int) {
+			go func(ep string, sendMap *map[int]bool, barrierChan chan bool, mu *sync.Mutex, n int) {
 				for {
 					conn, err := net.Dial("tcp", ep)
 					if err != nil {
@@ -110,7 +111,9 @@ func notifyOtherDistributedProcesses(endPoints []string, lineNumber int, barrier
 						conn.Close()
 						continue
 					}
+					mu.Lock()
 					(*sendMap)[i] = true
+					mu.Unlock()
 					log.Println("Sent msg to ", ep, " sents ", len(*sendMap))
 					if n-1 == len(*sendMap) {
 						barrierChan <- true //Desbloqueo la barrera si ya he mandado mis mensaje al resto
@@ -119,7 +122,7 @@ func notifyOtherDistributedProcesses(endPoints []string, lineNumber int, barrier
 					conn.Close()
 					break
 				}
-			}(ep, &sendMap, barrierChan, len(endPoints))
+			}(ep, &sendMap, barrierChan, &mu, len(endPoints))
 		}
 
 	}
