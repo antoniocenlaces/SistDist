@@ -40,20 +40,27 @@ func findPrimes(interval com.TPInterval) (primes []int) {
 	return primes
 }
 
-func processRequest(conn net.Conn) {
+func processRequest(conn net.Conn) bool {
 	var request com.Request
+	var end bool
 	decoder := gob.NewDecoder(conn)
-	err := decoder.Decode(&request)
+	err := decoder.Decode(&request) // espera recibir una petición de un cliente
 	com.CheckError(err)
-	primes := findPrimes(request.Interval)
-
-	reply := com.Reply{Id: request.Id, Primes: primes}
-	encoder := gob.NewEncoder(conn)
-	encoder.Encode(&reply)
-	log.Println("Reply to", conn.RemoteAddr())
+	if request.Id > 0 { // si es una petción de tranbajo se procesa
+		primes := findPrimes(request.Interval) // busca los primos en ese intervalo
+		reply := com.Reply{Id: request.Id, Primes: primes}
+		end = false
+		encoder := gob.NewEncoder(conn)
+		encoder.Encode(&reply)
+	} else { // de lo contrario se avisa que hemos terminado
+		end = true
+	}
+	return end
 }
 
 func main() {
+	var end bool
+	end = false
 	args := os.Args
 	if len(args) != 2 {
 		log.Println("Error: endpoint missing: go run server.go ip:port")
@@ -61,19 +68,15 @@ func main() {
 	}
 	endpoint := args[1]
 	listener, err := net.Listen("tcp", endpoint)
-
 	com.CheckError(err)
-	defer listener.Close()
+
 	log.SetFlags(log.Lshortfile | log.Lmicroseconds)
 
 	log.Println("***** Listening for new connection in endpoint ", endpoint)
-	for {
+	for !end {
 		conn, err := listener.Accept()
 		com.CheckError(err)
-		log.Println("New connection from ", conn.RemoteAddr())
-		processRequest(conn)
-
-		//conn.Close()
+		defer conn.Close()
+		end = processRequest(conn)
 	}
-
 }
