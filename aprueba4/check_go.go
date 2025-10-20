@@ -159,7 +159,8 @@ func processReply(n *Node) {
 func processRequest(n *Node, msg Message, endpoints []string) {
 	n.Mu.Lock()
 	n.HighestSeq = Max(n.HighestSeq, msg.Seq)
-	deferIt := n.RequestedSC && ((msg.Seq > n.MySeq) || (msg.Seq == n.MySeq && msg.Id > n.Me))
+	deferIt := n.RequestedSC && !(n.Reader && msg.Reader) &&
+		((msg.Seq > n.MySeq) || (msg.Seq == n.MySeq && msg.Id > n.Me))
 	n.Mu.Unlock()
 	if deferIt {
 		n.Mu.Lock()
@@ -224,12 +225,17 @@ func HandleReceivedMessages(n *Node, endpoints []string, quit chan struct{}) {
 }
 
 func main() {
-	myNode := NewNode(3, true, 4)
+	myNode := NewNode(4, false, 4)
 	endpoints := []string{"127.0.0.1:29280", "127.0.0.1:29281", "127.0.0.1:29282", "127.0.0.1:29283"}
 	log.SetFlags(log.Lshortfile | log.Lmicroseconds)
 	quit := make(chan struct{})
 	log.Println("Inicio a escuchar mensajes en Nodo: ", endpoints[myNode.Me-1])
 	go HandleReceivedMessages(myNode, endpoints, quit)
+	if myNode.Reader {
+		log.Println("Nodo: ", myNode.Me, " Es un LECTOR")
+	} else {
+		log.Println("Nodo: ", myNode.Me, " Es un ESCRITOR")
+	}
 	log.Println("Nodo: ", myNode.Me, " va a pedir entrada en CS")
 	// In this example I'm writer and I want to enter CS:
 	myNode.RequestCS(endpoints)
@@ -252,6 +258,8 @@ func main() {
 	// once finished I notify the rest
 	myNode.ReleaseCS(endpoints)
 	log.Println("Nodo: ", myNode.Me, "Ha salido de CS y la ha liberado para otros")
+	// Como los otros piden más accesos no puedo acabar
+	time.Sleep(20000 * time.Millisecond)
 
 	// Stop listener
 	close(quit)

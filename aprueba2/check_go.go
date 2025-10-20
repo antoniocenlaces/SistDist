@@ -159,7 +159,8 @@ func processReply(n *Node) {
 func processRequest(n *Node, msg Message, endpoints []string) {
 	n.Mu.Lock()
 	n.HighestSeq = Max(n.HighestSeq, msg.Seq)
-	deferIt := n.RequestedSC && ((msg.Seq > n.MySeq) || (msg.Seq == n.MySeq && msg.Id > n.Me))
+	deferIt := n.RequestedSC && !(n.Reader && msg.Reader) &&
+		((msg.Seq > n.MySeq) || (msg.Seq == n.MySeq && msg.Id > n.Me))
 	n.Mu.Unlock()
 	if deferIt {
 		n.Mu.Lock()
@@ -224,12 +225,17 @@ func HandleReceivedMessages(n *Node, endpoints []string, quit chan struct{}) {
 }
 
 func main() {
-	myNode := NewNode(1, false, 4)
+	myNode := NewNode(2, true, 4)
 	endpoints := []string{"127.0.0.1:29280", "127.0.0.1:29281", "127.0.0.1:29282", "127.0.0.1:29283"}
 	log.SetFlags(log.Lshortfile | log.Lmicroseconds)
 	quit := make(chan struct{})
 	log.Println("Inicio a escuchar mensajes en Nodo: ", endpoints[myNode.Me-1])
 	go HandleReceivedMessages(myNode, endpoints, quit)
+	if myNode.Reader {
+		log.Println("Nodo: ", myNode.Me, " Es un LECTOR")
+	} else {
+		log.Println("Nodo: ", myNode.Me, " Es un ESCRITOR")
+	}
 	log.Println("Nodo: ", myNode.Me, " va a pedir entrada en CS")
 	// In this example I'm writer and I want to enter CS:
 	myNode.RequestCS(endpoints)
@@ -246,6 +252,50 @@ func main() {
 	// In this example I'm writer and I want to enter CS:
 	myNode.RequestCS(endpoints)
 	log.Println("Nodo: ", myNode.Me, " Ha conseguido entrar en CS por segunda vez")
+	time.Sleep(8000 * time.Millisecond)
+	// Now myNode is in SC
+	// as this example is a writer could write and then notify new content to other writers
+	// once finished I notify the rest
+	myNode.ReleaseCS(endpoints)
+	log.Println("Nodo: ", myNode.Me, "Ha salido de CS y la ha liberado para otros")
+
+	log.Println("Nodo: ", myNode.Me, " va a pedir entrada en CS por tercera vez")
+	// In this example I'm writer and I want to enter CS:
+	myNode.RequestCS(endpoints)
+	log.Println("Nodo: ", myNode.Me, " Ha conseguido entrar en CS por tercera vez")
+	time.Sleep(2000 * time.Millisecond)
+	// Now myNode is in SC
+	// as this example is a writer could write and then notify new content to other writers
+	// once finished I notify the rest
+	myNode.ReleaseCS(endpoints)
+	log.Println("Nodo: ", myNode.Me, "Ha salido de CS y la ha liberado para otros")
+
+	log.Println("Nodo: ", myNode.Me, " va a pedir entrada en CS por cuarta vez")
+	// In this example I'm writer and I want to enter CS:
+	myNode.RequestCS(endpoints)
+	log.Println("Nodo: ", myNode.Me, " Ha conseguido entrar en CS por cuarta vez")
+	time.Sleep(2000 * time.Millisecond)
+	// Now myNode is in SC
+	// as this example is a writer could write and then notify new content to other writers
+	// once finished I notify the rest
+	myNode.ReleaseCS(endpoints)
+	log.Println("Nodo: ", myNode.Me, "Ha salido de CS y la ha liberado para otros")
+
+	log.Println("Nodo: ", myNode.Me, " va a pedir entrada en CS por quinta vez")
+	// In this example I'm writer and I want to enter CS:
+	myNode.RequestCS(endpoints)
+	log.Println("Nodo: ", myNode.Me, " Ha conseguido entrar en CS por quinta vez")
+	time.Sleep(2000 * time.Millisecond)
+	// Now myNode is in SC
+	// as this example is a writer could write and then notify new content to other writers
+	// once finished I notify the rest
+	myNode.ReleaseCS(endpoints)
+	log.Println("Nodo: ", myNode.Me, "Ha salido de CS y la ha liberado para otros")
+
+	log.Println("Nodo: ", myNode.Me, " va a pedir entrada en CS por sexta vez")
+	// In this example I'm writer and I want to enter CS:
+	myNode.RequestCS(endpoints)
+	log.Println("Nodo: ", myNode.Me, " Ha conseguido entrar en CS por sexta vez")
 	time.Sleep(2000 * time.Millisecond)
 	// Now myNode is in SC
 	// as this example is a writer could write and then notify new content to other writers
