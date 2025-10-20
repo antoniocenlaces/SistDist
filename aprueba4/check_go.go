@@ -224,7 +224,7 @@ func HandleReceivedMessages(n *Node, endpoints []string, quit chan struct{}) {
 }
 
 func main() {
-	myNode := NewNode(1, false, 4)
+	myNode := NewNode(3, true, 4)
 	endpoints := []string{"127.0.0.1:29280", "127.0.0.1:29281", "127.0.0.1:29282", "127.0.0.1:29283"}
 	log.SetFlags(log.Lshortfile | log.Lmicroseconds)
 	quit := make(chan struct{})
