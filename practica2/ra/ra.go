@@ -10,10 +10,8 @@ package ra
 
 import (
 	"log"
-	"net"
 	"practica2/ms"
 	"sync"
-	"time"
 )
 
 type Request struct {
@@ -23,10 +21,6 @@ type Request struct {
 }
 
 type Reply struct{}
-
-type File struct {
-	Text string
-}
 
 type RASharedDB struct {
 	Me         int
@@ -47,7 +41,7 @@ type RASharedDB struct {
 }
 
 func New(me int, usersFile string, reader bool) *RASharedDB {
-	messageTypes := []ms.Message{Request{}, Reply{}, File{}} // Message is interface{}, here is defined
+	messageTypes := []ms.Message{Request{}, Reply{}} // Message is interface{}, here is defined
 	// the different types of messages for the MessageSystem
 	msgs := ms.New(me, usersFile, messageTypes)
 	var ra RASharedDB
@@ -69,6 +63,13 @@ func New(me int, usersFile string, reader bool) *RASharedDB {
 	return &ra
 }
 
+func max(a, b int) int {
+	if a > b {
+		return a
+	}
+	return b
+}
+
 // Pre: Verdad
 // Post: Realiza  el  PreProtocol  para el  algoritmo de
 //
@@ -80,33 +81,16 @@ func (ra *RASharedDB) PreProtocol() {
 	ra.OurSeqNum = ra.HigSeqNum + 1
 	ra.OutRepCnt = ra.totalNodes - 1
 	ra.Mutex.Unlock()
-	var msg ms.Message
-	msg = Request{Clock: ra.OurSeqNum, Pid: ra.OurSeqNum, Reader: ra.Reader}
+	msg := Request{Clock: ra.OurSeqNum, Pid: ra.OurSeqNum, Reader: ra.Reader}
 	// a message with my Id, my function (reader or writer) and my actual sequence number are sent to all other nodes
-	for i, ep := range endpoints {
-		if i+1 != ra.Me {
-			go func(ep string, m Message) {
-				for {
-					conn, err := net.Dial("tcp", ep)
-					if err != nil {
-						log.Println("Error connecting to ", ep, ":", err)
-						time.Sleep(1 * time.Second)
-						continue
-					}
-					if err = sendMsg(conn, m); err != nil {
-						log.Println("Error messaging to ", ep, ":", err)
-						time.Sleep(1 * time.Second)
-						continue
-					}
-					conn.Close()
-					break
-				}
-			}(ep, msg)
+	for i := 1; i <= ra.totalNodes; i++ {
+		if i != ra.Me {
+			go ra.ms.Send(i, msg)
 		}
 	}
 	// Now we wait for all other nodes to answer my REQUEST
 	ra.Mutex.Lock()
-	for ra.OutstandingReplies > 0 {
+	for ra.OutRepCnt > 0 {
 		ra.AllReplied.Wait() // I go to sleep while all other sent their notification
 		// a Broadcast will wake up me and I'll recover ra.Mutex
 	}
@@ -119,10 +103,76 @@ func (ra *RASharedDB) PreProtocol() {
 //
 //	Ricart-Agrawala Generalizado
 func (ra *RASharedDB) PostProtocol() {
-	// TODO completar
+	var wg sync.WaitGroup // used to count number of goroutines launched and wait for them to end properly
+	ra.Mutex.Lock()
+	ra.ReqCS = false
+	ra.Mutex.Unlock()
+	msg := Reply{}
+	for _, pid := range ra.RepDefd {
+		// notification to node j
+		// ra.Mutex.Lock()
+		// ra.Reply_deferred[j] = false
+		// ra.Mutex.Unlock()
+		wg.Add(1) // add one goroutine
+		go func(pid int, m Reply) {
+			defer wg.Done()
+			ra.ms.Send(pid, m)
+		}(pid, msg)
+
+	}
+	ra.Mutex.Lock()
+	ra.RepDefd = []int{}
+	ra.Mutex.Unlock()
+	wg.Wait() // wait all goroutines to finish
 }
 
 func (ra *RASharedDB) Stop() {
 	ra.ms.Stop()
 	ra.done <- true
+}
+
+func processReply(n *RASharedDB) {
+	n.Mutex.Lock()
+	n.OutRepCnt--
+	if n.OutRepCnt <= 0 {
+		n.OutRepCnt = 0
+		n.AllReplied.Broadcast() // wake up the waiter
+	}
+	n.Mutex.Unlock()
+}
+
+func processRequest(n *RASharedDB, msg Request) {
+	n.Mutex.Lock()
+	n.HigSeqNum = max(n.HigSeqNum, msg.Clock)
+	deferIt := n.ReqCS && !(n.Reader && msg.Reader) &&
+		((msg.Clock > n.OurSeqNum) || (msg.Clock == n.OurSeqNum && msg.Pid > n.Me))
+	n.Mutex.Unlock()
+	if deferIt {
+		n.Mutex.Lock()
+		n.RepDefd = append(n.RepDefd, msg.Pid)
+		n.Mutex.Unlock()
+	} else {
+		n.ms.Send(msg.Pid, Reply{}) // then I REPLY to the REQUEST
+	}
+}
+
+// Called when a REPLY message arrives
+// HandleReceivedMessages accepts connections and dispatches them.
+// It listens until quit is closed; when quit is closed we close the listener
+// which makes Accept return an error and the loop stops.
+func HandleReceivedMessages(n *RASharedDB) {
+	select {
+	case <-n.done:
+		return
+	default:
+		msg := n.ms.Receive()
+		switch m := msg.(type) {
+		case Request:
+			processRequest(n, m)
+		case Reply:
+			processReply(n)
+		default:
+			log.Println("Error in hanling message received: unknown type. Node: ", n.Me)
+		}
+	}
 }
