@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"log"
 	"os"
-	"practica2/ra"
+	"practica2/cmd/fileManager"
 	"strconv"
 )
 
@@ -18,27 +18,18 @@ func checkError(err error) {
 func main() {
 	args := os.Args
 
-	if len(args) != 3 {
-		log.Println("usage: main.go peers me path")
+	if len(args) != 5 {
+		log.Println("usage: main.go peers me endpointsfile path")
 		os.Exit(1)
 	}
 
 	peersFile := args[1]
 	me, err := strconv.Atoi(args[2])
 	checkError(err)
-	path := args[3]
+	endpointsFile := args[3]
+	path := args[4]
+	fileManager := fileManager.New(me, endpointsFile, path, peersFile, true)
 
-	distributedMutex := ra.New(me, peersFile, true)
-	for {
-		distributedMutex.PreProtocol()
-
-		data, err := os.ReadFile(path)
-		if err != nil {
-			fmt.Fprintf(os.Stderr, "Error: %s", err.Error())
-		} else {
-			log.Println("File content: ", data)
-		}
-		distributedMutex.PostProtocol()
-	}
+	fileManager.ServerOn()
 
 }
