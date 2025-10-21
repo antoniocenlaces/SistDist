@@ -31,7 +31,7 @@ func main() {
 	path := args[4]
 	fm := fileManager.New(me, endpointsFile, path, peersFile, true)
 	reader := bufio.NewReader(os.Stdin)
-	//fileManager.ServerOn()
+	go fm.ServerOn()
 	for {
 		fmt.Print("Quieres leer [y\\n]: ")
 		input, _ := reader.ReadString('\n')
