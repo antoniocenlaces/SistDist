@@ -14,8 +14,9 @@ import (
 )
 
 type Request struct {
-	Clock int
-	Pid   int
+	Clock  int
+	Pid    int
+	Reader bool
 }
 
 type Reply struct{}
@@ -25,20 +26,22 @@ type RASharedDB struct {
 	HigSeqNum int
 	OutRepCnt int
 	ReqCS     bool
-	RepDefd   []int             // Replies Deferred for this node, should be a slice of int
-	ms        *ms.MessageSystem // in ms I have the message box for this node, my peers,
-	// channel for communication of Message, channel for finalization
-	// my own Id
-	done  chan bool
-	chrep chan bool
-	Mutex sync.Mutex // mutex para proteger concurrencia sobre las variables
-	// TODO: completar
+	RepDefd   []int // Replies Deferred for this node. The Pid of delayed REQUESTS
+	// ms has the message box for this node, my peers, channel for communication of Message,
+	// channel for finalization and my own Id
+	ms         *ms.MessageSystem
+	done       chan bool
+	chrep      chan bool
+	Mutex      sync.Mutex // mutex para proteger concurrencia sobre las variables
+	AllReplied *sync.Cond
 }
 
 func New(me int, usersFile string) *RASharedDB {
-	messageTypes := []ms.Message{Request{}, Reply{}} // Message is interface{}, here instanciated before used
+	messageTypes := []ms.Message{Request{}, Reply{}} // Message is interface{}, here is defined
+	// the different types of messages for the MessageSystem
 	msgs := ms.New(me, usersFile, messageTypes)
-	ra := RASharedDB{0, 0, 0, false, []int{}, &msgs, make(chan bool), make(chan bool), sync.Mutex{}}
+	var ra RASharedDB
+	ra = RASharedDB{0, 0, 0, false, []int{}, &msgs, make(chan bool), make(chan bool), sync.Mutex{}, sync.NewCond(&ra.Mutex)}
 	// TODO completar
 	return &ra
 }
