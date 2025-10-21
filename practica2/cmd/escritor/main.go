@@ -1,7 +1,9 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
+	"io"
 	"log"
 	"os"
 	"practica2/cmd/fileManager"
@@ -28,8 +30,23 @@ func main() {
 	checkError(err)
 	endpointsFile := args[3]
 	path := args[4]
-	fileManager := fileManager.New(me, endpointsFile, path, peersFile, false)
-
-	fileManager.ServerOn()
+	fm := fileManager.New(me, endpointsFile, path, peersFile, false)
+	reader := bufio.NewReader(os.Stdin)
+	//fileManager.ServerOn()
+	for {
+		fmt.Print("Introduce lo que quieras escribir: ")
+		input, _ := reader.ReadString('\n')
+		if input != "0" {
+			err = fm.CallWrite(me, input, 0, io.SeekEnd)
+			if err == nil {
+				log.Println("Soy ", me, " he escrito correctamente")
+			} else {
+				log.Println("Error en ", me, " escribiendo en fichero")
+			}
+		} else {
+			fm.Close()
+			break
+		}
+	}
 
 }

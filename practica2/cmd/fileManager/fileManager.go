@@ -138,10 +138,10 @@ func parseEndpoints(endpointsFile string) (endpoints []string) {
 	return endpoints
 }
 
-func (fm *FileManager) CallRead(pid int, len int, pos int) (err error) {
+func (fm *FileManager) CallRead(pid int, len int, pos int) (read string, err error) {
 	client, err := rpc.Dial("tcp", fm.endpoints[pid-1])
 	if err != nil {
-		return err
+		return "", err
 	}
 
 	readArgs := ReadArgs{
@@ -152,13 +152,13 @@ func (fm *FileManager) CallRead(pid int, len int, pos int) (err error) {
 
 	err = client.Call("FileManager.ReadFile", readArgs, readReply)
 	if err != nil {
-		return err
+		return "", err
 	}
 	if readReply.Err != 0 {
-		return errors.New(string(readReply.Data))
+		return "", errors.New(string(readReply.Data))
 	}
 
-	return nil
+	return string(readReply.Data), nil
 }
 
 func (fm *FileManager) CallWrite(pid int, content string, pos int, from int) (err error) {
@@ -236,4 +236,8 @@ func New(me int, endpointsFile string, filename string, peerFile string, reader 
 	rpc.Register(fm)
 
 	return fm
+}
+
+func (fm *FileManager) Close() {
+	fm.distributedMutex.Stop()
 }

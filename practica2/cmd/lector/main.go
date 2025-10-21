@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
 	"log"
 	"os"
@@ -28,8 +29,23 @@ func main() {
 	checkError(err)
 	endpointsFile := args[3]
 	path := args[4]
-	fileManager := fileManager.New(me, endpointsFile, path, peersFile, true)
-
-	fileManager.ServerOn()
+	fm := fileManager.New(me, endpointsFile, path, peersFile, true)
+	reader := bufio.NewReader(os.Stdin)
+	//fileManager.ServerOn()
+	for {
+		fmt.Print("Quieres leer [y\\n]: ")
+		input, _ := reader.ReadString('\n')
+		if input != "n" {
+			data, err := fm.CallRead(me, 0, 0)
+			if err == nil {
+				log.Println("Soy ", me, " he leido correctamente : ", data)
+			} else {
+				log.Println("Error en ", me, " escribiendo en fichero")
+			}
+		} else {
+			fm.Close()
+			break
+		}
+	}
 
 }
