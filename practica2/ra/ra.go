@@ -42,7 +42,7 @@ type RASharedDB struct {
 
 func New(me int, usersFile string, reader bool) *RASharedDB {
 	messageTypes := []ms.Message{Request{}, Reply{}} // Message is interface{}, here is defined
-	// the different types of messages for the MessageSystem
+	// the different types of messages for the MessageSystem registered for use with gob
 	msgs := ms.New(me, usersFile, messageTypes)
 	var ra RASharedDB
 	ra = RASharedDB{
@@ -60,6 +60,7 @@ func New(me int, usersFile string, reader bool) *RASharedDB {
 		AllReplied: sync.NewCond(&ra.Mutex),
 		Reader:     reader,
 	}
+	go handleReceivedMessages(&ra)
 	return &ra
 }
 
@@ -160,7 +161,7 @@ func processRequest(n *RASharedDB, msg Request) {
 // HandleReceivedMessages accepts connections and dispatches them.
 // It listens until quit is closed; when quit is closed we close the listener
 // which makes Accept return an error and the loop stops.
-func HandleReceivedMessages(n *RASharedDB) {
+func handleReceivedMessages(n *RASharedDB) {
 	select {
 	case <-n.done:
 		return
