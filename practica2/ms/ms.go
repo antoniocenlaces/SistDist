@@ -48,6 +48,10 @@ func parsePeers(path string) (lines []string) {
 	return lines
 }
 
+func (ms *MessageSystem) TotalNodes() int {
+	return len(ms.peers)
+}
+
 // Pre: pid en {1..n}, el conjunto de procesos del SD
 // Post: envía el mensaje msg a pid
 func (ms *MessageSystem) Send(pid int, msg Message) {
@@ -55,6 +59,7 @@ func (ms *MessageSystem) Send(pid int, msg Message) {
 	checkError(err)
 	encoder := gob.NewEncoder(conn)
 	err = encoder.Encode(&msg)
+	checkError(err)
 	conn.Close()
 }
 
