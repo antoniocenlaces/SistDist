@@ -70,19 +70,20 @@ func writeFile(text string, pos int, from int, fileName string) error {
 
 }
 
-func (fm *FileManager) UpdateFile(args *UpdateArgs, reply *ReplyType) {
+func (fm *FileManager) UpdateFile(args *UpdateArgs, reply *ReplyType) error {
 	err := writeFile(args.Content, args.Pos, args.From, fm.filename)
 	if err != nil {
 		reply.Err = -1
 		reply.Data = []byte(err.Error())
 	}
+	return nil
 }
 
-func (fm *FileManager) WriteFile(args *WriteArgs, reply *ReplyType) {
+func (fm *FileManager) WriteFile(args *WriteArgs, reply *ReplyType) error {
 	if fm.distributedMutex.Reader {
 		reply.Err = -1
 		reply.Data = []byte("It is not a writer node")
-		return
+		return errors.New(string(reply.Data))
 	}
 	fm.distributedMutex.PreProtocol()
 	defer fm.distributedMutex.PostProtocol()
@@ -90,7 +91,7 @@ func (fm *FileManager) WriteFile(args *WriteArgs, reply *ReplyType) {
 	if err != nil {
 		reply.Err = -1
 		reply.Data = []byte("Error writing on file")
-		return
+		return errors.New(string(reply.Data))
 	}
 
 	for i, ep := range fm.endpoints {
@@ -101,14 +102,14 @@ func (fm *FileManager) WriteFile(args *WriteArgs, reply *ReplyType) {
 			}
 		}
 	}
-
+	return nil
 }
 
-func (fm *FileManager) ReadFile(args *ReadArgs, reply *ReplyType) {
+func (fm *FileManager) ReadFile(args *ReadArgs, reply *ReplyType) error {
 	if !fm.distributedMutex.Reader {
 		reply.Err = -1
 		reply.Data = []byte("It is not a reader node")
-		return
+		return errors.New(string(reply.Data))
 	}
 	fm.distributedMutex.PreProtocol()
 	defer fm.distributedMutex.PostProtocol()
@@ -122,7 +123,7 @@ func (fm *FileManager) ReadFile(args *ReadArgs, reply *ReplyType) {
 		reply.Data = data
 		reply.Err = 0
 	}
-
+	return nil
 }
 
 func parseEndpoints(endpointsFile string) (endpoints []string) {
@@ -150,7 +151,7 @@ func (fm *FileManager) CallRead(pid int, len int, pos int) (read string, err err
 	}
 	readReply := ReplyType{}
 
-	err = client.Call("FileManager.ReadFile", readArgs, readReply)
+	err = client.Call("FileManager.ReadFile", &readArgs, &readReply)
 	if err != nil {
 		return "", err
 	}
@@ -174,7 +175,7 @@ func (fm *FileManager) CallWrite(pid int, content string, pos int, from int) (er
 	}
 	writeReply := ReplyType{}
 
-	err = client.Call("FileManager.WriteFile", writeArgs, writeReply)
+	err = client.Call("FileManager.WriteFile", &writeArgs, &writeReply)
 	if err != nil {
 		return err
 	}
@@ -198,7 +199,7 @@ func (fm *FileManager) CallUpdate(pid int, content string, pos int, from int) (e
 	}
 	updateReply := ReplyType{}
 
-	err = client.Call("FileManager.UpdateFile", updateArgs, updateReply)
+	err = client.Call("FileManager.UpdateFile", &updateArgs, &updateReply)
 	if err != nil {
 		return err
 	}
