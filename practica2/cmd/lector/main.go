@@ -18,6 +18,7 @@ func checkError(err error) {
 
 func main() {
 	args := os.Args
+	log.SetFlags(log.Lshortfile | log.Lmicroseconds)
 
 	if len(args) != 5 {
 		log.Println("usage: main.go peers me endpointsfile path")

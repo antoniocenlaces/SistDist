@@ -44,8 +44,8 @@ func New(me int, usersFile string, reader bool) *RASharedDB {
 	messageTypes := []ms.Message{Request{}, Reply{}} // Message is interface{}, here is defined
 	// the different types of messages for the MessageSystem registered for use with gob
 	msgs := ms.New(me, usersFile, messageTypes)
-	var ra RASharedDB
-	ra = RASharedDB{
+
+	ra := RASharedDB{
 		Me:         me,
 		totalNodes: msgs.TotalNodes(),
 		OurSeqNum:  0,
@@ -57,9 +57,9 @@ func New(me int, usersFile string, reader bool) *RASharedDB {
 		done:       make(chan bool),
 		chrep:      make(chan bool),
 		Mutex:      sync.Mutex{},
-		AllReplied: sync.NewCond(&ra.Mutex),
 		Reader:     reader,
 	}
+	ra.AllReplied = sync.NewCond(&ra.Mutex)
 	go handleReceivedMessages(&ra)
 	return &ra
 }
@@ -82,7 +82,7 @@ func (ra *RASharedDB) PreProtocol() {
 	ra.OurSeqNum = ra.HigSeqNum + 1
 	ra.OutRepCnt = ra.totalNodes - 1
 	ra.Mutex.Unlock()
-	msg := Request{Clock: ra.OurSeqNum, Pid: ra.OurSeqNum, Reader: ra.Reader}
+	msg := Request{Clock: ra.OurSeqNum, Pid: ra.Me, Reader: ra.Reader}
 	// a message with my Id, my function (reader or writer) and my actual sequence number are sent to all other nodes
 	for i := 1; i <= ra.totalNodes; i++ {
 		if i != ra.Me {
@@ -106,10 +106,13 @@ func (ra *RASharedDB) PreProtocol() {
 func (ra *RASharedDB) PostProtocol() {
 	var wg sync.WaitGroup // used to count number of goroutines launched and wait for them to end properly
 	ra.Mutex.Lock()
+	myRepDef := ra.RepDefd
+	ra.RepDefd = []int{}
 	ra.ReqCS = false
 	ra.Mutex.Unlock()
 	msg := Reply{}
-	for _, pid := range ra.RepDefd {
+
+	for _, pid := range myRepDef {
 		// notification to node j
 		// ra.Mutex.Lock()
 		// ra.Reply_deferred[j] = false
@@ -121,10 +124,9 @@ func (ra *RASharedDB) PostProtocol() {
 		}(pid, msg)
 
 	}
-	ra.Mutex.Lock()
-	ra.RepDefd = []int{}
-	ra.Mutex.Unlock()
+
 	wg.Wait() // wait all goroutines to finish
+
 }
 
 func (ra *RASharedDB) Stop() {
@@ -162,18 +164,20 @@ func processRequest(n *RASharedDB, msg Request) {
 // It listens until quit is closed; when quit is closed we close the listener
 // which makes Accept return an error and the loop stops.
 func handleReceivedMessages(n *RASharedDB) {
-	select {
-	case <-n.done:
-		return
-	default:
-		msg := n.ms.Receive()
-		switch m := msg.(type) {
-		case Request:
-			processRequest(n, m)
-		case Reply:
-			processReply(n)
+	for {
+		select {
+		case <-n.done:
+			return
 		default:
-			log.Println("Error in hanling message received: unknown type. Node: ", n.Me)
+			msg := n.ms.Receive()
+			switch m := msg.(type) {
+			case Request:
+				processRequest(n, m)
+			case Reply:
+				processReply(n)
+			default:
+				log.Println("Error in hanling message received: unknown type. Node: ", n.Me)
+			}
 		}
 	}
 }

@@ -12,6 +12,7 @@ import (
 	"bufio"
 	"encoding/gob"
 	"fmt"
+	"log"
 	"net"
 	"os"
 )
@@ -95,7 +96,7 @@ func New(whoIam int, usersFile string, messageTypes []Message) (ms MessageSystem
 	go func() {
 		listener, err := net.Listen("tcp", ms.peers[ms.me-1])
 		checkError(err)
-		fmt.Println("Process listening at " + ms.peers[ms.me-1])
+		log.Println("Process listening at " + ms.peers[ms.me-1])
 		defer close(ms.mbox)
 		for {
 			select {
@@ -119,4 +120,5 @@ func New(whoIam int, usersFile string, messageTypes []Message) (ms MessageSystem
 // Post: termina la ejecución de este ms
 func (ms *MessageSystem) Stop() {
 	ms.done <- true
+	//ms.listener.Close()
 }
