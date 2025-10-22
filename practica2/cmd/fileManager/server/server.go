@@ -1,14 +1,37 @@
-package fileManager
+package fileManagerServer
 
 import (
+	"bufio"
 	"fmt"
 	"io"
 	"log"
 	"net"
 	"net/rpc"
 	"os"
+	fileManagerClient "practica2/cmd/fileManager/client"
+	fileMangertypes "practica2/cmd/fileManager/types"
 	"practica2/ra"
 )
+
+type FileServer struct {
+	me               int
+	endpoints        []string
+	filename         string
+	distributedMutex *ra.RASharedDB
+}
+
+func parseEndpoints(endpointsFile string) (endpoints []string) {
+
+	file, err := os.Open(endpointsFile)
+	checkError(err)
+	defer file.Close()
+	scanner := bufio.NewScanner(file)
+	scanner.Split(bufio.ScanLines)
+	for scanner.Scan() {
+		endpoints = append(endpoints, scanner.Text())
+	}
+	return endpoints
+}
 
 func checkError(err error) {
 	if err != nil {
@@ -16,7 +39,6 @@ func checkError(err error) {
 		os.Exit(1)
 	}
 }
-
 func writeFile(text string, pos int, whence int, fileName string) error {
 	if pos < 0 {
 		return fmt.Errorf("invalid pos: %d", pos)
@@ -46,8 +68,8 @@ func writeFile(text string, pos int, whence int, fileName string) error {
 
 }
 
-func (fm *FileServer) UpdateFile(args *UpdateArgs, reply *ReplyType) error {
-	log.Println("Soy ", fm.me, " he recibido Update file call")
+func (fm *FileServer) UpdateFile(args *fileMangertypes.UpdateArgs, reply *fileMangertypes.ReplyType) error {
+	//log.Println("Soy ", fm.me, " he recibido Update file call")
 	err := writeFile(args.Content, args.Pos, args.From, fm.filename)
 	if err != nil {
 		reply.Err = -1
@@ -59,8 +81,8 @@ func (fm *FileServer) UpdateFile(args *UpdateArgs, reply *ReplyType) error {
 	return nil
 }
 
-func (fm *FileServer) WriteFile(args *WriteArgs, reply *ReplyType) error {
-	log.Println("Soy ", fm.me, " he recibido Write file call")
+func (fm *FileServer) WriteFile(args *fileMangertypes.WriteArgs, reply *fileMangertypes.ReplyType) error {
+	//log.Println("Soy ", fm.me, " he recibido Write file call")
 	if fm.distributedMutex.Reader {
 		reply.Err = -1
 		reply.Data = []byte("It is not a writer node")
@@ -77,8 +99,8 @@ func (fm *FileServer) WriteFile(args *WriteArgs, reply *ReplyType) error {
 
 	for i, ep := range fm.endpoints {
 		if i != fm.me-1 {
-			fc := FileClient{}
-			err = fc.CallUpdate(fm.endpoints[i+1], args.Content, args.Pos, args.From)
+
+			err = fileManagerClient.CallUpdate(ep, args.Content, args.Pos, args.From)
 			if err != nil {
 				log.Printf("El endpoint %s no pudo escribir el fichero\n", ep)
 			}
@@ -89,17 +111,19 @@ func (fm *FileServer) WriteFile(args *WriteArgs, reply *ReplyType) error {
 	return nil
 }
 
-func (fm *FileServer) ReadFile(args *ReadArgs, reply *ReplyType) error {
-	log.Println("Soy ", fm.me, " he recibido Read file call")
+func (fm *FileServer) LocalAdress() string {
+	return fm.endpoints[fm.me-1]
+}
+
+func (fm *FileServer) ReadFile(args *fileMangertypes.ReadArgs, reply *fileMangertypes.ReplyType) error {
+	//log.Println("Soy ", fm.me, " he recibido Read file call")
 	if !fm.distributedMutex.Reader {
 		reply.Err = -1
 		reply.Data = []byte("It is not a reader node")
 		return nil
 	}
-	log.Println("Soy ", fm.me, " trylock")
 	fm.distributedMutex.PreProtocol()
 	defer fm.distributedMutex.PostProtocol()
-	log.Println("Soy ", fm.me, " estoy en sc")
 	data, err := os.ReadFile(fm.filename)
 
 	if err != nil {
@@ -109,18 +133,17 @@ func (fm *FileServer) ReadFile(args *ReadArgs, reply *ReplyType) error {
 		reply.Data = data
 		reply.Err = 0
 	}
-	log.Println("Soy ", fm.me, " salgo de sc")
 	return nil
 }
 
-func (fm *FileServer) ServerOn() {
+func (fm *FileServer) Listen() {
 	l, err := net.Listen("tcp", fm.endpoints[fm.me-1])
 	checkError(err)
 	defer l.Close()
 
 	for {
 		conn, err := l.Accept()
-		log.Println("NUevo cliente RPC conectado ", conn.RemoteAddr())
+		//log.Println("NUevo cliente RPC conectado ", conn.RemoteAddr())
 		if err != nil {
 			continue
 		}
@@ -128,11 +151,11 @@ func (fm *FileServer) ServerOn() {
 	}
 }
 
-func NewServer(me int, endpointsFile string, filename string, peerFile string, reader bool) *FileServer {
+func New(me int, endpointsFile string, filename string, peerFile string, reader bool) *FileServer {
 
 	fm := &FileServer{
 		me:               me,
-		endpoints:        ParseEndpoints(endpointsFile),
+		endpoints:        parseEndpoints(endpointsFile),
 		filename:         filename,
 		distributedMutex: ra.New(me, peerFile, reader),
 	}

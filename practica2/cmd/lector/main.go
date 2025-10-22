@@ -5,7 +5,8 @@ import (
 	"fmt"
 	"log"
 	"os"
-	"practica2/cmd/fileManager"
+	fileManagerClient "practica2/cmd/fileManager/client"
+	fileManagerServer "practica2/cmd/fileManager/server"
 	"strconv"
 )
 
@@ -30,18 +31,18 @@ func main() {
 	checkError(err)
 	endpointsFile := args[3]
 	path := args[4]
-	fm := fileManager.New(me, endpointsFile, path, peersFile, true)
+	fm := fileManagerServer.New(me, endpointsFile, path, peersFile, true)
 	reader := bufio.NewReader(os.Stdin)
-	go fm.ServerOn()
+	go fm.Listen()
 	for {
 		fmt.Print("Quieres leer [y\\n]: ")
 		input, _ := reader.ReadString('\n')
-		if input != "n" {
-			data, err := fm.CallRead(me, 0, 0)
+		if input != "n\n" {
+			data, err := fileManagerClient.CallRead(fm.LocalAdress(), 0, 0)
 			if err == nil {
-				log.Println("Soy ", me, " he leido correctamente : ", data)
+				log.Println("Leido {\n", data, "\n}")
 			} else {
-				log.Println("Error en ", me, " escribiendo en fichero")
+				log.Println("Error en ", me, " leyendo de fichero")
 			}
 		} else {
 			fm.Close()
