@@ -169,14 +169,16 @@ func handleReceivedMessages(n *RASharedDB) {
 		case <-n.done:
 			return
 		default:
-			msg := n.ms.Receive()
-			switch m := msg.(type) {
-			case Request:
-				processRequest(n, m)
-			case Reply:
-				processReply(n)
-			default:
-				log.Println("Error in hanling message received: unknown type. Node: ", n.Me)
+			msg, ok := n.ms.Receive()
+			if ok {
+				switch m := msg.(type) {
+				case Request:
+					processRequest(n, m)
+				case Reply:
+					processReply(n)
+				default:
+					log.Println("Error in hanling message received: unknown type. Node: ", n.Me)
+				}
 			}
 		}
 	}

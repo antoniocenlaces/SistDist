@@ -14,6 +14,7 @@ import (
 	"fmt"
 	"net"
 	"os"
+	"time"
 )
 
 type Message interface{}
@@ -67,9 +68,9 @@ func (ms *MessageSystem) Send(pid int, msg Message) {
 // Post: el mensaje msg de algún Proceso P_j se retira del mailbox y se devuelve
 //
 //	Si mailbox vacío, Receive bloquea hasta que llegue algún mensaje
-func (ms *MessageSystem) Receive() (msg Message) {
-	msg = <-ms.mbox
-	return msg
+func (ms *MessageSystem) Receive() (msg Message, ok bool) {
+	msg, ok = <-ms.mbox
+	return
 }
 
 //	messageTypes es un slice con tipos de mensajes que los procesos se pueden intercambiar a través de este ms
@@ -93,8 +94,10 @@ func New(whoIam int, usersFile string, messageTypes []Message) (ms MessageSystem
 	ms.done = make(chan bool)
 	Register(messageTypes)
 	go func() {
+
 		listener, err := net.Listen("tcp", ms.peers[ms.me-1])
 		checkError(err)
+
 		//log.Println("Process listening at " + ms.peers[ms.me-1])
 		defer close(ms.mbox)
 		for {
@@ -102,13 +105,20 @@ func New(whoIam int, usersFile string, messageTypes []Message) (ms MessageSystem
 			case <-ms.done:
 				return
 			default:
+				listener.(*net.TCPListener).SetDeadline(time.Now().Add(500 * time.Millisecond))
 				conn, err := listener.Accept()
-				checkError(err)
-				decoder := gob.NewDecoder(conn)
-				var msg Message
-				err = decoder.Decode(&msg)
-				conn.Close()
-				ms.mbox <- msg
+				if err != nil {
+					if ne, ok := err.(net.Error); ok && ne.Timeout() {
+						continue
+					}
+					checkError(err)
+				} else {
+					decoder := gob.NewDecoder(conn)
+					var msg Message
+					err = decoder.Decode(&msg)
+					conn.Close()
+					ms.mbox <- msg
+				}
 			}
 		}
 	}()
@@ -119,5 +129,4 @@ func New(whoIam int, usersFile string, messageTypes []Message) (ms MessageSystem
 // Post: termina la ejecución de este ms
 func (ms *MessageSystem) Stop() {
 	ms.done <- true
-	//ms.listener.Close()
 }
