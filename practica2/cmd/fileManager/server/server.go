@@ -22,6 +22,7 @@ type FileServer struct {
 	endpoints        []string       // Direcciones de todos los nodos del sistema
 	filename         string         // Nombre del fichero local que gestiona este nodo
 	distributedMutex *ra.RASharedDB // Mecanismo de exclusión mutua distribuida (lectores/escritores)
+	listener         net.Listener
 }
 
 // parseEndpoints
@@ -156,6 +157,7 @@ func (fm *FileServer) UpdateFile(args *fileMangertypes.UpdateArgs, reply *fileMa
 //   - Si la escritura y propagación son exitosas, reply.Err = 0.
 //   - Si el nodo no es escritor o ocurre un error de escritura, reply.Err = -1 y reply.Data contiene el mensaje.
 func (fm *FileServer) WriteFile(args *fileMangertypes.WriteArgs, reply *fileMangertypes.ReplyType) error {
+	log.Println("Me piden escribir en nodo nº: ", fm.me, " en: ", fm.listener.Addr().String(), " como Reader: ", fm.distributedMutex.Reader)
 	if fm.distributedMutex.Reader {
 		reply.Err = -1
 		reply.Data = []byte("It is not a writer node")
@@ -252,12 +254,13 @@ func (fm *FileServer) ReadFile(args *fileMangertypes.ReadArgs, reply *fileManger
 // Post:
 //   - El servidor queda en bucle aceptando conexiones RPC y sirviendo peticiones concurrentemente.
 func (fm *FileServer) Listen() {
-	l, err := net.Listen("tcp", fm.endpoints[fm.me-1])
+	var err error
+	fm.listener, err = net.Listen("tcp", fm.endpoints[fm.me-1])
 	checkError(err)
-	defer l.Close()
+	defer fm.listener.Close()
 
 	for {
-		conn, err := l.Accept()
+		conn, err := fm.listener.Accept()
 		if err != nil {
 			continue
 		}
@@ -329,6 +332,7 @@ func New(me int, endpointsFile string, filename string, peerFile string, reader 
 	}
 
 	rpc.Register(fm)
+	log.Println("Lanzado FileServer como nodo nº: ", fm.me, " en: ", fm.endpoints[me-1], " como Reader: ", fm.distributedMutex.Reader)
 	return fm
 }
 

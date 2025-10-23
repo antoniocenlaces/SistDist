@@ -23,43 +23,41 @@ type Request struct {
 type Reply struct{}
 
 type RASharedDB struct {
-	Me         int
+	me         int
 	totalNodes int
-	OurSeqNum  int
-	HigSeqNum  int
-	OutRepCnt  int
-	ReqCS      bool
-	RepDefd    []int // Replies Deferred for this node. The Pid of delayed REQUESTS
+	ourSeqNum  int
+	higSeqNum  int
+	outRepCnt  int
+	reqCS      bool
+	repDefd    []int // Replies Deferred for this node. The Pid of delayed REQUESTS
 	// ms has the message box for this node, my peers, channel for communication of Message,
 	// channel for finalization and my own Id
 	ms         *ms.MessageSystem
 	done       chan bool
-	chrep      chan bool
-	Mutex      sync.Mutex // mutex para proteger concurrencia sobre las variables
-	AllReplied *sync.Cond
-	Reader     bool
+	mutex      sync.Mutex // mutex para proteger concurrencia sobre las variables
+	allReplied *sync.Cond // conditional variable for PreProtocol() wait all peers to send REPLY
+	Reader     bool       // true: this peer is a reader; flase: this peer is a writer
 }
 
-func New(me int, usersFile string, reader bool) *RASharedDB {
+func New(whoAmI int, usersFile string, reader bool) *RASharedDB {
 	messageTypes := []ms.Message{Request{}, Reply{}} // Message is interface{}, here is defined
 	// the different types of messages for the MessageSystem registered for use with gob
-	msgs := ms.New(me, usersFile, messageTypes)
+	msgs := ms.New(whoAmI, usersFile, messageTypes)
 
 	ra := RASharedDB{
-		Me:         me,
+		me:         whoAmI,
 		totalNodes: msgs.TotalNodes(),
-		OurSeqNum:  0,
-		HigSeqNum:  0,
-		OutRepCnt:  0,
-		ReqCS:      false,
-		RepDefd:    []int{},
+		ourSeqNum:  0,
+		higSeqNum:  0,
+		outRepCnt:  0,
+		reqCS:      false,
+		repDefd:    []int{},
 		ms:         &msgs,
 		done:       make(chan bool),
-		chrep:      make(chan bool),
-		Mutex:      sync.Mutex{},
+		mutex:      sync.Mutex{},
 		Reader:     reader,
 	}
-	ra.AllReplied = sync.NewCond(&ra.Mutex)
+	ra.allReplied = sync.NewCond(&ra.mutex)
 	go handleReceivedMessages(&ra)
 	return &ra
 }
@@ -77,25 +75,25 @@ func max(a, b int) int {
 //	Ricart-Agrawala Generalizado
 func (ra *RASharedDB) PreProtocol() {
 	// Using ra mutex common variables are updated to REQUEST critical section
-	ra.Mutex.Lock()
-	ra.ReqCS = true
-	ra.OurSeqNum = ra.HigSeqNum + 1
-	ra.OutRepCnt = ra.totalNodes - 1
-	ra.Mutex.Unlock()
-	msg := Request{Clock: ra.OurSeqNum, Pid: ra.Me, Reader: ra.Reader}
+	ra.mutex.Lock()
+	ra.reqCS = true
+	ra.ourSeqNum = ra.higSeqNum + 1
+	ra.outRepCnt = ra.totalNodes - 1
+	ra.mutex.Unlock()
+	msg := Request{Clock: ra.ourSeqNum, Pid: ra.me, Reader: ra.Reader}
 	// a message with my Id, my function (reader or writer) and my actual sequence number are sent to all other nodes
 	for i := 1; i <= ra.totalNodes; i++ {
-		if i != ra.Me {
+		if i != ra.me {
 			go ra.ms.Send(i, msg)
 		}
 	}
 	// Now we wait for all other nodes to answer my REQUEST
-	ra.Mutex.Lock()
-	for ra.OutRepCnt > 0 {
-		ra.AllReplied.Wait() // I go to sleep while all other sent their notification
-		// a Broadcast will wake up me and I'll recover ra.Mutex
+	ra.mutex.Lock()
+	for ra.outRepCnt > 0 {
+		ra.allReplied.Wait() // I go to sleep while all other sent their notification
+		// a Broadcast will wake up me and I'll recover ra.mutex
 	}
-	ra.Mutex.Unlock()
+	ra.mutex.Unlock()
 
 }
 
@@ -105,18 +103,18 @@ func (ra *RASharedDB) PreProtocol() {
 //	Ricart-Agrawala Generalizado
 func (ra *RASharedDB) PostProtocol() {
 	var wg sync.WaitGroup // used to count number of goroutines launched and wait for them to end properly
-	ra.Mutex.Lock()
-	myRepDef := ra.RepDefd
-	ra.RepDefd = []int{}
-	ra.ReqCS = false
-	ra.Mutex.Unlock()
+	ra.mutex.Lock()
+	myRepDef := ra.repDefd
+	ra.repDefd = []int{}
+	ra.reqCS = false
+	ra.mutex.Unlock()
 	msg := Reply{}
 
 	for _, pid := range myRepDef {
 		// notification to node j
-		// ra.Mutex.Lock()
+		// ra.mutex.Lock()
 		// ra.Reply_deferred[j] = false
-		// ra.Mutex.Unlock()
+		// ra.mutex.Unlock()
 		wg.Add(1) // add one goroutine
 		go func(pid int, m Reply) {
 			defer wg.Done()
@@ -135,25 +133,25 @@ func (ra *RASharedDB) Stop() {
 }
 
 func processReply(n *RASharedDB) {
-	n.Mutex.Lock()
-	n.OutRepCnt--
-	if n.OutRepCnt <= 0 {
-		n.OutRepCnt = 0
-		n.AllReplied.Broadcast() // wake up the waiter
+	n.mutex.Lock()
+	n.outRepCnt--
+	if n.outRepCnt <= 0 {
+		n.outRepCnt = 0
+		n.allReplied.Broadcast() // wake up the waiter
 	}
-	n.Mutex.Unlock()
+	n.mutex.Unlock()
 }
 
 func processRequest(n *RASharedDB, msg Request) {
-	n.Mutex.Lock()
-	n.HigSeqNum = max(n.HigSeqNum, msg.Clock)
-	deferIt := n.ReqCS && !(n.Reader && msg.Reader) &&
-		((msg.Clock > n.OurSeqNum) || (msg.Clock == n.OurSeqNum && msg.Pid > n.Me))
-	n.Mutex.Unlock()
+	n.mutex.Lock()
+	n.higSeqNum = max(n.higSeqNum, msg.Clock)
+	deferIt := n.reqCS && !(n.Reader && msg.Reader) &&
+		((msg.Clock > n.ourSeqNum) || (msg.Clock == n.ourSeqNum && msg.Pid > n.me))
+	n.mutex.Unlock()
 	if deferIt {
-		n.Mutex.Lock()
-		n.RepDefd = append(n.RepDefd, msg.Pid)
-		n.Mutex.Unlock()
+		n.mutex.Lock()
+		n.repDefd = append(n.repDefd, msg.Pid)
+		n.mutex.Unlock()
 	} else {
 		n.ms.Send(msg.Pid, Reply{}) // then I REPLY to the REQUEST
 	}
@@ -177,7 +175,7 @@ func handleReceivedMessages(n *RASharedDB) {
 				case Reply:
 					processReply(n)
 				default:
-					log.Println("Error in hanling message received: unknown type. Node: ", n.Me)
+					log.Println("Error in hanling message received: unknown type. Node: ", n.me)
 				}
 			}
 		}

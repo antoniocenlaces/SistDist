@@ -11,6 +11,7 @@ package ms
 import (
 	"bufio"
 	"encoding/gob"
+	"errors"
 	"fmt"
 	"net"
 	"os"
@@ -37,6 +38,11 @@ func checkError(err error) {
 	}
 }
 
+// Pre: path es la ruta a un fichero de texto donde se identifica IP:Port de todos los nodos (peers)
+//
+//	al menos debe contener dos líneas con dirección IP o nombre y puerto existentes
+//
+// Post: devuelve un []string con IP:Port de cada nodo y comprueba que en el SD haya al menos dos nodos
 func parsePeers(path string) (lines []string) {
 	file, err := os.Open(path)
 	checkError(err)
@@ -46,9 +52,14 @@ func parsePeers(path string) (lines []string) {
 	for scanner.Scan() {
 		lines = append(lines, scanner.Text())
 	}
+	if len(lines) < 2 {
+		checkError(errors.New("not enough peers: at least two nodes are required"))
+	}
 	return lines
 }
 
+// Pre: ms está instanciado
+// post: devuelve el número de nodos que componen el SD
 func (ms *MessageSystem) TotalNodes() int {
 	return len(ms.peers)
 }
@@ -105,9 +116,11 @@ func New(whoIam int, usersFile string, messageTypes []Message) (ms MessageSystem
 			case <-ms.done:
 				return
 			default:
+				// added a Timeout to stop the listener on Accept()
 				listener.(*net.TCPListener).SetDeadline(time.Now().Add(500 * time.Millisecond))
 				conn, err := listener.Accept()
 				if err != nil {
+					// if the listener has been stopped by the Timeout: continue to next loop iteration
 					if ne, ok := err.(net.Error); ok && ne.Timeout() {
 						continue
 					}
