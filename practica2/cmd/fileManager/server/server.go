@@ -78,7 +78,7 @@ func checkError(err error) {
 // Pre:
 //   - pos >= 0 → Posición válida en el fichero.
 //   - fileName != "" → Nombre del fichero local donde escribir.
-//   - whence ∈ {0, 1, 2} → Modo de desplazamiento en el fichero (io.SeekStart, io.SeekCurrent, io.SeekEnd). La posición será calculada a partide del desplazamiento
+//   - whence ∈ {0, 1, 2} → Modo de desplazamiento en el fichero (io.SeekStart, io.SeekCurrent, io.SeekEnd). La posición será calculada a partir  del desplazamiento
 //
 // Post:
 //   - Si la escritura se completa correctamente, devuelve err = nil.
@@ -119,7 +119,7 @@ func writeFile(text string, pos int, whence int, fileName string) error {
 // Pre:
 //   - args.Content != "" → Contenido a escribir en el fichero local.
 //   - args.Pos >= 0 → Posición válida en el fichero.
-//   - args.From ∈ {0, 1, 2} → Indica el origen de la operación.
+//   - args.From ∈ {0, 1, 2} → Indica el desplazamiento en el fichero (io.SeekStart, io.SeekCurrent, io.SeekEnd). La posición será calculada a partir  del desplazamiento
 //   - fm.filename debe existir o ser accesible para escritura.
 //
 // Post:
@@ -150,7 +150,7 @@ func (fm *FileServer) UpdateFile(args *fileMangertypes.UpdateArgs, reply *fileMa
 //   - fm.distributedMutex.Reader == false → Solo nodos escritores pueden ejecutar esta operación.
 //   - args.Content != "" → Contenido válido para escribir.
 //   - args.Pos >= 0 → Posición válida en el fichero.
-//   - args.From ∈ {0, 1, 2} → Origen de la operación.
+//   - args.From ∈ {0, 1, 2} →  Indica el desplazamiento en el fichero (io.SeekStart, io.SeekCurrent, io.SeekEnd). La posición será calculada a partir  del desplazamiento
 //
 // Post:
 //   - Si la escritura y propagación son exitosas, reply.Err = 0.
@@ -216,6 +216,9 @@ func (fm *FileServer) LocalAdress() string {
 // Post:
 //   - Si la lectura es exitosa, reply.Err = 0 y reply.Data contiene el contenido del fichero.
 //   - Si el nodo no es lector o ocurre un error de lectura, reply.Err = -1 y reply.Data contiene el error.
+//
+// De momento está función no tiene implementado el leer desde una posición una longitus especifica
+// Ahora mismo se lee el fichero entero y se deuvlve el contenido al completo
 func (fm *FileServer) ReadFile(args *fileMangertypes.ReadArgs, reply *fileMangertypes.ReplyType) error {
 	if !fm.distributedMutex.Reader {
 		reply.Err = -1
@@ -273,7 +276,7 @@ func (fm *FileServer) Listen() {
 //   - pid ∈ [1, len(fm.endpoints)] → Identificador válido del nodo destino.
 //   - content != "" → Contenido que se desea escribir.
 //   - pos >= 0 → Posición de escritura.
-//   - from ∈ {0, 1, 2} → Origen de la actualización.
+//   - from ∈ {0, 1, 2} →  Indica el desplazamiento en el fichero (io.SeekStart, io.SeekCurrent, io.SeekEnd). La posición será calculada a partir  del desplazamiento
 //
 // Post:
 //   - Si la actualización remota es exitosa, devuelve err = nil.
