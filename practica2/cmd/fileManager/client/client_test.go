@@ -22,8 +22,8 @@ func createConfigFile(path string, lines []string) {
 }
 
 func TestCallReadSuccess(t *testing.T) {
-	endpoints := []string{"localhost:9100", "localhost:9101"}
-	peers := []string{"localhost:9202", "localhost:9203"}
+	endpoints := []string{"192.168.3.13:29280", "192.168.3.14:29281"}
+	peers := []string{"192.168.3.13:29282", "192.168.3.14:29283"}
 
 	endpointsFile := "test_endpoints.txt"
 	peersFile := "test_peers.txt"
@@ -41,6 +41,7 @@ func TestCallReadSuccess(t *testing.T) {
 
 	go fs1.Listen()
 	go fs2.Listen()
+
 	defer fs1.Close()
 	defer fs2.Close()
 
@@ -62,8 +63,8 @@ func TestCallReadSuccess(t *testing.T) {
 }
 
 func TestCallWriteSuccess(t *testing.T) {
-	endpoints := []string{"localhost:9104", "localhost:9105"}
-	peers := []string{"localhost:9206", "localhost:9207"}
+	endpoints := []string{"192.168.3.13:29284", "192.168.3.14:29285"}
+	peers := []string{"192.168.3.13:29286", "192.168.3.14:29287"}
 
 	endpointsFile := "test_endpoints2.txt"
 	peersFile := "test_peers2.txt"
@@ -81,6 +82,7 @@ func TestCallWriteSuccess(t *testing.T) {
 
 	go fs1.Listen()
 	go fs2.Listen()
+
 	defer fs1.Close()
 	defer fs2.Close()
 
