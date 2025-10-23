@@ -260,12 +260,15 @@ func (fm *FileServer) Listen() {
 	checkError(err)
 	defer fm.listener.Close()
 
+	rpcServer := rpc.NewServer()
+	rpcServer.Register(fm)
+
 	for {
 		conn, err := fm.listener.Accept()
 		if err != nil {
 			continue
 		}
-		go rpc.ServeConn(conn)
+		go rpcServer.ServeConn(conn)
 	}
 }
 
@@ -332,7 +335,7 @@ func New(me int, endpointsFile string, filename string, peerFile string, reader 
 		distributedMutex: ra.New(me, peerFile, reader),
 	}
 
-	rpc.Register(fm)
+	// rpc.Register(fm)
 	log.Println("Lanzado FileServer como nodo nº: ", fm.me, " en: ", fm.endpoints[me-1], " como Reader: ", fm.distributedMutex.Reader)
 	return fm
 }

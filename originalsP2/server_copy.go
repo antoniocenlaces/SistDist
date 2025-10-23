@@ -1,3 +1,5 @@
+package fileManagerServer
+
 import (
 	"bufio"
 	"errors"
@@ -186,4 +188,3 @@ func New(me int, endpointsFile string, filename string, peerFile string, reader 
 func (fm *FileServer) Close() {
 	fm.distributedMutex.Stop()
 }
-
