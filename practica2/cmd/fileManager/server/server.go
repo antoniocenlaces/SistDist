@@ -222,6 +222,7 @@ func (fm *FileServer) LocalAdress() string {
 // De momento está función no tiene implementado el leer desde una posición una longitus especifica
 // Ahora mismo se lee el fichero entero y se deuvlve el contenido al completo
 func (fm *FileServer) ReadFile(args *fileMangertypes.ReadArgs, reply *fileMangertypes.ReplyType) error {
+	log.Println("Piden leer en nodo nº: ", fm.me, " estoy en: ", fm.listener.Addr().String(), " como Reader: ", fm.distributedMutex.Reader)
 	if !fm.distributedMutex.Reader {
 		reply.Err = -1
 		reply.Data = []byte("It is not a reader node")
