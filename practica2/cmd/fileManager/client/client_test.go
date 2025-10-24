@@ -160,6 +160,9 @@ func MultipleTest(t *testing.T) {
 	// }
 
 	// Limpieza
+	if string(text) != "Distributed Write" {
+		t.Errorf("Se esperaba 'Distributed Write', se recibió '%s'", string(data))
+	}
 	os.Remove(testFile1)
 
 }
