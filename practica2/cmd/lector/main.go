@@ -32,7 +32,7 @@ func main() {
 	endpointsFile := args[3]
 	path := args[4]
 	fm := fileManagerServer.New(me, endpointsFile, path, peersFile, true)
-	time.Sleep(10 * time.Second)
+	time.Sleep(30 * time.Second)
 	//reader := bufio.NewReader(os.Stdin)
 	go fm.Listen()
 	for {
