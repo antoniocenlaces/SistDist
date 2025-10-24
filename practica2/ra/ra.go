@@ -147,12 +147,13 @@ func processRequest(n *RASharedDB, msg Request) {
 	n.higSeqNum = max(n.higSeqNum, msg.Clock)
 	deferIt := n.reqCS && !(n.Reader && msg.Reader) &&
 		((msg.Clock > n.ourSeqNum) || (msg.Clock == n.ourSeqNum && msg.Pid > n.me))
-	n.mutex.Unlock()
+	// n.mutex.Unlock()
 	if deferIt {
-		n.mutex.Lock()
+		// n.mutex.Lock()
 		n.repDefd = append(n.repDefd, msg.Pid)
 		n.mutex.Unlock()
 	} else {
+		n.mutex.Unlock()
 		n.ms.Send(msg.Pid, Reply{}) // then I REPLY to the REQUEST
 	}
 }
