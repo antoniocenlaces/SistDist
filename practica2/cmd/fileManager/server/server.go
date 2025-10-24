@@ -127,7 +127,7 @@ func writeFile(text string, pos int, whence int, fileName string) error {
 //   - Si la operación se realiza correctamente, reply.Err = 0 y reply.Data = nil.
 //   - Si ocurre un error, reply.Err = -1 y reply.Data contiene el mensaje de error.
 func (fm *FileServer) UpdateFile(args *fileMangertypes.UpdateArgs, reply *fileMangertypes.ReplyType) error {
-	log.Println("Me piden actualizar en nodo nº: ", fm.me, " en: ", fm.listener.Addr().String(), " como Reader: ", fm.distributedMutex.Reader)
+	log.Println("Soy nodo nº: ", fm.me, " en: ", fm.listener.Addr().String(), " como Reader: ", fm.distributedMutex.Reader, "actualizo mi fichero con: ", args.Content)
 	err := writeFile(args.Content, args.Pos, args.From, fm.filename)
 	if err != nil {
 		reply.Err = -1
@@ -166,6 +166,7 @@ func (fm *FileServer) WriteFile(args *fileMangertypes.WriteArgs, reply *fileMang
 	}
 
 	fm.distributedMutex.PreProtocol()
+	log.Println("Nodo nº: ", fm.me, "ha conseguido entrar en CS")
 	defer fm.distributedMutex.PostProtocol()
 
 	err := writeFile(args.Content, args.Pos, args.From, fm.filename)
@@ -174,10 +175,11 @@ func (fm *FileServer) WriteFile(args *fileMangertypes.WriteArgs, reply *fileMang
 		reply.Data = []byte("Error writing on file")
 		return nil
 	}
-
+	log.Println("Nodo nº: ", fm.me, "ha escrito en su fichero y comunica cambios al resto")
 	// Propagar la actualización a los demás nodos
 	for i, ep := range fm.endpoints {
 		if i != fm.me-1 {
+			log.Println("Nodo nº: ", fm.me, "comunica cambios al nodo: ", i+1)
 			err = fm.callUpdate(i+1, args.Content, args.Pos, args.From)
 			if err != nil {
 				log.Printf("El endpoint %s no pudo escribir el fichero\n", ep)
