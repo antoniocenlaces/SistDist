@@ -34,6 +34,7 @@ func main() {
 	path := args[4]
 	fm := fileManagerServer.New(me, endpointsFile, path, peersFile, false)
 	//reader := bufio.NewReader(os.Stdin)
+	time.Sleep(10 * time.Second)
 	go fm.Listen()
 	for {
 		//fmt.Print("Introduce lo que quieras escribir: ")
