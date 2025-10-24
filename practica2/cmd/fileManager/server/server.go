@@ -127,6 +127,7 @@ func writeFile(text string, pos int, whence int, fileName string) error {
 //   - Si la operación se realiza correctamente, reply.Err = 0 y reply.Data = nil.
 //   - Si ocurre un error, reply.Err = -1 y reply.Data contiene el mensaje de error.
 func (fm *FileServer) UpdateFile(args *fileMangertypes.UpdateArgs, reply *fileMangertypes.ReplyType) error {
+	log.Println("Me piden actualizar en nodo nº: ", fm.me, " en: ", fm.listener.Addr().String(), " como Reader: ", fm.distributedMutex.Reader)
 	err := writeFile(args.Content, args.Pos, args.From, fm.filename)
 	if err != nil {
 		reply.Err = -1
