@@ -22,8 +22,8 @@ func createConfigFile(path string, lines []string) {
 }
 
 func TestCallReadSuccess(t *testing.T) {
-	endpoints := []string{"192.168.3.13:29280", "192.168.3.14:29281"}
-	peers := []string{"192.168.3.13:29282", "192.168.3.14:29283"}
+	endpoints := []string{"192.168.3.13:29280", "192.168.3.13:29281"}
+	peers := []string{"192.168.3.13:29282", "192.168.3.13:29283"}
 
 	endpointsFile := "test_endpoints.txt"
 	peersFile := "test_peers.txt"
@@ -63,8 +63,8 @@ func TestCallReadSuccess(t *testing.T) {
 }
 
 func TestCallWriteSuccess(t *testing.T) {
-	endpoints := []string{"192.168.3.13:29284", "192.168.3.14:29285"}
-	peers := []string{"192.168.3.13:29286", "192.168.3.14:29287"}
+	endpoints := []string{"192.168.3.13:29284", "192.168.3.13:29285"}
+	peers := []string{"192.168.3.13:29286", "192.168.3.13:29287"}
 
 	endpointsFile := "test_endpoints2.txt"
 	peersFile := "test_peers2.txt"
