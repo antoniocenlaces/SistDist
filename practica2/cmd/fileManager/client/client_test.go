@@ -109,60 +109,60 @@ func TestCallWriteSuccess(t *testing.T) {
 	os.Remove(testFile2)
 }
 
-// func TestMultipleTest(t *testing.T) {
-// 	// 						reader				writer					reader				writer
-// 	endpoints := []string{"192.168.3.13:29280", "192.168.3.14:29280", "192.168.3.15:29280", "192.168.3.16:29280"}
-// 	testFile1 := "test_data_node1.txt"
+func TestMultipleTest(t *testing.T) {
+	// 						reader				writer					reader				writer
+	endpoints := []string{"192.168.3.13:29280", "192.168.3.14:29280", "192.168.3.15:29280", "192.168.3.16:29280"}
+	testFile1 := "test_data_node1.txt"
 
-// 	time.Sleep(1000 * time.Millisecond) // Esperar a que ambos servidores estén listos
-// 	log.Println("Desde el test voy a pedir escribir en nodo: ", endpoints[1], " el texto: Distributed Write 1")
-// 	go CallWrite(endpoints[1], "Distributed Write 1", 0, io.SeekEnd)
+	time.Sleep(1000 * time.Millisecond) // Esperar a que ambos servidores estén listos
+	log.Println("Desde el test voy a pedir escribir en nodo: ", endpoints[1], " el texto: Distributed Write 1")
+	go CallWrite(endpoints[1], "Distributed Write 1", 0, io.SeekEnd)
 
-// 	log.Println("Desde el test voy a pedir escribir en nodo: ", endpoints[3], " el texto: Distributed Write 2")
-// 	go CallWrite(endpoints[3], "Distributed Write 2", 0, io.SeekEnd)
+	log.Println("Desde el test voy a pedir escribir en nodo: ", endpoints[3], " el texto: Distributed Write 2")
+	go CallWrite(endpoints[3], "Distributed Write 2", 0, io.SeekEnd)
 
-// 	log.Println("Desde el test voy a pedir leer del nodo: ", endpoints[0])
-// 	data, err := CallRead(endpoints[0], 0, 0)
-// 	if err == nil {
-// 		log.Println("Leido {\n", data, "\n}")
-// 	} else {
-// 		log.Println("Error en ", endpoints[0], " leyendo de fichero")
-// 	}
+	log.Println("Desde el test voy a pedir leer del nodo: ", endpoints[0])
+	data, err := CallRead(endpoints[0], 0, 0)
+	if err == nil {
+		log.Println("Leido {\n", data, "\n}")
+	} else {
+		log.Println("Error en ", endpoints[0], " leyendo de fichero")
+	}
 
-// 	log.Println("Desde el test voy a pedir escribir en nodo: ", endpoints[1], " el texto: Distributed Write 3")
-// 	go CallWrite(endpoints[3], "Distributed Write 3", 0, io.SeekEnd)
+	log.Println("Desde el test voy a pedir escribir en nodo: ", endpoints[1], " el texto: Distributed Write 3")
+	go CallWrite(endpoints[3], "Distributed Write 3", 0, io.SeekEnd)
 
-// 	log.Println("Desde el test voy a pedir escribir en nodo: ", endpoints[3], " el texto: Distributed Write 4")
-// 	go CallWrite(endpoints[3], "Distributed Write 4", 0, io.SeekEnd)
+	log.Println("Desde el test voy a pedir escribir en nodo: ", endpoints[3], " el texto: Distributed Write 4")
+	go CallWrite(endpoints[3], "Distributed Write 4", 0, io.SeekEnd)
 
-// 	log.Println("Desde el test voy a pedir leer del nodo: ", endpoints[2])
-// 	data, err = CallRead(endpoints[2], 0, 0)
-// 	if err == nil {
-// 		log.Println("Leido {\n", data, "\n}")
-// 	} else {
-// 		log.Println("Error en ", endpoints[2], " leyendo de fichero")
-// 	}
-// 	time.Sleep(1000 * time.Millisecond) // Esperar a que ambos servidores estén listos
-// 	log.Println("Después de un descanso vuelvo a leer")
-// 	log.Println("Desde el test voy a pedir leer del nodo: ", endpoints[0])
-// 	data, err = CallRead(endpoints[0], 0, 0)
-// 	if err == nil {
-// 		log.Println("Leido {\n", data, "\n}")
-// 	} else {
-// 		log.Println("Error en ", endpoints[0], " leyendo de fichero")
-// 	}
-// 	log.Println("Contenido real del fichero:")
+	log.Println("Desde el test voy a pedir leer del nodo: ", endpoints[2])
+	data, err = CallRead(endpoints[2], 0, 0)
+	if err == nil {
+		log.Println("Leido {\n", data, "\n}")
+	} else {
+		log.Println("Error en ", endpoints[2], " leyendo de fichero")
+	}
+	time.Sleep(1000 * time.Millisecond) // Esperar a que ambos servidores estén listos
+	log.Println("Después de un descanso vuelvo a leer")
+	log.Println("Desde el test voy a pedir leer del nodo: ", endpoints[0])
+	data, err = CallRead(endpoints[0], 0, 0)
+	if err == nil {
+		log.Println("Leido {\n", data, "\n}")
+	} else {
+		log.Println("Error en ", endpoints[0], " leyendo de fichero")
+	}
+	log.Println("Contenido real del fichero:")
 
-// 	text, _ := os.ReadFile(testFile1)
-// 	log.Println(text)
-// 	// if string(data) != "Distributed Write" {
-// 	// 	t.Errorf("Se esperaba 'Distributed Write', se recibió '%s'", string(data))
-// 	// }
+	text, _ := os.ReadFile(testFile1)
+	log.Println(text)
+	// if string(data) != "Distributed Write" {
+	// 	t.Errorf("Se esperaba 'Distributed Write', se recibió '%s'", string(data))
+	// }
 
-// 	// Limpieza
-// 	if string(text) != "Distributed Write" {
-// 		t.Errorf("Se esperaba 'Distributed Write', se recibió '%s'", string(data))
-// 	}
-// 	os.Remove(testFile1)
+	// Limpieza
+	if string(text) != "Distributed Write" {
+		t.Errorf("Se esperaba 'Distributed Write', se recibió '%s'", string(data))
+	}
+	os.Remove(testFile1)
 
-// }
+}
