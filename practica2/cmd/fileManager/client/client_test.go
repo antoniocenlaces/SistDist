@@ -109,8 +109,8 @@ func TestCallWriteSuccess(t *testing.T) {
 	os.Remove(testFile2)
 }
 
-func MultipleTest(t *testing.T) {
-	// reader				writer					reader				writer
+func TestMultipleTest(t *testing.T) {
+	// 						reader				writer					reader				writer
 	endpoints := []string{"192.168.3.13:29280", "192.168.3.14:29280", "192.168.3.15:29280", "192.168.3.16:29280"}
 	testFile1 := "test_data_node1.txt"
 
