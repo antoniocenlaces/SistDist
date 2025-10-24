@@ -58,8 +58,8 @@ func main() {
 	// Inicializar dos nodo
 	fs1 := fileManagerServer.New(me, endpointsFile, testFile1, peersFile, (reader != 0)) // lector
 
-	go fs1.Listen()
+	fs1.Listen()
 
-	// defer fs1.Close()
+	defer fs1.Close()
 
 }
