@@ -36,9 +36,9 @@ func main() {
 		log.Println("usage: main.go myNodeNumber reader")
 		os.Exit(1)
 	}
-	me, err := strconv.Atoi(args[2])
+	me, err := strconv.Atoi(args[1])
 	checkError(err)
-	reader, err := strconv.Atoi(args[3])
+	reader, err := strconv.Atoi(args[2])
 	checkError(err)
 	if reader < 0 || reader > 1 {
 		log.Println("reader=0 => is a writer; reader=1 => is a reader")
