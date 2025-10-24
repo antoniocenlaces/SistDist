@@ -116,10 +116,10 @@ func TestMultipleTest(t *testing.T) {
 
 	time.Sleep(1000 * time.Millisecond) // Esperar a que ambos servidores estén listos
 	log.Println("Desde el test voy a pedir escribir en nodo: ", endpoints[1], " el texto: Distributed Write 1")
-	go CallWrite(endpoints[1], "Distributed Write 1", 0, io.SeekEnd)
+	go CallWrite(endpoints[1], "Distributed Write 1\n", 0, io.SeekEnd)
 
 	log.Println("Desde el test voy a pedir escribir en nodo: ", endpoints[3], " el texto: Distributed Write 2")
-	go CallWrite(endpoints[3], "Distributed Write 2", 0, io.SeekEnd)
+	go CallWrite(endpoints[3], "Distributed Write 2\n", 0, io.SeekEnd)
 
 	log.Println("Desde el test voy a pedir leer del nodo: ", endpoints[0])
 	data, err := CallRead(endpoints[0], 0, 0)
@@ -130,10 +130,10 @@ func TestMultipleTest(t *testing.T) {
 	}
 
 	log.Println("Desde el test voy a pedir escribir en nodo: ", endpoints[1], " el texto: Distributed Write 3")
-	go CallWrite(endpoints[3], "Distributed Write 3", 0, io.SeekEnd)
+	go CallWrite(endpoints[3], "Distributed Write 3\n", 0, io.SeekEnd)
 
 	log.Println("Desde el test voy a pedir escribir en nodo: ", endpoints[3], " el texto: Distributed Write 4")
-	go CallWrite(endpoints[3], "Distributed Write 4", 0, io.SeekEnd)
+	go CallWrite(endpoints[3], "Distributed Write 4\n", 0, io.SeekEnd)
 
 	log.Println("Desde el test voy a pedir leer del nodo: ", endpoints[2])
 	data, err = CallRead(endpoints[2], 0, 0)
@@ -154,7 +154,7 @@ func TestMultipleTest(t *testing.T) {
 	log.Println("Contenido real del fichero:")
 
 	text, _ := os.ReadFile(testFile1)
-	log.Println(text)
+	log.Println(string(text))
 	// if string(data) != "Distributed Write" {
 	// 	t.Errorf("Se esperaba 'Distributed Write', se recibió '%s'", string(data))
 	// }
@@ -163,6 +163,6 @@ func TestMultipleTest(t *testing.T) {
 	if string(text) != "Distributed Write" {
 		t.Errorf("Se esperaba 'Distributed Write', se recibió '%s'", string(data))
 	}
-	os.Remove(testFile1)
+	// os.Remove(testFile1)
 
 }
