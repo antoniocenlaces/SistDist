@@ -1,7 +1,6 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
 	"io"
 	"log"
@@ -9,6 +8,7 @@ import (
 	fileManagerClient "practica2/cmd/fileManager/client"
 	fileManagerServer "practica2/cmd/fileManager/server"
 	"strconv"
+	"time"
 )
 
 func checkError(err error) {
@@ -33,22 +33,23 @@ func main() {
 	endpointsFile := args[3]
 	path := args[4]
 	fm := fileManagerServer.New(me, endpointsFile, path, peersFile, false)
-	reader := bufio.NewReader(os.Stdin)
+	//reader := bufio.NewReader(os.Stdin)
 	go fm.Listen()
 	for {
-		fmt.Print("Introduce lo que quieras escribir: ")
-		input, _ := reader.ReadString('\n')
-		if input != "0\n" {
-			err = fileManagerClient.CallWrite(fm.LocalAdress(), input, 0, io.SeekEnd)
-			if err == nil {
-				log.Println("He escrito correctamente : ", input)
-			} else {
-				log.Println("Error en ", me, " escribiendo en fichero")
-			}
+		//fmt.Print("Introduce lo que quieras escribir: ")
+		//input, _ := reader.ReadString('\n')
+		//if input != "0\n" {
+		err = fileManagerClient.CallWrite(fm.LocalAdress(), ("Write " + args[2]), 0, io.SeekEnd)
+		if err == nil {
+			log.Println("He escrito correctamente : ", "Write "+args[2])
 		} else {
-			fm.Close()
-			break
+			log.Println("Error en ", me, " escribiendo en fichero")
 		}
+		time.Sleep(500 * time.Millisecond)
+		//} else {
+		//	fm.Close()
+		//	break
+		//}
 	}
 
 }
