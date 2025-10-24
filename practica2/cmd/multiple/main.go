@@ -60,6 +60,6 @@ func main() {
 
 	go fs1.Listen()
 
-	defer fs1.Close()
+	// defer fs1.Close()
 
 }
