@@ -1,6 +1,0 @@
-Distributed Write 1
-Distributed Write 3
-Distributed Write 4
-Distributed Write 2
-Distributed Write 6
-Distributed Write 5

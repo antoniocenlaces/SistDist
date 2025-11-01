@@ -166,7 +166,7 @@ func (fm *FileServer) WriteFile(args *fileMangertypes.WriteArgs, reply *fileMang
 	}
 
 	fm.distributedMutex.PreProtocol()
-	log.Println("Nodo nº: ", fm.me, "ha conseguido entrar en CS")
+	log.Println("ENTRADA EN CS: Nodo nº: ", fm.me)
 	defer fm.distributedMutex.PostProtocol()
 
 	err := writeFile(args.Content, args.Pos, args.From, fm.filename)
@@ -189,6 +189,7 @@ func (fm *FileServer) WriteFile(args *fileMangertypes.WriteArgs, reply *fileMang
 
 	reply.Err = 0
 	reply.Data = nil
+	log.Println("SALIDA DE CS: Nodo nº: ", fm.me)
 	return nil
 }
 

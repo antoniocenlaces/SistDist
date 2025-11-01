@@ -37,6 +37,11 @@ type RASharedDB struct {
 	mutex      sync.Mutex // mutex para proteger concurrencia sobre las variables
 	allReplied *sync.Cond // conditional variable for PreProtocol() wait all peers to send REPLY
 	Reader     bool       // true: this peer is a reader; flase: this peer is a writer
+	// To control which call to my node enter CS
+	nextShift  int
+	shiftInCS  int
+	shiftMutex sync.Mutex
+	csFinished *sync.Cond
 }
 
 func New(whoAmI int, usersFile string, reader bool) *RASharedDB {
@@ -56,8 +61,12 @@ func New(whoAmI int, usersFile string, reader bool) *RASharedDB {
 		done:       make(chan bool),
 		mutex:      sync.Mutex{},
 		Reader:     reader,
+		nextShift:  0,
+		shiftInCS:  0,
+		shiftMutex: sync.Mutex{},
 	}
 	ra.allReplied = sync.NewCond(&ra.mutex)
+	ra.csFinished = sync.NewCond(&ra.shiftMutex)
 	log.Println("Creada estrucutra ra para nodo nº: ", ra.me, " en: ", msgs.Peers[ra.me-1], " como Reader: ", ra.Reader)
 	go handleReceivedMessages(&ra)
 	return &ra
@@ -77,7 +86,17 @@ func max(a, b int) int {
 func (ra *RASharedDB) PreProtocol() {
 	log.Println("ra de nodo nº: ", ra.me, " pide entrar en SC como Reader: ", ra.Reader)
 	// Using ra mutex common variables are updated to REQUEST critical section
+	ra.shiftMutex.Lock()
+	myShift := ra.nextShift
+	ra.nextShift++
+	for myShift != ra.shiftInCS {
+		ra.csFinished.Wait()
+	}
+	ra.shiftMutex.Unlock()
 	ra.mutex.Lock()
+	if ra.reqCS {
+		log.Panicln("¡¡¡¡FATAL tengo el shift pero la variable reqCS está ocupada por otro hilo!!!!")
+	}
 	ra.reqCS = true
 	ra.ourSeqNum = ra.higSeqNum + 1
 	ra.outRepCnt = ra.totalNodes - 1
@@ -114,8 +133,14 @@ func (ra *RASharedDB) PostProtocol() {
 	ra.repDefd = []int{}
 	ra.reqCS = false
 	ra.mutex.Unlock()
-	msg := Reply{}
 
+	// let's advance to next shift to allow any other request to my node to enter
+	ra.shiftMutex.Lock()
+	ra.shiftInCS++
+	ra.csFinished.Broadcast()
+	ra.shiftMutex.Unlock()
+
+	msg := Reply{}
 	for _, pid := range myRepDef {
 		// notification to node j
 		// ra.mutex.Lock()
@@ -130,7 +155,7 @@ func (ra *RASharedDB) PostProtocol() {
 	}
 
 	wg.Wait() // wait all goroutines to finish
-
+	log.Println("ra de nodo nº: ", ra.me, " ha TERMINDADO POSTPROTOCOL")
 }
 
 func (ra *RASharedDB) Stop() {
