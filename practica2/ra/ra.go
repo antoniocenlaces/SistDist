@@ -58,6 +58,7 @@ func New(whoAmI int, usersFile string, reader bool) *RASharedDB {
 		Reader:     reader,
 	}
 	ra.allReplied = sync.NewCond(&ra.mutex)
+	log.Println("Creada estrucutra ra para nodo nº: ", ra.me, " en: ", msgs.Peers[ra.me-1], " como Reader: ", ra.Reader)
 	go handleReceivedMessages(&ra)
 	return &ra
 }
@@ -74,27 +75,32 @@ func max(a, b int) int {
 //
 //	Ricart-Agrawala Generalizado
 func (ra *RASharedDB) PreProtocol() {
+	log.Println("ra de nodo nº: ", ra.me, " pide entrar en SC como Reader: ", ra.Reader)
 	// Using ra mutex common variables are updated to REQUEST critical section
 	ra.mutex.Lock()
 	ra.reqCS = true
 	ra.ourSeqNum = ra.higSeqNum + 1
 	ra.outRepCnt = ra.totalNodes - 1
+	log.Println("ra de nodo nº: ", ra.me, " tiene el mutex y ourSeqNum=", ra.ourSeqNum, " outRepCnt=", ra.outRepCnt)
 	ra.mutex.Unlock()
+	log.Println("ra de nodo nº: ", ra.me, " ha soltado el mutex")
 	msg := Request{Clock: ra.ourSeqNum, Pid: ra.me, Reader: ra.Reader}
 	// a message with my Id, my function (reader or writer) and my actual sequence number are sent to all other nodes
 	for i := 1; i <= ra.totalNodes; i++ {
 		if i != ra.me {
+			log.Println("ra de nodo nº: ", ra.me, " envía Request a ", i)
 			go ra.ms.Send(i, msg)
 		}
 	}
 	// Now we wait for all other nodes to answer my REQUEST
 	ra.mutex.Lock()
 	for ra.outRepCnt > 0 {
+		log.Println("ra de nodo nº: ", ra.me, " tiene el mutex y se duerme en .Wait()")
 		ra.allReplied.Wait() // I go to sleep while all other sent their notification
 		// a Broadcast will wake up me and I'll recover ra.mutex
 	}
 	ra.mutex.Unlock()
-
+	log.Println("ra de nodo nº: ", ra.me, " ha sido despertado y devuelve el mutex")
 }
 
 // Pre: Verdad
@@ -135,11 +141,15 @@ func (ra *RASharedDB) Stop() {
 func processReply(n *RASharedDB) {
 	n.mutex.Lock()
 	n.outRepCnt--
+	log.Println("ra de nodo nº: ", n.me, " tiene el mutex y ha recibido un Reply. outRepCnt=", n.outRepCnt)
 	if n.outRepCnt <= 0 {
 		n.outRepCnt = 0
+		log.Println("ra de nodo nº: ", n.me, " ha recibido Reply de todos y podrá entrar en SC")
 		n.allReplied.Broadcast() // wake up the waiter
+		log.Println("después de despertar al PreProtocol he procesado todos los Reply")
 	}
 	n.mutex.Unlock()
+
 }
 
 func processRequest(n *RASharedDB, msg Request) {
@@ -147,13 +157,11 @@ func processRequest(n *RASharedDB, msg Request) {
 	n.higSeqNum = max(n.higSeqNum, msg.Clock)
 	deferIt := n.reqCS && !(n.Reader && msg.Reader) &&
 		((msg.Clock > n.ourSeqNum) || (msg.Clock == n.ourSeqNum && msg.Pid > n.me))
-	// n.mutex.Unlock()
 	if deferIt {
-		// n.mutex.Lock()
 		n.repDefd = append(n.repDefd, msg.Pid)
-		n.mutex.Unlock()
-	} else {
-		n.mutex.Unlock()
+	}
+	n.mutex.Unlock()
+	if !deferIt {
 		n.ms.Send(msg.Pid, Reply{}) // then I REPLY to the REQUEST
 	}
 }

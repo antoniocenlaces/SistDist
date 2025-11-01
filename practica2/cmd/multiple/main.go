@@ -44,8 +44,9 @@ func main() {
 		log.Println("reader=0 => is a writer; reader=1 => is a reader")
 		os.Exit(1)
 	}
-	endpoints := []string{"192.168.3.13:29280", "192.168.3.14:29280", "192.168.3.15:29280", "192.168.3.16:29280"}
-	peers := []string{"192.168.3.13:29281", "192.168.3.14:29281", "192.168.3.15:29281", "192.168.3.16:29281"}
+	// 						reader				writer					reader				writer
+	endpoints := []string{"127.0.0.1:29280", "127.0.0.1:29281", "127.0.0.1:29282", "127.0.0.1:29283"}
+	peers := []string{"127.0.0.1:29284", "127.0.0.1:29285", "127.0.0.1:29286", "127.0.0.1:29287"}
 
 	endpointsFile := "test_endpoints.txt"
 	peersFile := "test_peers.txt"
