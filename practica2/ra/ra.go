@@ -85,7 +85,7 @@ func max(a, b int) int {
 //	Ricart-Agrawala Generalizado
 func (ra *RASharedDB) PreProtocol() {
 	log.Println("ra de nodo nº: ", ra.me, " pide entrar en SC como Reader: ", ra.Reader)
-	// Using ra mutex common variables are updated to REQUEST critical section
+
 	ra.shiftMutex.Lock()
 	myShift := ra.nextShift
 	ra.nextShift++
@@ -93,6 +93,7 @@ func (ra *RASharedDB) PreProtocol() {
 		ra.csFinished.Wait()
 	}
 	ra.shiftMutex.Unlock()
+	// Using ra mutex common variables are updated to REQUEST critical section
 	ra.mutex.Lock()
 	if ra.reqCS {
 		log.Panicln("¡¡¡¡FATAL tengo el shift pero la variable reqCS está ocupada por otro hilo!!!!")

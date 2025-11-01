@@ -109,7 +109,19 @@ func TestCallWriteSuccess(t *testing.T) {
 	os.Remove(testFile2)
 }
 
+func leeMiNodo(endpoints []string, pid int, result *string) {
+	log.Println("Desde el test voy a pedir leer del nodo: ", endpoints[pid-1])
+	data, err := CallRead(endpoints[pid-1], 0, 0)
+	if err == nil {
+		log.Println("Leido {\n", data, "\n}")
+	} else {
+		log.Println("Error en ", endpoints[pid-1], " leyendo de fichero")
+	}
+	*result = data
+}
+
 func TestMultipleTest(t *testing.T) {
+	var data string
 	// 						reader				writer					reader				writer
 	endpoints := []string{"127.0.0.1:29280", "127.0.0.1:29281", "127.0.0.1:29282", "127.0.0.1:29283"}
 	testFile1 := "../../multiple/test_data_node1.txt"
@@ -125,66 +137,55 @@ func TestMultipleTest(t *testing.T) {
 
 	// time.Sleep(1000 * time.Millisecond)
 
-	log.Println("Desde el test voy a pedir leer del nodo: ", endpoints[0])
-	data, err := CallRead(endpoints[0], 0, 0)
-	if err == nil {
-		log.Println("Leido {\n", data, "\n}")
-	} else {
-		log.Println("Error en ", endpoints[0], " leyendo de fichero")
-	}
+	go leeMiNodo(endpoints, 1, &data)
 
 	log.Println("Desde el test voy a pedir escribir en nodo: ", endpoints[1], " el texto: Distributed Write 3")
-	go CallWrite(endpoints[3], "Distributed Write 3\n", 0, io.SeekEnd)
+	go CallWrite(endpoints[1], "Distributed Write 3\n", 0, io.SeekEnd)
 	// time.Sleep(500 * time.Millisecond)
 	log.Println("Desde el test voy a pedir escribir en nodo: ", endpoints[3], " el texto: Distributed Write 4")
 	go CallWrite(endpoints[3], "Distributed Write 4\n", 0, io.SeekEnd)
 	// time.Sleep(1000 * time.Millisecond)
 	log.Println("Desde el test voy a pedir leer del nodo: ", endpoints[2])
-	data, err = CallRead(endpoints[2], 0, 0)
-	if err == nil {
-		log.Println("Leido {\n", data, "\n}")
-	} else {
-		log.Println("Error en ", endpoints[2], " leyendo de fichero")
-	}
+
+	go leeMiNodo(endpoints, 3, &data)
+	go leeMiNodo(endpoints, 1, &data)
+
 	log.Println("Desde el test voy a pedir escribir en nodo: ", endpoints[1], " el texto: Distributed Write 5")
-	go CallWrite(endpoints[3], "Distributed Write 5\n", 0, io.SeekEnd)
+	go CallWrite(endpoints[1], "Distributed Write 5\n", 0, io.SeekEnd)
 	// time.Sleep(500 * time.Millisecond)
 	log.Println("Desde el test voy a pedir escribir en nodo: ", endpoints[3], " el texto: Distributed Write 6")
 	go CallWrite(endpoints[3], "Distributed Write 6\n", 0, io.SeekEnd)
 	log.Println("Desde el test voy a pedir escribir en nodo: ", endpoints[1], " el texto: Distributed Write 7")
-	go CallWrite(endpoints[3], "Distributed Write 7\n", 0, io.SeekEnd)
+	go CallWrite(endpoints[1], "Distributed Write 7\n", 0, io.SeekEnd)
 	// time.Sleep(500 * time.Millisecond)
 	log.Println("Desde el test voy a pedir escribir en nodo: ", endpoints[3], " el texto: Distributed Write 8")
 	go CallWrite(endpoints[3], "Distributed Write 8\n", 0, io.SeekEnd)
 	log.Println("Desde el test voy a pedir escribir en nodo: ", endpoints[1], " el texto: Distributed Write 9")
-	go CallWrite(endpoints[3], "Distributed Write 9\n", 0, io.SeekEnd)
+	go CallWrite(endpoints[1], "Distributed Write 9\n", 0, io.SeekEnd)
 	// time.Sleep(500 * time.Millisecond)
 	log.Println("Desde el test voy a pedir escribir en nodo: ", endpoints[3], " el texto: Distributed Write 10")
 	go CallWrite(endpoints[3], "Distributed Write 10\n", 0, io.SeekEnd)
 	log.Println("Desde el test voy a pedir escribir en nodo: ", endpoints[1], " el texto: Distributed Write 11")
-	go CallWrite(endpoints[3], "Distributed Write 11\n", 0, io.SeekEnd)
+	go CallWrite(endpoints[1], "Distributed Write 11\n", 0, io.SeekEnd)
 	// time.Sleep(500 * time.Millisecond)
 	log.Println("Desde el test voy a pedir escribir en nodo: ", endpoints[3], " el texto: Distributed Write 12")
 	go CallWrite(endpoints[3], "Distributed Write 12\n", 0, io.SeekEnd)
 	log.Println("Desde el test voy a pedir escribir en nodo: ", endpoints[1], " el texto: Distributed Write 13")
-	go CallWrite(endpoints[3], "Distributed Write 13\n", 0, io.SeekEnd)
+	go CallWrite(endpoints[1], "Distributed Write 13\n", 0, io.SeekEnd)
 	// time.Sleep(500 * time.Millisecond)
 	log.Println("Desde el test voy a pedir escribir en nodo: ", endpoints[3], " el texto: Distributed Write 14")
 	go CallWrite(endpoints[3], "Distributed Write 14\n", 0, io.SeekEnd)
 	log.Println("Desde el test voy a pedir escribir en nodo: ", endpoints[1], " el texto: Distributed Write 15")
-	go CallWrite(endpoints[3], "Distributed Write 15\n", 0, io.SeekEnd)
+	go CallWrite(endpoints[1], "Distributed Write 15\n", 0, io.SeekEnd)
 	// time.Sleep(500 * time.Millisecond)
 	log.Println("Desde el test voy a pedir escribir en nodo: ", endpoints[3], " el texto: Distributed Write 16")
 	go CallWrite(endpoints[3], "Distributed Write 16\n", 0, io.SeekEnd)
 	time.Sleep(3000 * time.Millisecond) // Esperar a que ambos servidores estén listos
 	log.Println("Después de un descanso vuelvo a leer")
 	log.Println("Desde el test voy a pedir leer del nodo: ", endpoints[0])
-	data, err = CallRead(endpoints[0], 0, 0)
-	if err == nil {
-		log.Println("Leido {\n", data, "\n}")
-	} else {
-		log.Println("Error en ", endpoints[0], " leyendo de fichero")
-	}
+
+	go leeMiNodo(endpoints, 1, &data)
+
 	log.Println("Contenido real del fichero:")
 
 	text, _ := os.ReadFile(testFile1)
