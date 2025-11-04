@@ -24,8 +24,9 @@ package raft
 
 import (
 	"fmt"
-	"io/ioutil"
+	"io"
 	"log"
+	"math/rand"
 	"os"
 
 	//"crypto/rand"
@@ -36,6 +37,9 @@ import (
 
 	"raft/internal/comun/rpctimeout"
 )
+
+// para representar los estados de un servidor
+type state int
 
 const (
 	// Constante para fijar valor entero no inicializado
@@ -50,6 +54,15 @@ const (
 
 	// Cambiar esto para salida de logs en un directorio diferente
 	kLogOutputDir = "./logs_raft/"
+	// base y techo del timer para nueva elección (ms)
+	baseTimer = 150
+	ceilTimer = 300
+	// Timeout de la llamada RPC en ms (ajustar al entorno donde se ejecuta)
+	rpcTimeout = 200
+	// definición de estados del servidor
+	Follower state = iota
+	Candidate
+	Leader
 )
 
 type TipoOperacion struct {
@@ -97,12 +110,27 @@ type NodoRaft struct {
 	// más alto conocido a ser replicado en ese servidor
 
 	// Estado temporal (no persistente)
-	role          string      // "Follower", "Candidate", "Leader"
-	votesReceived int         // votos durante elección
-	electionReset time.Time   // última vez que recibió mensaje válido
-	timer         *time.Timer // para gestionar timeout de elecciones
+	role          state         // "Follower", "Candidate", "Leader"
+	votesReceived int           // votos durante elección
+	electionReset time.Duration // última vez que recibió mensaje válido
+	timer         *time.Timer   // para gestionar timeout de elecciones
 	// Canal para aplicar operaciones comprometidas a la máquina de estados
 	canalAplicarOperacion chan AplicaOperacion
+}
+
+// resetTimer reinicia el temporizador de elección del nodo.
+// Cancela el temporizador anterior (si existe) y programa uno nuevo
+// con una duración aleatoria en el rango [150ms, 300ms].
+func (nr *NodoRaft) resetTimer() {
+	// Duración aleatoria para evitar colisiones simultáneas de elección
+	dur := time.Duration(baseTimer+rand.Intn(ceilTimer-baseTimer)) * time.Millisecond
+	// para evitar condiciones de carrera solo lanzamos AfterFunc() si no hay timer
+	if nr.timer == nil {
+		nr.timer = time.AfterFunc(dur, nr.iniciarEleccion)
+	} else {
+		nr.timer.Reset(dur)
+	}
+	nr.Logger.Printf("[Nodo %d] Temporizador reiniciado (timeout: %v)", nr.Yo, nr.electionReset)
 }
 
 // Creacion de un nuevo nodo de eleccion
@@ -150,10 +178,23 @@ func NuevoNodo(nodos []rpctimeout.HostPort, yo int,
 		}
 		nr.Logger.Println("logger initialized")
 	} else {
-		nr.Logger = log.New(ioutil.Discard, "", 0)
+		nr.Logger = log.New(io.Discard, "", 0)
 	}
 
-	// Añadir codigo de inicialización
+	nr.currentTerm = 0
+	nr.votedFor = IntNOINICIALIZADO
+	nr.logEntries = make([]AplicaOperacion, 0)
+
+	nr.commitIndex = 0
+	nr.lastApplied = 0
+
+	nr.nextIndex = make(map[int]int, len(nr.Nodos))
+	nr.matchIndex = make(map[int]int, len(nr.Nodos))
+
+	nr.role = Follower
+	nr.votesReceived = 0
+
+	nr.resetTimer()
 
 	return nr
 }
@@ -175,11 +216,9 @@ func (nr *NodoRaft) para() {
 // Cuarto valor es el lider, es el indice del líder si no es él
 func (nr *NodoRaft) obtenerEstado() (int, int, bool, int) {
 	var yo int = nr.Yo
-	var mandato int
-	var esLider bool
+	var mandato int = nr.currentTerm
+	var esLider bool = nr.Yo == nr.IdLider
 	var idLider int = nr.IdLider
-
-	// Vuestro codigo aqui
 
 	return yo, mandato, esLider, idLider
 }
@@ -211,6 +250,35 @@ func (nr *NodoRaft) someterOperacion(operacion TipoOperacion) (int, int,
 	// Vuestro codigo aqui
 
 	return indice, mandato, EsLider, idLider, valorADevolver
+}
+
+func (nr *NodoRaft) iniciarEleccion() {
+	nr.Mux.Lock()
+	// incrementa mandato para esta nueva elección
+	nr.currentTerm++
+	nr.votedFor = nr.Yo
+	nr.votesReceived = 1 // voto por mí mismo
+	nr.role = Candidate
+	nr.resetTimer() // para evitar que vuelva a dispararse elección
+	nr.Logger.Printf("Nodo %d inicia elección para mandato %d\n", nr.Yo, nr.currentTerm)
+
+	args := ArgsPeticionVoto{
+		Term:        nr.currentTerm,
+		CandidateId: nr.Yo,
+	}
+	for node, peer := range nr.Nodos {
+		if node == nr.Yo {
+			continue
+		}
+		go func(peer rpctimeout.HostPort, node int) {
+			reply := RespuestaPeticionVoto{}
+			ok := nr.enviarPeticionVoto(node, &args, &reply)
+			if ok {
+				nr.tratarRespuestaVoto(reply)
+			}
+		}(peer, node)
+	}
+	nr.Mux.Unlock()
 }
 
 // -----------------------------------------------------------------------
@@ -262,7 +330,10 @@ func (nr *NodoRaft) SometerOperacionRaft(operacion TipoOperacion,
 // -----------
 // Nombres de campos deben comenzar con letra mayuscula !
 type ArgsPeticionVoto struct {
-	// Vuestros datos aqui
+	Term         int // mandato al que se presenta como candidato
+	CandidateId  int // nº nodo en Nodos de quien se presenta como candidato
+	LastLogIndex int // índice del último log del candidato
+	LastLogTerm  int // mandato en el que se produjo el último commit del candidato
 }
 
 // Structura de ejemplo de respuesta de RPC PedirVoto,
@@ -271,14 +342,42 @@ type ArgsPeticionVoto struct {
 // -----------
 // Nombres de campos deben comenzar con letra mayuscula !
 type RespuestaPeticionVoto struct {
-	// Vuestros datos aqui
+	Term        int  // mandato del seguidor que responde
+	VoteGranted bool //true si el voto fue concedido
 }
 
 // Metodo para RPC PedirVoto
 func (nr *NodoRaft) PedirVoto(peticion *ArgsPeticionVoto,
 	reply *RespuestaPeticionVoto) error {
-	// Vuestro codigo aqui
+	nr.Mux.Lock()
+	defer nr.Mux.Unlock()
 
+	reply.Term = nr.currentTerm
+	reply.VoteGranted = false // en principio mi voto es negativo
+
+	// si el mandato del candidato es menor al mío, emito voto negativo
+	// también le informo que estamos en un mandato superior
+	if peticion.Term < nr.currentTerm {
+		nr.Logger.Printf("Nodo: %d Rechaza voto para nodo %d porque está mandato menor->(%d < %d)",
+			nr.Yo, peticion.CandidateId, peticion.Term, nr.currentTerm)
+		return nil
+	}
+	// si el mandato del candidato es más actual que el mío, me actualizo y le voto
+	if peticion.Term > nr.currentTerm {
+		nr.currentTerm = peticion.Term
+		nr.votedFor = IntNOINICIALIZADO
+		nr.role = Follower
+	}
+	// si aún no he votado o bien voté por este candidato le repito el voto
+	if nr.votedFor == IntNOINICIALIZADO || nr.votedFor == peticion.CandidateId {
+		nr.votedFor = peticion.CandidateId
+		reply.VoteGranted = true
+		// reinicia el temporizador de elección
+		nr.resetTimer()
+		nr.Logger.Printf("Nodo: %d Vota por %d en mandato %d", nr.Yo,
+			nr.votedFor, nr.currentTerm)
+	}
+	reply.Term = nr.currentTerm
 	return nil
 }
 
@@ -331,7 +430,60 @@ func (nr *NodoRaft) AppendEntries(args *ArgAppendEntries,
 func (nr *NodoRaft) enviarPeticionVoto(nodo int, args *ArgsPeticionVoto,
 	reply *RespuestaPeticionVoto) bool {
 
-	// Completar....
+	peer := nr.Nodos[nodo]
+
+	// Llamamos remotamente al método del otro nodo
+	err := peer.CallTimeout("NodoRaft.PedirVoto", args, reply, rpcTimeout*time.Millisecond)
+
+	if err != nil {
+		// Error de conexión o timeout -> el nodo remoto no ha respondido
+		nr.Logger.Printf("Nodo %d: fallo al pedir voto a %d (%v)\n", nr.Yo, nodo, err)
+		return false
+	}
+
+	// Si no hubo error, el reply ya está relleno
+	nr.Logger.Printf("Nodo %d: respuesta de voto de %d: Term=%d, VoteGranted=%v\n",
+		nr.Yo, nodo, reply.Term, reply.VoteGranted)
 
 	return true
+}
+
+func (nr *NodoRaft) tratarRespuestaVoto(reply RespuestaPeticionVoto) {
+	nr.Mux.Lock()
+	defer nr.Mux.Unlock()
+
+	// si quien responde está en mandato mayor=> soy "Follower"
+	if reply.Term > nr.currentTerm {
+		nr.currentTerm = reply.Term
+		nr.role = Follower
+		nr.votedFor = IntNOINICIALIZADO
+		nr.IdLider = IntNOINICIALIZADO
+		nr.resetTimer()
+		nr.Logger.Printf("Nodo: %d vuelvo a Follower. Hay un nuevo mandato: %d\n",
+			nr.Yo, nr.currentTerm)
+		return
+	}
+	// si entre tanto he dejado de ser candidato
+	if nr.role != Candidate {
+		return
+	}
+	// recuento de votos
+	if reply.VoteGranted && reply.Term == nr.currentTerm {
+		nr.votesReceived++
+		nr.Logger.Printf("Nodo: %d Recibido voto #%d en mandato %d\n",
+			nr.Yo, nr.votesReceived, nr.currentTerm)
+		// Si alcanzo mayoría me delcaro líder
+		if nr.votesReceived > len(nr.Nodos)/2 {
+			nr.role = Leader
+			nr.IdLider = nr.Yo
+			nr.votesReceived = 0
+			nr.Logger.Printf("Nodo: %d Es elegido LIDER en mandato %d\n",
+				nr.Yo, nr.currentTerm)
+			// al ser Líder no vuelvo a solicitar elección
+			if nr.timer != nil {
+				nr.timer.Stop()
+			}
+		}
+		// AQUI se debe comenzar a enviar latidos a los otros nodos
+	}
 }
