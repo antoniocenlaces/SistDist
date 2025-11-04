@@ -382,18 +382,41 @@ func (nr *NodoRaft) PedirVoto(peticion *ArgsPeticionVoto,
 }
 
 type ArgAppendEntries struct {
-	// Vuestros datos aqui
+	Term     int // mandato actual del líder
+	IdLeader int // id del líder para redirigir clientes
+	// después se introducirán los campos para control de replicas
 }
 
 type Results struct {
-	// Vuestros datos aqui
+	Term    int  // mandato actaual del follower
+	Success bool // true si el follower acepta la entrada (o latido)
 }
 
 // Metodo de tratamiento de llamadas RPC AppendEntries
 func (nr *NodoRaft) AppendEntries(args *ArgAppendEntries,
 	results *Results) error {
-	// Completar....
+	nr.Mux.Lock()
+	defer nr.Mux.Unlock()
 
+	results.Success = false
+	results.Term = nr.currentTerm
+	// si quien envía entrada está en mandato inferior se ignora
+	if args.Term < nr.currentTerm {
+		nr.Logger.Printf("Nodo %d rechaza AppendEntries de %d (mandato %d < %d)",
+			nr.Yo, args.IdLeader, args.Term, nr.currentTerm)
+		return nil
+	}
+	// si llega de mandato igual o superior al mío, me actualizo y acepto la entrada
+	if args.Term >= nr.currentTerm {
+		nr.currentTerm = args.Term
+		nr.role = Follower
+		nr.IdLider = args.IdLeader
+		results.Success = true
+		nr.resetTimer()
+		nr.Logger.Printf("Nodo %d acepta latido de líder %d (mandato %d)",
+			nr.Yo, args.IdLeader, nr.currentTerm)
+	}
+	results.Term = nr.currentTerm
 	return nil
 }
 
@@ -485,5 +508,10 @@ func (nr *NodoRaft) tratarRespuestaVoto(reply RespuestaPeticionVoto) {
 			}
 		}
 		// AQUI se debe comenzar a enviar latidos a los otros nodos
+		go nr.enviarLatido()
 	}
+}
+
+func (nr *NodoRaft) enviarLatido() {
+
 }
