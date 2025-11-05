@@ -1,0 +1,1653 @@
+localhost_28003 -> 00:52:59.179093 raft.go:181: logger initialized
+localhost_28003 -> 00:52:59.179186 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 294ms)
+localhost_28003 -> 00:52:59.321580 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 175ms)
+localhost_28003 -> 00:52:59.321607 raft.go:379: Nodo: 3 Vota por 0 en mandato 33
+localhost_28003 -> 00:52:59.323434 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 152ms)
+localhost_28003 -> 00:52:59.323461 raft.go:419: Nodo 3 acepta latido de líder 0 (mandato 33)
+localhost_28003 -> 00:52:59.476093 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 203ms)
+localhost_28003 -> 00:52:59.476187 raft.go:265: Nodo 3 inicia elección para mandato 34
+localhost_28003 -> 00:52:59.476915 raft.go:466: Nodo 3: fallo al pedir voto a 4 (dial tcp 127.0.0.1:28004: connect: connection refused)
+localhost_28003 -> 00:52:59.477460 raft.go:471: Nodo 3: respuesta de voto de 2: Term=34, VoteGranted=true
+localhost_28003 -> 00:52:59.477482 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 34
+localhost_28003 -> 00:52:59.644114 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 213ms)
+localhost_28003 -> 00:52:59.644161 raft.go:379: Nodo: 3 Vota por 2 en mandato 35
+localhost_28003 -> 00:52:59.677730 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{34 3 0 0}
+)
+localhost_28003 -> 00:52:59.677774 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{34 3 0 0}
+)
+localhost_28003 -> 00:52:59.858094 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 202ms)
+localhost_28003 -> 00:52:59.858157 raft.go:265: Nodo 3 inicia elección para mandato 36
+localhost_28003 -> 00:52:59.858647 raft.go:466: Nodo 3: fallo al pedir voto a 4 (dial tcp 127.0.0.1:28004: connect: connection refused)
+localhost_28003 -> 00:52:59.859361 raft.go:471: Nodo 3: respuesta de voto de 2: Term=36, VoteGranted=true
+localhost_28003 -> 00:52:59.859387 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 36
+localhost_28003 -> 00:53:00.058735 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{36 3 0 0}
+)
+localhost_28003 -> 00:53:00.058735 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{36 3 0 0}
+)
+localhost_28003 -> 00:53:00.060900 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 190ms)
+localhost_28003 -> 00:53:00.060934 raft.go:265: Nodo 3 inicia elección para mandato 37
+localhost_28003 -> 00:53:00.061298 raft.go:466: Nodo 3: fallo al pedir voto a 4 (dial tcp 127.0.0.1:28004: connect: connection refused)
+localhost_28003 -> 00:53:00.062141 raft.go:471: Nodo 3: respuesta de voto de 2: Term=37, VoteGranted=true
+localhost_28003 -> 00:53:00.062175 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 37
+localhost_28003 -> 00:53:00.251603 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 165ms)
+localhost_28003 -> 00:53:00.251661 raft.go:265: Nodo 3 inicia elección para mandato 38
+localhost_28003 -> 00:53:00.252145 raft.go:466: Nodo 3: fallo al pedir voto a 4 (dial tcp 127.0.0.1:28004: connect: connection refused)
+localhost_28003 -> 00:53:00.252756 raft.go:471: Nodo 3: respuesta de voto de 2: Term=38, VoteGranted=true
+localhost_28003 -> 00:53:00.252781 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 38
+localhost_28003 -> 00:53:00.261784 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{37 3 0 0}
+)
+localhost_28003 -> 00:53:00.261835 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{37 3 0 0}
+)
+localhost_28003 -> 00:53:00.417181 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 210ms)
+localhost_28003 -> 00:53:00.417240 raft.go:265: Nodo 3 inicia elección para mandato 39
+localhost_28003 -> 00:53:00.417548 raft.go:466: Nodo 3: fallo al pedir voto a 4 (dial tcp 127.0.0.1:28004: connect: connection refused)
+localhost_28003 -> 00:53:00.418268 raft.go:471: Nodo 3: respuesta de voto de 2: Term=39, VoteGranted=true
+localhost_28003 -> 00:53:00.418413 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 39
+localhost_28003 -> 00:53:00.452638 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{38 3 0 0}
+)
+localhost_28003 -> 00:53:00.452638 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{38 3 0 0}
+)
+localhost_28003 -> 00:53:00.617979 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{39 3 0 0}
+)
+localhost_28003 -> 00:53:00.617979 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{39 3 0 0}
+)
+localhost_28003 -> 00:53:00.623555 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 246ms)
+localhost_28003 -> 00:53:00.623593 raft.go:379: Nodo: 3 Vota por 2 en mandato 40
+localhost_28003 -> 00:53:00.789414 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 271ms)
+localhost_28003 -> 00:53:00.789451 raft.go:379: Nodo: 3 Vota por 2 en mandato 41
+localhost_28003 -> 00:53:01.061177 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 226ms)
+localhost_28003 -> 00:53:01.061265 raft.go:265: Nodo 3 inicia elección para mandato 42
+localhost_28003 -> 00:53:01.061693 raft.go:466: Nodo 3: fallo al pedir voto a 4 (dial tcp 127.0.0.1:28004: connect: connection refused)
+localhost_28003 -> 00:53:01.062458 raft.go:471: Nodo 3: respuesta de voto de 2: Term=42, VoteGranted=true
+localhost_28003 -> 00:53:01.062581 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 42
+localhost_28003 -> 00:53:01.262018 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{42 3 0 0}
+)
+localhost_28003 -> 00:53:01.262096 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{42 3 0 0}
+)
+localhost_28003 -> 00:53:01.263521 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 222ms)
+localhost_28003 -> 00:53:01.263549 raft.go:379: Nodo: 3 Vota por 2 en mandato 43
+localhost_28003 -> 00:53:01.478321 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 196ms)
+localhost_28003 -> 00:53:01.478348 raft.go:379: Nodo: 3 Vota por 2 en mandato 44
+localhost_28003 -> 00:53:01.675339 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 243ms)
+localhost_28003 -> 00:53:01.675395 raft.go:265: Nodo 3 inicia elección para mandato 45
+localhost_28003 -> 00:53:01.675855 raft.go:466: Nodo 3: fallo al pedir voto a 4 (dial tcp 127.0.0.1:28004: connect: connection refused)
+localhost_28003 -> 00:53:01.676611 raft.go:471: Nodo 3: respuesta de voto de 2: Term=45, VoteGranted=true
+localhost_28003 -> 00:53:01.676627 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 45
+localhost_28003 -> 00:53:01.876176 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{45 3 0 0}
+)
+localhost_28003 -> 00:53:01.876176 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{45 3 0 0}
+)
+localhost_28003 -> 00:53:01.919371 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 236ms)
+localhost_28003 -> 00:53:01.919450 raft.go:265: Nodo 3 inicia elección para mandato 46
+localhost_28003 -> 00:53:01.920015 raft.go:466: Nodo 3: fallo al pedir voto a 4 (dial tcp 127.0.0.1:28004: connect: connection refused)
+localhost_28003 -> 00:53:01.920867 raft.go:471: Nodo 3: respuesta de voto de 2: Term=46, VoteGranted=true
+localhost_28003 -> 00:53:01.920983 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 46
+localhost_28003 -> 00:53:02.120393 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{46 3 0 0}
+)
+localhost_28003 -> 00:53:02.120393 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{46 3 0 0}
+)
+localhost_28003 -> 00:53:02.152150 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 238ms)
+localhost_28003 -> 00:53:02.152175 raft.go:379: Nodo: 3 Vota por 2 en mandato 47
+localhost_28003 -> 00:53:02.378213 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 205ms)
+localhost_28003 -> 00:53:02.378249 raft.go:379: Nodo: 3 Vota por 2 en mandato 48
+localhost_28003 -> 00:53:02.583888 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 155ms)
+localhost_28003 -> 00:53:02.583933 raft.go:265: Nodo 3 inicia elección para mandato 49
+localhost_28003 -> 00:53:02.584213 raft.go:466: Nodo 3: fallo al pedir voto a 4 (dial tcp 127.0.0.1:28004: connect: connection refused)
+localhost_28003 -> 00:53:02.585134 raft.go:471: Nodo 3: respuesta de voto de 2: Term=49, VoteGranted=true
+localhost_28003 -> 00:53:02.585154 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 49
+localhost_28003 -> 00:53:02.739453 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 167ms)
+localhost_28003 -> 00:53:02.739510 raft.go:265: Nodo 3 inicia elección para mandato 50
+localhost_28003 -> 00:53:02.740136 raft.go:466: Nodo 3: fallo al pedir voto a 4 (dial tcp 127.0.0.1:28004: connect: connection refused)
+localhost_28003 -> 00:53:02.741480 raft.go:471: Nodo 3: respuesta de voto de 2: Term=50, VoteGranted=true
+localhost_28003 -> 00:53:02.741512 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 50
+localhost_28003 -> 00:53:02.784688 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{49 3 0 0}
+)
+localhost_28003 -> 00:53:02.784699 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{49 3 0 0}
+)
+localhost_28003 -> 00:53:02.906941 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 205ms)
+localhost_28003 -> 00:53:02.906997 raft.go:265: Nodo 3 inicia elección para mandato 51
+localhost_28003 -> 00:53:02.907551 raft.go:466: Nodo 3: fallo al pedir voto a 4 (dial tcp 127.0.0.1:28004: connect: connection refused)
+localhost_28003 -> 00:53:02.908090 raft.go:471: Nodo 3: respuesta de voto de 2: Term=51, VoteGranted=true
+localhost_28003 -> 00:53:02.908108 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 51
+localhost_28003 -> 00:53:02.940358 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{50 3 0 0}
+)
+localhost_28003 -> 00:53:02.940358 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{50 3 0 0}
+)
+localhost_28003 -> 00:53:03.108735 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{51 3 0 0}
+)
+localhost_28003 -> 00:53:03.108837 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{51 3 0 0}
+)
+localhost_28003 -> 00:53:03.112881 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 298ms)
+localhost_28003 -> 00:53:03.112912 raft.go:265: Nodo 3 inicia elección para mandato 52
+localhost_28003 -> 00:53:03.113329 raft.go:466: Nodo 3: fallo al pedir voto a 4 (dial tcp 127.0.0.1:28004: connect: connection refused)
+localhost_28003 -> 00:53:03.113978 raft.go:471: Nodo 3: respuesta de voto de 2: Term=52, VoteGranted=true
+localhost_28003 -> 00:53:03.114005 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 52
+localhost_28003 -> 00:53:03.276155 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 187ms)
+localhost_28003 -> 00:53:03.276187 raft.go:379: Nodo: 3 Vota por 2 en mandato 53
+localhost_28003 -> 00:53:03.313881 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{52 3 0 0}
+)
+localhost_28003 -> 00:53:03.313877 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{52 3 0 0}
+)
+localhost_28003 -> 00:53:03.464154 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 160ms)
+localhost_28003 -> 00:53:03.464229 raft.go:265: Nodo 3 inicia elección para mandato 54
+localhost_28003 -> 00:53:03.464695 raft.go:466: Nodo 3: fallo al pedir voto a 4 (dial tcp 127.0.0.1:28004: connect: connection refused)
+localhost_28003 -> 00:53:03.465359 raft.go:471: Nodo 3: respuesta de voto de 2: Term=54, VoteGranted=true
+localhost_28003 -> 00:53:03.465397 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 54
+localhost_28003 -> 00:53:03.624702 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 238ms)
+localhost_28003 -> 00:53:03.624760 raft.go:265: Nodo 3 inicia elección para mandato 55
+localhost_28003 -> 00:53:03.625033 raft.go:466: Nodo 3: fallo al pedir voto a 4 (dial tcp 127.0.0.1:28004: connect: connection refused)
+localhost_28003 -> 00:53:03.625861 raft.go:471: Nodo 3: respuesta de voto de 2: Term=55, VoteGranted=true
+localhost_28003 -> 00:53:03.625886 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 55
+localhost_28003 -> 00:53:03.665057 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{54 3 0 0}
+)
+localhost_28003 -> 00:53:03.665208 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{54 3 0 0}
+)
+localhost_28003 -> 00:53:03.783031 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 248ms)
+localhost_28003 -> 00:53:03.783055 raft.go:379: Nodo: 3 Vota por 2 en mandato 56
+localhost_28003 -> 00:53:03.825833 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{55 3 0 0}
+)
+localhost_28003 -> 00:53:03.825832 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{55 3 0 0}
+)
+localhost_28003 -> 00:53:03.937316 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 292ms)
+localhost_28003 -> 00:53:03.937342 raft.go:379: Nodo: 3 Vota por 2 en mandato 57
+localhost_28003 -> 00:53:04.112251 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 207ms)
+localhost_28003 -> 00:53:04.112289 raft.go:379: Nodo: 3 Vota por 2 en mandato 58
+localhost_28003 -> 00:53:04.313591 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 241ms)
+localhost_28003 -> 00:53:04.313624 raft.go:379: Nodo: 3 Vota por 2 en mandato 59
+localhost_28003 -> 00:53:04.555622 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 186ms)
+localhost_28003 -> 00:53:04.555685 raft.go:265: Nodo 3 inicia elección para mandato 60
+localhost_28003 -> 00:53:04.556120 raft.go:466: Nodo 3: fallo al pedir voto a 4 (dial tcp 127.0.0.1:28004: connect: connection refused)
+localhost_28003 -> 00:53:04.556670 raft.go:471: Nodo 3: respuesta de voto de 2: Term=60, VoteGranted=true
+localhost_28003 -> 00:53:04.556879 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 60
+localhost_28003 -> 00:53:04.742225 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 219ms)
+localhost_28003 -> 00:53:04.742289 raft.go:265: Nodo 3 inicia elección para mandato 61
+localhost_28003 -> 00:53:04.742912 raft.go:466: Nodo 3: fallo al pedir voto a 4 (dial tcp 127.0.0.1:28004: connect: connection refused)
+localhost_28003 -> 00:53:04.744078 raft.go:471: Nodo 3: respuesta de voto de 2: Term=61, VoteGranted=false
+localhost_28003 -> 00:53:04.757216 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{60 3 0 0}
+)
+localhost_28003 -> 00:53:04.757266 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{60 3 0 0}
+)
+localhost_28003 -> 00:53:04.924196 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 187ms)
+localhost_28003 -> 00:53:04.924248 raft.go:379: Nodo: 3 Vota por 2 en mandato 62
+localhost_28003 -> 00:53:04.943911 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{61 3 0 0}
+)
+localhost_28003 -> 00:53:04.943977 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{61 3 0 0}
+)
+localhost_28003 -> 00:53:05.079909 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 186ms)
+localhost_28003 -> 00:53:05.079944 raft.go:379: Nodo: 3 Vota por 2 en mandato 63
+localhost_28003 -> 00:53:05.266630 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 267ms)
+localhost_28003 -> 00:53:05.266686 raft.go:265: Nodo 3 inicia elección para mandato 64
+localhost_28003 -> 00:53:05.267179 raft.go:466: Nodo 3: fallo al pedir voto a 4 (dial tcp 127.0.0.1:28004: connect: connection refused)
+localhost_28003 -> 00:53:05.267762 raft.go:471: Nodo 3: respuesta de voto de 2: Term=64, VoteGranted=true
+localhost_28003 -> 00:53:05.267831 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 64
+localhost_28003 -> 00:53:05.467263 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{64 3 0 0}
+)
+localhost_28003 -> 00:53:05.467264 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{64 3 0 0}
+)
+localhost_28003 -> 00:53:05.510370 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 199ms)
+localhost_28003 -> 00:53:05.510403 raft.go:379: Nodo: 3 Vota por 2 en mandato 65
+localhost_28003 -> 00:53:05.710073 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 246ms)
+localhost_28003 -> 00:53:05.710130 raft.go:265: Nodo 3 inicia elección para mandato 66
+localhost_28003 -> 00:53:05.710463 raft.go:466: Nodo 3: fallo al pedir voto a 4 (dial tcp 127.0.0.1:28004: connect: connection refused)
+localhost_28003 -> 00:53:05.712085 raft.go:471: Nodo 3: respuesta de voto de 2: Term=66, VoteGranted=false
+localhost_28003 -> 00:53:05.911392 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{66 3 0 0}
+)
+localhost_28003 -> 00:53:05.911488 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{66 3 0 0}
+)
+localhost_28003 -> 00:53:05.956699 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 232ms)
+localhost_28003 -> 00:53:05.956744 raft.go:265: Nodo 3 inicia elección para mandato 67
+localhost_28003 -> 00:53:05.957247 raft.go:466: Nodo 3: fallo al pedir voto a 4 (dial tcp 127.0.0.1:28004: connect: connection refused)
+localhost_28003 -> 00:53:05.957816 raft.go:471: Nodo 3: respuesta de voto de 2: Term=67, VoteGranted=true
+localhost_28003 -> 00:53:05.957846 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 67
+localhost_28003 -> 00:53:06.158270 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{67 3 0 0}
+)
+localhost_28003 -> 00:53:06.158270 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{67 3 0 0}
+)
+localhost_28003 -> 00:53:06.159424 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 241ms)
+localhost_28003 -> 00:53:06.159453 raft.go:379: Nodo: 3 Vota por 2 en mandato 68
+localhost_28003 -> 00:53:06.401226 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 259ms)
+localhost_28003 -> 00:53:06.401276 raft.go:265: Nodo 3 inicia elección para mandato 69
+localhost_28003 -> 00:53:06.401733 raft.go:466: Nodo 3: fallo al pedir voto a 4 (dial tcp 127.0.0.1:28004: connect: connection refused)
+localhost_28003 -> 00:53:06.402615 raft.go:471: Nodo 3: respuesta de voto de 2: Term=69, VoteGranted=true
+localhost_28003 -> 00:53:06.402641 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 69
+localhost_28003 -> 00:53:06.600835 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 258ms)
+localhost_28003 -> 00:53:06.600871 raft.go:379: Nodo: 3 Vota por 2 en mandato 70
+localhost_28003 -> 00:53:06.602189 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{69 3 0 0}
+)
+localhost_28003 -> 00:53:06.602189 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{69 3 0 0}
+)
+localhost_28003 -> 00:53:06.783363 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 160ms)
+localhost_28003 -> 00:53:06.783398 raft.go:379: Nodo: 3 Vota por 2 en mandato 71
+localhost_28003 -> 00:53:06.944075 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 271ms)
+localhost_28003 -> 00:53:06.944130 raft.go:265: Nodo 3 inicia elección para mandato 72
+localhost_28003 -> 00:53:06.944558 raft.go:466: Nodo 3: fallo al pedir voto a 4 (dial tcp 127.0.0.1:28004: connect: connection refused)
+localhost_28003 -> 00:53:06.945330 raft.go:471: Nodo 3: respuesta de voto de 2: Term=72, VoteGranted=true
+localhost_28003 -> 00:53:06.945427 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 72
+localhost_28003 -> 00:53:07.106696 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 274ms)
+localhost_28003 -> 00:53:07.106722 raft.go:379: Nodo: 3 Vota por 2 en mandato 73
+localhost_28003 -> 00:53:07.145498 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{72 3 0 0}
+)
+localhost_28003 -> 00:53:07.145493 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{72 3 0 0}
+)
+localhost_28003 -> 00:53:07.316382 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 283ms)
+localhost_28003 -> 00:53:07.316408 raft.go:379: Nodo: 3 Vota por 2 en mandato 74
+localhost_28003 -> 00:53:07.549464 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 258ms)
+localhost_28003 -> 00:53:07.549495 raft.go:379: Nodo: 3 Vota por 2 en mandato 75
+localhost_28003 -> 00:53:07.713222 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 299ms)
+localhost_28003 -> 00:53:07.713249 raft.go:379: Nodo: 3 Vota por 2 en mandato 76
+localhost_28003 -> 00:53:07.714716 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 265ms)
+localhost_28003 -> 00:53:07.714735 raft.go:419: Nodo 3 acepta latido de líder 2 (mandato 76)
+localhost_28003 -> 00:53:07.879282 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 174ms)
+localhost_28003 -> 00:53:07.879313 raft.go:379: Nodo: 3 Vota por 4 en mandato 77
+localhost_28003 -> 00:53:08.054171 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 182ms)
+localhost_28003 -> 00:53:08.054252 raft.go:265: Nodo 3 inicia elección para mandato 78
+localhost_28003 -> 00:53:08.055605 raft.go:471: Nodo 3: respuesta de voto de 4: Term=78, VoteGranted=false
+localhost_28003 -> 00:53:08.236590 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 174ms)
+localhost_28003 -> 00:53:08.236646 raft.go:265: Nodo 3 inicia elección para mandato 79
+localhost_28003 -> 00:53:08.237831 raft.go:471: Nodo 3: respuesta de voto de 4: Term=79, VoteGranted=true
+localhost_28003 -> 00:53:08.237853 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 79
+localhost_28003 -> 00:53:08.256054 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{78 3 0 0}
+)
+localhost_28003 -> 00:53:08.256109 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{78 3 0 0}
+)
+localhost_28003 -> 00:53:08.256106 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{78 3 0 0}
+)
+localhost_28003 -> 00:53:08.411393 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 196ms)
+localhost_28003 -> 00:53:08.411449 raft.go:265: Nodo 3 inicia elección para mandato 80
+localhost_28003 -> 00:53:08.412704 raft.go:471: Nodo 3: respuesta de voto de 4: Term=80, VoteGranted=true
+localhost_28003 -> 00:53:08.412724 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 80
+localhost_28003 -> 00:53:08.437974 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{79 3 0 0}
+)
+localhost_28003 -> 00:53:08.438041 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{79 3 0 0}
+)
+localhost_28003 -> 00:53:08.438093 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{79 3 0 0}
+)
+localhost_28003 -> 00:53:08.608301 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 193ms)
+localhost_28003 -> 00:53:08.608362 raft.go:265: Nodo 3 inicia elección para mandato 81
+localhost_28003 -> 00:53:08.610201 raft.go:471: Nodo 3: respuesta de voto de 4: Term=81, VoteGranted=true
+localhost_28003 -> 00:53:08.610378 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 81
+localhost_28003 -> 00:53:08.612469 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{80 3 0 0}
+)
+localhost_28003 -> 00:53:08.612557 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{80 3 0 0}
+)
+localhost_28003 -> 00:53:08.612582 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{80 3 0 0}
+)
+localhost_28003 -> 00:53:08.780324 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 226ms)
+localhost_28003 -> 00:53:08.780356 raft.go:379: Nodo: 3 Vota por 4 en mandato 82
+localhost_28003 -> 00:53:08.809105 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{81 3 0 0}
+)
+localhost_28003 -> 00:53:08.809136 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{81 3 0 0}
+)
+localhost_28003 -> 00:53:08.809144 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{81 3 0 0}
+)
+localhost_28003 -> 00:53:08.986407 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 216ms)
+localhost_28003 -> 00:53:08.986449 raft.go:379: Nodo: 3 Vota por 4 en mandato 83
+localhost_28003 -> 00:53:09.177876 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 213ms)
+localhost_28003 -> 00:53:09.177911 raft.go:379: Nodo: 3 Vota por 4 en mandato 84
+localhost_28003 -> 00:53:09.382124 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 194ms)
+localhost_28003 -> 00:53:09.382167 raft.go:379: Nodo: 3 Vota por 4 en mandato 85
+localhost_28003 -> 00:53:09.577059 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 287ms)
+localhost_28003 -> 00:53:09.577116 raft.go:265: Nodo 3 inicia elección para mandato 86
+localhost_28003 -> 00:53:09.578467 raft.go:471: Nodo 3: respuesta de voto de 4: Term=86, VoteGranted=true
+localhost_28003 -> 00:53:09.578490 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 86
+localhost_28003 -> 00:53:09.735485 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 173ms)
+localhost_28003 -> 00:53:09.735521 raft.go:379: Nodo: 3 Vota por 4 en mandato 87
+localhost_28003 -> 00:53:09.778195 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{86 3 0 0}
+)
+localhost_28003 -> 00:53:09.778195 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{86 3 0 0}
+)
+localhost_28003 -> 00:53:09.779337 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{86 3 0 0}
+)
+localhost_28003 -> 00:53:09.909518 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 274ms)
+localhost_28003 -> 00:53:09.909574 raft.go:265: Nodo 3 inicia elección para mandato 88
+localhost_28003 -> 00:53:09.911088 raft.go:471: Nodo 3: respuesta de voto de 4: Term=88, VoteGranted=true
+localhost_28003 -> 00:53:09.911108 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 88
+localhost_28003 -> 00:53:10.110648 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{88 3 0 0}
+)
+localhost_28003 -> 00:53:10.110648 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{88 3 0 0}
+)
+localhost_28003 -> 00:53:10.110710 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{88 3 0 0}
+)
+localhost_28003 -> 00:53:10.168525 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 173ms)
+localhost_28003 -> 00:53:10.168562 raft.go:379: Nodo: 3 Vota por 4 en mandato 89
+localhost_28003 -> 00:53:10.319280 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 219ms)
+localhost_28003 -> 00:53:10.319387 raft.go:379: Nodo: 3 Vota por 4 en mandato 90
+localhost_28003 -> 00:53:10.487998 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 299ms)
+localhost_28003 -> 00:53:10.488032 raft.go:379: Nodo: 3 Vota por 4 en mandato 91
+localhost_28003 -> 00:53:10.756036 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 260ms)
+localhost_28003 -> 00:53:10.756073 raft.go:379: Nodo: 3 Vota por 4 en mandato 92
+localhost_28003 -> 00:53:10.936636 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 187ms)
+localhost_28003 -> 00:53:10.936672 raft.go:379: Nodo: 3 Vota por 4 en mandato 93
+localhost_28003 -> 00:53:11.124613 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 283ms)
+localhost_28003 -> 00:53:11.124676 raft.go:265: Nodo 3 inicia elección para mandato 94
+localhost_28003 -> 00:53:11.126117 raft.go:471: Nodo 3: respuesta de voto de 4: Term=94, VoteGranted=true
+localhost_28003 -> 00:53:11.126153 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 94
+localhost_28003 -> 00:53:11.325524 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{94 3 0 0}
+)
+localhost_28003 -> 00:53:11.325524 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{94 3 0 0}
+)
+localhost_28003 -> 00:53:11.325582 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{94 3 0 0}
+)
+localhost_28003 -> 00:53:11.382638 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 204ms)
+localhost_28003 -> 00:53:11.382678 raft.go:379: Nodo: 3 Vota por 4 en mandato 95
+localhost_28003 -> 00:53:11.587550 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 297ms)
+localhost_28003 -> 00:53:11.587588 raft.go:265: Nodo 3 inicia elección para mandato 96
+localhost_28003 -> 00:53:11.589124 raft.go:471: Nodo 3: respuesta de voto de 4: Term=96, VoteGranted=true
+localhost_28003 -> 00:53:11.589156 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 96
+localhost_28003 -> 00:53:11.788500 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{96 3 0 0}
+)
+localhost_28003 -> 00:53:11.788606 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{96 3 0 0}
+)
+localhost_28003 -> 00:53:11.788647 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{96 3 0 0}
+)
+localhost_28003 -> 00:53:11.875452 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 246ms)
+localhost_28003 -> 00:53:11.875689 raft.go:379: Nodo: 3 Vota por 4 en mandato 97
+localhost_28003 -> 00:53:12.052385 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 190ms)
+localhost_28003 -> 00:53:12.052422 raft.go:379: Nodo: 3 Vota por 4 en mandato 98
+localhost_28003 -> 00:53:12.243140 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 206ms)
+localhost_28003 -> 00:53:12.243213 raft.go:265: Nodo 3 inicia elección para mandato 99
+localhost_28003 -> 00:53:12.244916 raft.go:471: Nodo 3: respuesta de voto de 4: Term=99, VoteGranted=true
+localhost_28003 -> 00:53:12.245073 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 99
+localhost_28003 -> 00:53:12.398764 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 203ms)
+localhost_28003 -> 00:53:12.399033 raft.go:379: Nodo: 3 Vota por 4 en mandato 100
+localhost_28003 -> 00:53:12.444557 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{99 3 0 0}
+)
+localhost_28003 -> 00:53:12.444556 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{99 3 0 0}
+)
+localhost_28003 -> 00:53:12.444592 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{99 3 0 0}
+)
+localhost_28003 -> 00:53:12.586728 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 202ms)
+localhost_28003 -> 00:53:12.586764 raft.go:379: Nodo: 3 Vota por 4 en mandato 101
+localhost_28003 -> 00:53:12.761424 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 287ms)
+localhost_28003 -> 00:53:12.761461 raft.go:379: Nodo: 3 Vota por 4 en mandato 102
+localhost_28003 -> 00:53:12.950188 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 266ms)
+localhost_28003 -> 00:53:12.950228 raft.go:379: Nodo: 3 Vota por 4 en mandato 103
+localhost_28003 -> 00:53:13.199007 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 152ms)
+localhost_28003 -> 00:53:13.199057 raft.go:379: Nodo: 3 Vota por 4 en mandato 104
+localhost_28003 -> 00:53:13.352077 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 250ms)
+localhost_28003 -> 00:53:13.352134 raft.go:265: Nodo 3 inicia elección para mandato 105
+localhost_28003 -> 00:53:13.354815 raft.go:471: Nodo 3: respuesta de voto de 4: Term=105, VoteGranted=true
+localhost_28003 -> 00:53:13.354862 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 105
+localhost_28003 -> 00:53:13.553393 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{105 3 0 0}
+)
+localhost_28003 -> 00:53:13.553467 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{105 3 0 0}
+)
+localhost_28003 -> 00:53:13.553499 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{105 3 0 0}
+)
+localhost_28003 -> 00:53:13.562428 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 205ms)
+localhost_28003 -> 00:53:13.562469 raft.go:379: Nodo: 3 Vota por 4 en mandato 106
+localhost_28003 -> 00:53:13.762253 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 265ms)
+localhost_28003 -> 00:53:13.762290 raft.go:379: Nodo: 3 Vota por 4 en mandato 107
+localhost_28003 -> 00:53:14.028235 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 186ms)
+localhost_28003 -> 00:53:14.028296 raft.go:265: Nodo 3 inicia elección para mandato 108
+localhost_28003 -> 00:53:14.029458 raft.go:471: Nodo 3: respuesta de voto de 4: Term=108, VoteGranted=true
+localhost_28003 -> 00:53:14.029492 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 108
+localhost_28003 -> 00:53:14.215068 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 246ms)
+localhost_28003 -> 00:53:14.215125 raft.go:265: Nodo 3 inicia elección para mandato 109
+localhost_28003 -> 00:53:14.217235 raft.go:471: Nodo 3: respuesta de voto de 4: Term=109, VoteGranted=false
+localhost_28003 -> 00:53:14.229366 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{108 3 0 0}
+)
+localhost_28003 -> 00:53:14.229366 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{108 3 0 0}
+)
+localhost_28003 -> 00:53:14.230506 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{108 3 0 0}
+)
+localhost_28003 -> 00:53:14.394695 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 182ms)
+localhost_28003 -> 00:53:14.394750 raft.go:379: Nodo: 3 Vota por 4 en mandato 110
+localhost_28003 -> 00:53:14.417201 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{109 3 0 0}
+)
+localhost_28003 -> 00:53:14.417265 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{109 3 0 0}
+)
+localhost_28003 -> 00:53:14.417310 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{109 3 0 0}
+)
+localhost_28003 -> 00:53:14.577642 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 295ms)
+localhost_28003 -> 00:53:14.577703 raft.go:265: Nodo 3 inicia elección para mandato 111
+localhost_28003 -> 00:53:14.578892 raft.go:471: Nodo 3: respuesta de voto de 4: Term=111, VoteGranted=true
+localhost_28003 -> 00:53:14.578918 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 111
+localhost_28003 -> 00:53:14.778314 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{111 3 0 0}
+)
+localhost_28003 -> 00:53:14.778355 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{111 3 0 0}
+)
+localhost_28003 -> 00:53:14.778348 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{111 3 0 0}
+)
+localhost_28003 -> 00:53:14.831681 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 232ms)
+localhost_28003 -> 00:53:14.831977 raft.go:379: Nodo: 3 Vota por 4 en mandato 112
+localhost_28003 -> 00:53:15.033999 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 265ms)
+localhost_28003 -> 00:53:15.034042 raft.go:379: Nodo: 3 Vota por 4 en mandato 113
+localhost_28003 -> 00:53:15.209095 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 240ms)
+localhost_28003 -> 00:53:15.209135 raft.go:379: Nodo: 3 Vota por 4 en mandato 114
+localhost_28003 -> 00:53:15.449114 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 161ms)
+localhost_28003 -> 00:53:15.449172 raft.go:265: Nodo 3 inicia elección para mandato 115
+localhost_28003 -> 00:53:15.450475 raft.go:471: Nodo 3: respuesta de voto de 4: Term=115, VoteGranted=true
+localhost_28003 -> 00:53:15.450501 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 115
+localhost_28003 -> 00:53:15.610818 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 294ms)
+localhost_28003 -> 00:53:15.610875 raft.go:265: Nodo 3 inicia elección para mandato 116
+localhost_28003 -> 00:53:15.612289 raft.go:471: Nodo 3: respuesta de voto de 4: Term=116, VoteGranted=true
+localhost_28003 -> 00:53:15.612333 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 116
+localhost_28003 -> 00:53:15.650291 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{115 3 0 0}
+)
+localhost_28003 -> 00:53:15.650291 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{115 3 0 0}
+)
+localhost_28003 -> 00:53:15.650330 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{115 3 0 0}
+)
+localhost_28003 -> 00:53:15.811608 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{116 3 0 0}
+)
+localhost_28003 -> 00:53:15.811608 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{116 3 0 0}
+)
+localhost_28003 -> 00:53:15.811650 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{116 3 0 0}
+)
+localhost_28003 -> 00:53:15.872701 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 297ms)
+localhost_28003 -> 00:53:15.872738 raft.go:379: Nodo: 3 Vota por 4 en mandato 117
+localhost_28003 -> 00:53:16.063735 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 218ms)
+localhost_28003 -> 00:53:16.063825 raft.go:379: Nodo: 3 Vota por 4 en mandato 118
+localhost_28003 -> 00:53:16.282611 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 200ms)
+localhost_28003 -> 00:53:16.282660 raft.go:265: Nodo 3 inicia elección para mandato 119
+localhost_28003 -> 00:53:16.284202 raft.go:471: Nodo 3: respuesta de voto de 4: Term=119, VoteGranted=true
+localhost_28003 -> 00:53:16.284227 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 119
+localhost_28003 -> 00:53:16.483736 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{119 3 0 0}
+)
+localhost_28003 -> 00:53:16.483737 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{119 3 0 0}
+)
+localhost_28003 -> 00:53:16.483753 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 262ms)
+localhost_28003 -> 00:53:16.483832 raft.go:265: Nodo 3 inicia elección para mandato 120
+localhost_28003 -> 00:53:16.483842 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{119 3 0 0}
+)
+localhost_28003 -> 00:53:16.485374 raft.go:471: Nodo 3: respuesta de voto de 4: Term=120, VoteGranted=true
+localhost_28003 -> 00:53:16.485396 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 120
+localhost_28003 -> 00:53:16.684897 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{120 3 0 0}
+)
+localhost_28003 -> 00:53:16.684898 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{120 3 0 0}
+)
+localhost_28003 -> 00:53:16.684935 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{120 3 0 0}
+)
+localhost_28003 -> 00:53:16.716833 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 286ms)
+localhost_28003 -> 00:53:16.716874 raft.go:379: Nodo: 3 Vota por 4 en mandato 121
+localhost_28003 -> 00:53:16.889628 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 210ms)
+localhost_28003 -> 00:53:16.889663 raft.go:379: Nodo: 3 Vota por 4 en mandato 122
+localhost_28003 -> 00:53:17.100386 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 277ms)
+localhost_28003 -> 00:53:17.100447 raft.go:265: Nodo 3 inicia elección para mandato 123
+localhost_28003 -> 00:53:17.101579 raft.go:471: Nodo 3: respuesta de voto de 4: Term=123, VoteGranted=true
+localhost_28003 -> 00:53:17.101600 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 123
+localhost_28003 -> 00:53:17.301050 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{123 3 0 0}
+)
+localhost_28003 -> 00:53:17.301127 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{123 3 0 0}
+)
+localhost_28003 -> 00:53:17.301316 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{123 3 0 0}
+)
+localhost_28003 -> 00:53:17.333929 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 176ms)
+localhost_28003 -> 00:53:17.333967 raft.go:379: Nodo: 3 Vota por 4 en mandato 124
+localhost_28003 -> 00:53:17.510839 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 220ms)
+localhost_28003 -> 00:53:17.510921 raft.go:265: Nodo 3 inicia elección para mandato 125
+localhost_28003 -> 00:53:17.513069 raft.go:471: Nodo 3: respuesta de voto de 4: Term=125, VoteGranted=true
+localhost_28003 -> 00:53:17.513134 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 125
+localhost_28003 -> 00:53:17.712565 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{125 3 0 0}
+)
+localhost_28003 -> 00:53:17.712566 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{125 3 0 0}
+)
+localhost_28003 -> 00:53:17.712601 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{125 3 0 0}
+)
+localhost_28003 -> 00:53:17.724541 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 182ms)
+localhost_28003 -> 00:53:17.724582 raft.go:379: Nodo: 3 Vota por 4 en mandato 126
+localhost_28003 -> 00:53:17.907420 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 283ms)
+localhost_28003 -> 00:53:17.907499 raft.go:265: Nodo 3 inicia elección para mandato 127
+localhost_28003 -> 00:53:17.908943 raft.go:471: Nodo 3: respuesta de voto de 4: Term=127, VoteGranted=true
+localhost_28003 -> 00:53:17.908962 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 127
+localhost_28003 -> 00:53:18.108212 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{127 3 0 0}
+)
+localhost_28003 -> 00:53:18.108212 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{127 3 0 0}
+)
+localhost_28003 -> 00:53:18.108244 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{127 3 0 0}
+)
+localhost_28003 -> 00:53:18.191439 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 179ms)
+localhost_28003 -> 00:53:18.191493 raft.go:265: Nodo 3 inicia elección para mandato 128
+localhost_28003 -> 00:53:18.192790 raft.go:471: Nodo 3: respuesta de voto de 4: Term=128, VoteGranted=true
+localhost_28003 -> 00:53:18.192830 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 128
+localhost_28003 -> 00:53:18.355587 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 264ms)
+localhost_28003 -> 00:53:18.355637 raft.go:379: Nodo: 3 Vota por 4 en mandato 129
+localhost_28003 -> 00:53:18.392485 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{128 3 0 0}
+)
+localhost_28003 -> 00:53:18.392486 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{128 3 0 0}
+)
+localhost_28003 -> 00:53:18.392524 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{128 3 0 0}
+)
+localhost_28003 -> 00:53:18.619824 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 189ms)
+localhost_28003 -> 00:53:18.619881 raft.go:265: Nodo 3 inicia elección para mandato 130
+localhost_28003 -> 00:53:18.620899 raft.go:471: Nodo 3: respuesta de voto de 4: Term=130, VoteGranted=true
+localhost_28003 -> 00:53:18.620921 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 130
+localhost_28003 -> 00:53:18.809561 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 290ms)
+localhost_28003 -> 00:53:18.809637 raft.go:265: Nodo 3 inicia elección para mandato 131
+localhost_28003 -> 00:53:18.811044 raft.go:471: Nodo 3: respuesta de voto de 4: Term=131, VoteGranted=true
+localhost_28003 -> 00:53:18.811066 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 131
+localhost_28003 -> 00:53:18.821256 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{130 3 0 0}
+)
+localhost_28003 -> 00:53:18.821288 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{130 3 0 0}
+)
+localhost_28003 -> 00:53:18.821366 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{130 3 0 0}
+)
+localhost_28003 -> 00:53:19.010557 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{131 3 0 0}
+)
+localhost_28003 -> 00:53:19.010557 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{131 3 0 0}
+)
+localhost_28003 -> 00:53:19.010655 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{131 3 0 0}
+)
+localhost_28003 -> 00:53:19.023341 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 218ms)
+localhost_28003 -> 00:53:19.023407 raft.go:379: Nodo: 3 Vota por 4 en mandato 132
+localhost_28003 -> 00:53:19.177837 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 183ms)
+localhost_28003 -> 00:53:19.177888 raft.go:379: Nodo: 3 Vota por 4 en mandato 133
+localhost_28003 -> 00:53:19.361590 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 165ms)
+localhost_28003 -> 00:53:19.361662 raft.go:265: Nodo 3 inicia elección para mandato 134
+localhost_28003 -> 00:53:19.363109 raft.go:471: Nodo 3: respuesta de voto de 4: Term=134, VoteGranted=true
+localhost_28003 -> 00:53:19.363130 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 134
+localhost_28003 -> 00:53:19.527586 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 234ms)
+localhost_28003 -> 00:53:19.527643 raft.go:265: Nodo 3 inicia elección para mandato 135
+localhost_28003 -> 00:53:19.528765 raft.go:471: Nodo 3: respuesta de voto de 4: Term=135, VoteGranted=true
+localhost_28003 -> 00:53:19.528786 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 135
+localhost_28003 -> 00:53:19.563135 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{134 3 0 0}
+)
+localhost_28003 -> 00:53:19.563135 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{134 3 0 0}
+)
+localhost_28003 -> 00:53:19.564261 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{134 3 0 0}
+)
+localhost_28003 -> 00:53:19.728496 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{135 3 0 0}
+)
+localhost_28003 -> 00:53:19.728496 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{135 3 0 0}
+)
+localhost_28003 -> 00:53:19.729642 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{135 3 0 0}
+)
+localhost_28003 -> 00:53:19.761771 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 273ms)
+localhost_28003 -> 00:53:19.761840 raft.go:265: Nodo 3 inicia elección para mandato 136
+localhost_28003 -> 00:53:19.763437 raft.go:471: Nodo 3: respuesta de voto de 4: Term=136, VoteGranted=true
+localhost_28003 -> 00:53:19.763459 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 136
+localhost_28003 -> 00:53:19.963046 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{136 3 0 0}
+)
+localhost_28003 -> 00:53:19.963072 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{136 3 0 0}
+)
+localhost_28003 -> 00:53:19.963079 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{136 3 0 0}
+)
+localhost_28003 -> 00:53:19.990446 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 270ms)
+localhost_28003 -> 00:53:19.990486 raft.go:379: Nodo: 3 Vota por 4 en mandato 137
+localhost_28003 -> 00:53:20.155294 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 253ms)
+localhost_28003 -> 00:53:20.155503 raft.go:379: Nodo: 3 Vota por 4 en mandato 138
+localhost_28003 -> 00:53:20.396017 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 160ms)
+localhost_28003 -> 00:53:20.396058 raft.go:379: Nodo: 3 Vota por 4 en mandato 139
+localhost_28003 -> 00:53:20.557050 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 170ms)
+localhost_28003 -> 00:53:20.557107 raft.go:265: Nodo 3 inicia elección para mandato 140
+localhost_28003 -> 00:53:20.558207 raft.go:471: Nodo 3: respuesta de voto de 4: Term=140, VoteGranted=true
+localhost_28003 -> 00:53:20.558233 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 140
+localhost_28003 -> 00:53:20.727539 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 246ms)
+localhost_28003 -> 00:53:20.727593 raft.go:265: Nodo 3 inicia elección para mandato 141
+localhost_28003 -> 00:53:20.728744 raft.go:471: Nodo 3: respuesta de voto de 4: Term=141, VoteGranted=true
+localhost_28003 -> 00:53:20.728985 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 141
+localhost_28003 -> 00:53:20.757933 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{140 3 0 0}
+)
+localhost_28003 -> 00:53:20.758005 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{140 3 0 0}
+)
+localhost_28003 -> 00:53:20.758210 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{140 3 0 0}
+)
+localhost_28003 -> 00:53:20.902292 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 230ms)
+localhost_28003 -> 00:53:20.902326 raft.go:379: Nodo: 3 Vota por 4 en mandato 142
+localhost_28003 -> 00:53:20.929011 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{141 3 0 0}
+)
+localhost_28003 -> 00:53:20.929011 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{141 3 0 0}
+)
+localhost_28003 -> 00:53:20.929065 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{141 3 0 0}
+)
+localhost_28003 -> 00:53:21.069133 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 243ms)
+localhost_28003 -> 00:53:21.069177 raft.go:379: Nodo: 3 Vota por 4 en mandato 143
+localhost_28003 -> 00:53:21.313180 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 158ms)
+localhost_28003 -> 00:53:21.313247 raft.go:265: Nodo 3 inicia elección para mandato 144
+localhost_28003 -> 00:53:21.314414 raft.go:471: Nodo 3: respuesta de voto de 4: Term=144, VoteGranted=true
+localhost_28003 -> 00:53:21.314490 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 144
+localhost_28003 -> 00:53:21.471823 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 299ms)
+localhost_28003 -> 00:53:21.471880 raft.go:265: Nodo 3 inicia elección para mandato 145
+localhost_28003 -> 00:53:21.473333 raft.go:471: Nodo 3: respuesta de voto de 4: Term=145, VoteGranted=true
+localhost_28003 -> 00:53:21.473370 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 145
+localhost_28003 -> 00:53:21.514767 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{144 3 0 0}
+)
+localhost_28003 -> 00:53:21.514768 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{144 3 0 0}
+)
+localhost_28003 -> 00:53:21.514981 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{144 3 0 0}
+)
+localhost_28003 -> 00:53:21.673171 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{145 3 0 0}
+)
+localhost_28003 -> 00:53:21.673171 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{145 3 0 0}
+)
+localhost_28003 -> 00:53:21.674318 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{145 3 0 0}
+)
+localhost_28003 -> 00:53:21.698452 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 272ms)
+localhost_28003 -> 00:53:21.698491 raft.go:379: Nodo: 3 Vota por 4 en mandato 146
+localhost_28003 -> 00:53:21.945591 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 164ms)
+localhost_28003 -> 00:53:21.945638 raft.go:379: Nodo: 3 Vota por 4 en mandato 147
+localhost_28003 -> 00:53:22.103307 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 162ms)
+localhost_28003 -> 00:53:22.103367 raft.go:379: Nodo: 3 Vota por 4 en mandato 148
+localhost_28003 -> 00:53:22.266299 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 163ms)
+localhost_28003 -> 00:53:22.266352 raft.go:265: Nodo 3 inicia elección para mandato 149
+localhost_28003 -> 00:53:22.267641 raft.go:471: Nodo 3: respuesta de voto de 4: Term=149, VoteGranted=true
+localhost_28003 -> 00:53:22.267662 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 149
+localhost_28003 -> 00:53:22.430002 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 158ms)
+localhost_28003 -> 00:53:22.430059 raft.go:265: Nodo 3 inicia elección para mandato 150
+localhost_28003 -> 00:53:22.431726 raft.go:471: Nodo 3: respuesta de voto de 4: Term=150, VoteGranted=true
+localhost_28003 -> 00:53:22.431750 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 150
+localhost_28003 -> 00:53:22.467893 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{149 3 0 0}
+)
+localhost_28003 -> 00:53:22.468047 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{149 3 0 0}
+)
+localhost_28003 -> 00:53:22.468072 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{149 3 0 0}
+)
+localhost_28003 -> 00:53:22.588278 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 257ms)
+localhost_28003 -> 00:53:22.588337 raft.go:265: Nodo 3 inicia elección para mandato 151
+localhost_28003 -> 00:53:22.593363 raft.go:471: Nodo 3: respuesta de voto de 4: Term=151, VoteGranted=true
+localhost_28003 -> 00:53:22.593456 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 151
+localhost_28003 -> 00:53:22.631536 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{150 3 0 0}
+)
+localhost_28003 -> 00:53:22.631536 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{150 3 0 0}
+)
+localhost_28003 -> 00:53:22.631579 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{150 3 0 0}
+)
+localhost_28003 -> 00:53:22.751844 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 177ms)
+localhost_28003 -> 00:53:22.751883 raft.go:379: Nodo: 3 Vota por 4 en mandato 152
+localhost_28003 -> 00:53:22.789528 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{151 3 0 0}
+)
+localhost_28003 -> 00:53:22.789529 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{151 3 0 0}
+)
+localhost_28003 -> 00:53:22.789569 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{151 3 0 0}
+)
+localhost_28003 -> 00:53:22.929720 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 253ms)
+localhost_28003 -> 00:53:22.929813 raft.go:265: Nodo 3 inicia elección para mandato 153
+localhost_28003 -> 00:53:22.931733 raft.go:471: Nodo 3: respuesta de voto de 4: Term=153, VoteGranted=true
+localhost_28003 -> 00:53:22.931829 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 153
+localhost_28003 -> 00:53:23.131425 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{153 3 0 0}
+)
+localhost_28003 -> 00:53:23.131425 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{153 3 0 0}
+)
+localhost_28003 -> 00:53:23.131504 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{153 3 0 0}
+)
+localhost_28003 -> 00:53:23.140002 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 227ms)
+localhost_28003 -> 00:53:23.140056 raft.go:379: Nodo: 3 Vota por 4 en mandato 154
+localhost_28003 -> 00:53:23.367825 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 258ms)
+localhost_28003 -> 00:53:23.367880 raft.go:265: Nodo 3 inicia elección para mandato 155
+localhost_28003 -> 00:53:23.369161 raft.go:471: Nodo 3: respuesta de voto de 4: Term=155, VoteGranted=true
+localhost_28003 -> 00:53:23.369183 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 155
+localhost_28003 -> 00:53:23.568698 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{155 3 0 0}
+)
+localhost_28003 -> 00:53:23.568723 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{155 3 0 0}
+)
+localhost_28003 -> 00:53:23.568729 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{155 3 0 0}
+)
+localhost_28003 -> 00:53:23.626896 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 182ms)
+localhost_28003 -> 00:53:23.626950 raft.go:265: Nodo 3 inicia elección para mandato 156
+localhost_28003 -> 00:53:23.628212 raft.go:471: Nodo 3: respuesta de voto de 4: Term=156, VoteGranted=true
+localhost_28003 -> 00:53:23.628234 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 156
+localhost_28003 -> 00:53:23.809682 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 231ms)
+localhost_28003 -> 00:53:23.809738 raft.go:265: Nodo 3 inicia elección para mandato 157
+localhost_28003 -> 00:53:23.811127 raft.go:471: Nodo 3: respuesta de voto de 4: Term=157, VoteGranted=true
+localhost_28003 -> 00:53:23.811151 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 157
+localhost_28003 -> 00:53:23.828289 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{156 3 0 0}
+)
+localhost_28003 -> 00:53:23.828289 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{156 3 0 0}
+)
+localhost_28003 -> 00:53:23.828329 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{156 3 0 0}
+)
+localhost_28003 -> 00:53:24.010711 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{157 3 0 0}
+)
+localhost_28003 -> 00:53:24.010725 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{157 3 0 0}
+)
+localhost_28003 -> 00:53:24.010760 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{157 3 0 0}
+)
+localhost_28003 -> 00:53:24.040734 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 262ms)
+localhost_28003 -> 00:53:24.040846 raft.go:265: Nodo 3 inicia elección para mandato 158
+localhost_28003 -> 00:53:24.042212 raft.go:471: Nodo 3: respuesta de voto de 4: Term=158, VoteGranted=true
+localhost_28003 -> 00:53:24.042333 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 158
+localhost_28003 -> 00:53:24.241812 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{158 3 0 0}
+)
+localhost_28003 -> 00:53:24.241812 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{158 3 0 0}
+)
+localhost_28003 -> 00:53:24.241857 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{158 3 0 0}
+)
+localhost_28003 -> 00:53:24.294602 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 166ms)
+localhost_28003 -> 00:53:24.294663 raft.go:379: Nodo: 3 Vota por 4 en mandato 159
+localhost_28003 -> 00:53:24.461342 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 269ms)
+localhost_28003 -> 00:53:24.461397 raft.go:265: Nodo 3 inicia elección para mandato 160
+localhost_28003 -> 00:53:24.462779 raft.go:471: Nodo 3: respuesta de voto de 4: Term=160, VoteGranted=true
+localhost_28003 -> 00:53:24.462892 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 160
+localhost_28003 -> 00:53:24.662392 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{160 3 0 0}
+)
+localhost_28003 -> 00:53:24.662392 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{160 3 0 0}
+)
+localhost_28003 -> 00:53:24.662436 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{160 3 0 0}
+)
+localhost_28003 -> 00:53:24.701492 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 262ms)
+localhost_28003 -> 00:53:24.701540 raft.go:379: Nodo: 3 Vota por 4 en mandato 161
+localhost_28003 -> 00:53:24.952626 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 179ms)
+localhost_28003 -> 00:53:24.952662 raft.go:379: Nodo: 3 Vota por 4 en mandato 162
+localhost_28003 -> 00:53:25.132436 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 221ms)
+localhost_28003 -> 00:53:25.132512 raft.go:265: Nodo 3 inicia elección para mandato 163
+localhost_28003 -> 00:53:25.133834 raft.go:471: Nodo 3: respuesta de voto de 4: Term=163, VoteGranted=true
+localhost_28003 -> 00:53:25.133858 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 163
+localhost_28003 -> 00:53:25.311533 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 175ms)
+localhost_28003 -> 00:53:25.311569 raft.go:379: Nodo: 3 Vota por 4 en mandato 164
+localhost_28003 -> 00:53:25.333231 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{163 3 0 0}
+)
+localhost_28003 -> 00:53:25.333232 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{163 3 0 0}
+)
+localhost_28003 -> 00:53:25.333267 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{163 3 0 0}
+)
+localhost_28003 -> 00:53:25.487561 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 155ms)
+localhost_28003 -> 00:53:25.487620 raft.go:265: Nodo 3 inicia elección para mandato 165
+localhost_28003 -> 00:53:25.489185 raft.go:471: Nodo 3: respuesta de voto de 4: Term=165, VoteGranted=true
+localhost_28003 -> 00:53:25.489304 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 165
+localhost_28003 -> 00:53:25.642630 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 225ms)
+localhost_28003 -> 00:53:25.642698 raft.go:265: Nodo 3 inicia elección para mandato 166
+localhost_28003 -> 00:53:25.644737 raft.go:471: Nodo 3: respuesta de voto de 4: Term=166, VoteGranted=true
+localhost_28003 -> 00:53:25.644767 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 166
+localhost_28003 -> 00:53:25.688909 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{165 3 0 0}
+)
+localhost_28003 -> 00:53:25.688949 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{165 3 0 0}
+)
+localhost_28003 -> 00:53:25.688910 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{165 3 0 0}
+)
+localhost_28003 -> 00:53:25.844287 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{166 3 0 0}
+)
+localhost_28003 -> 00:53:25.844327 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{166 3 0 0}
+)
+localhost_28003 -> 00:53:25.844290 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{166 3 0 0}
+)
+localhost_28003 -> 00:53:25.850303 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 275ms)
+localhost_28003 -> 00:53:25.850343 raft.go:379: Nodo: 3 Vota por 4 en mandato 167
+localhost_28003 -> 00:53:26.126319 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 183ms)
+localhost_28003 -> 00:53:26.127393 raft.go:265: Nodo 3 inicia elección para mandato 168
+localhost_28003 -> 00:53:26.129656 raft.go:471: Nodo 3: respuesta de voto de 4: Term=168, VoteGranted=true
+localhost_28003 -> 00:53:26.129679 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 168
+localhost_28003 -> 00:53:26.310075 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 241ms)
+localhost_28003 -> 00:53:26.310155 raft.go:265: Nodo 3 inicia elección para mandato 169
+localhost_28003 -> 00:53:26.311423 raft.go:471: Nodo 3: respuesta de voto de 4: Term=169, VoteGranted=true
+localhost_28003 -> 00:53:26.311449 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 169
+localhost_28003 -> 00:53:26.329555 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{168 3 0 0}
+)
+localhost_28003 -> 00:53:26.329615 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{168 3 0 0}
+)
+localhost_28003 -> 00:53:26.329591 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{168 3 0 0}
+)
+localhost_28003 -> 00:53:26.510849 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{169 3 0 0}
+)
+localhost_28003 -> 00:53:26.510891 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{169 3 0 0}
+)
+localhost_28003 -> 00:53:26.510849 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{169 3 0 0}
+)
+localhost_28003 -> 00:53:26.552017 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 198ms)
+localhost_28003 -> 00:53:26.552064 raft.go:265: Nodo 3 inicia elección para mandato 170
+localhost_28003 -> 00:53:26.553219 raft.go:471: Nodo 3: respuesta de voto de 4: Term=170, VoteGranted=true
+localhost_28003 -> 00:53:26.553237 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 170
+localhost_28003 -> 00:53:26.750569 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 196ms)
+localhost_28003 -> 00:53:26.750637 raft.go:265: Nodo 3 inicia elección para mandato 171
+localhost_28003 -> 00:53:26.751919 raft.go:471: Nodo 3: respuesta de voto de 4: Term=171, VoteGranted=true
+localhost_28003 -> 00:53:26.751942 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 171
+localhost_28003 -> 00:53:26.752993 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{170 3 0 0}
+)
+localhost_28003 -> 00:53:26.752993 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{170 3 0 0}
+)
+localhost_28003 -> 00:53:26.753039 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{170 3 0 0}
+)
+localhost_28003 -> 00:53:26.947380 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 189ms)
+localhost_28003 -> 00:53:26.947438 raft.go:265: Nodo 3 inicia elección para mandato 172
+localhost_28003 -> 00:53:26.948727 raft.go:471: Nodo 3: respuesta de voto de 4: Term=172, VoteGranted=true
+localhost_28003 -> 00:53:26.948759 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 172
+localhost_28003 -> 00:53:26.951931 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{171 3 0 0}
+)
+localhost_28003 -> 00:53:26.951964 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{171 3 0 0}
+)
+localhost_28003 -> 00:53:26.951978 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{171 3 0 0}
+)
+localhost_28003 -> 00:53:27.137274 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 213ms)
+localhost_28003 -> 00:53:27.137334 raft.go:265: Nodo 3 inicia elección para mandato 173
+localhost_28003 -> 00:53:27.138720 raft.go:471: Nodo 3: respuesta de voto de 4: Term=173, VoteGranted=true
+localhost_28003 -> 00:53:27.138743 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 173
+localhost_28003 -> 00:53:27.148883 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{172 3 0 0}
+)
+localhost_28003 -> 00:53:27.148900 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{172 3 0 0}
+)
+localhost_28003 -> 00:53:27.148979 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{172 3 0 0}
+)
+localhost_28003 -> 00:53:27.338252 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{173 3 0 0}
+)
+localhost_28003 -> 00:53:27.338252 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{173 3 0 0}
+)
+localhost_28003 -> 00:53:27.338307 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{173 3 0 0}
+)
+localhost_28003 -> 00:53:27.350460 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 264ms)
+localhost_28003 -> 00:53:27.350501 raft.go:265: Nodo 3 inicia elección para mandato 174
+localhost_28003 -> 00:53:27.351753 raft.go:471: Nodo 3: respuesta de voto de 4: Term=174, VoteGranted=true
+localhost_28003 -> 00:53:27.351832 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 174
+localhost_28003 -> 00:53:27.551281 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{174 3 0 0}
+)
+localhost_28003 -> 00:53:27.551281 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{174 3 0 0}
+)
+localhost_28003 -> 00:53:27.551324 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{174 3 0 0}
+)
+localhost_28003 -> 00:53:27.615491 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 224ms)
+localhost_28003 -> 00:53:27.615545 raft.go:265: Nodo 3 inicia elección para mandato 175
+localhost_28003 -> 00:53:27.617219 raft.go:471: Nodo 3: respuesta de voto de 4: Term=175, VoteGranted=false
+localhost_28003 -> 00:53:27.781778 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 246ms)
+localhost_28003 -> 00:53:27.781861 raft.go:379: Nodo: 3 Vota por 4 en mandato 176
+localhost_28003 -> 00:53:27.817601 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{175 3 0 0}
+)
+localhost_28003 -> 00:53:27.817664 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{175 3 0 0}
+)
+localhost_28003 -> 00:53:27.817720 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{175 3 0 0}
+)
+localhost_28003 -> 00:53:28.028105 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 185ms)
+localhost_28003 -> 00:53:28.028160 raft.go:265: Nodo 3 inicia elección para mandato 177
+localhost_28003 -> 00:53:28.029326 raft.go:471: Nodo 3: respuesta de voto de 4: Term=177, VoteGranted=true
+localhost_28003 -> 00:53:28.029348 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 177
+localhost_28003 -> 00:53:28.210875 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 255ms)
+localhost_28003 -> 00:53:28.210949 raft.go:379: Nodo: 3 Vota por 4 en mandato 178
+localhost_28003 -> 00:53:28.229589 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{177 3 0 0}
+)
+localhost_28003 -> 00:53:28.229593 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{177 3 0 0}
+)
+localhost_28003 -> 00:53:28.229648 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{177 3 0 0}
+)
+localhost_28003 -> 00:53:28.465905 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 259ms)
+localhost_28003 -> 00:53:28.465969 raft.go:265: Nodo 3 inicia elección para mandato 179
+localhost_28003 -> 00:53:28.467879 raft.go:471: Nodo 3: respuesta de voto de 4: Term=179, VoteGranted=true
+localhost_28003 -> 00:53:28.467909 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 179
+localhost_28003 -> 00:53:28.667342 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{179 3 0 0}
+)
+localhost_28003 -> 00:53:28.667342 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{179 3 0 0}
+)
+localhost_28003 -> 00:53:28.667383 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{179 3 0 0}
+)
+localhost_28003 -> 00:53:28.685443 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 256ms)
+localhost_28003 -> 00:53:28.685491 raft.go:379: Nodo: 3 Vota por 4 en mandato 180
+localhost_28003 -> 00:53:28.920295 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 160ms)
+localhost_28003 -> 00:53:28.920334 raft.go:379: Nodo: 3 Vota por 4 en mandato 181
+localhost_28003 -> 00:53:29.081039 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 278ms)
+localhost_28003 -> 00:53:29.081121 raft.go:265: Nodo 3 inicia elección para mandato 182
+localhost_28003 -> 00:53:29.082285 raft.go:471: Nodo 3: respuesta de voto de 4: Term=182, VoteGranted=true
+localhost_28003 -> 00:53:29.082305 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 182
+localhost_28003 -> 00:53:29.239996 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 286ms)
+localhost_28003 -> 00:53:29.240035 raft.go:379: Nodo: 3 Vota por 4 en mandato 183
+localhost_28003 -> 00:53:29.282560 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{182 3 0 0}
+)
+localhost_28003 -> 00:53:29.282560 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{182 3 0 0}
+)
+localhost_28003 -> 00:53:29.282601 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{182 3 0 0}
+)
+localhost_28003 -> 00:53:29.420863 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 201ms)
+localhost_28003 -> 00:53:29.420895 raft.go:379: Nodo: 3 Vota por 4 en mandato 184
+localhost_28003 -> 00:53:29.575311 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 230ms)
+localhost_28003 -> 00:53:29.575342 raft.go:379: Nodo: 3 Vota por 4 en mandato 185
+localhost_28003 -> 00:53:29.805410 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 236ms)
+localhost_28003 -> 00:53:29.805460 raft.go:265: Nodo 3 inicia elección para mandato 186
+localhost_28003 -> 00:53:29.806900 raft.go:471: Nodo 3: respuesta de voto de 4: Term=186, VoteGranted=true
+localhost_28003 -> 00:53:29.806920 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 186
+localhost_28003 -> 00:53:30.006235 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{186 3 0 0}
+)
+localhost_28003 -> 00:53:30.006235 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{186 3 0 0}
+)
+localhost_28003 -> 00:53:30.006277 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{186 3 0 0}
+)
+localhost_28003 -> 00:53:30.026313 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 226ms)
+localhost_28003 -> 00:53:30.026350 raft.go:379: Nodo: 3 Vota por 4 en mandato 187
+localhost_28003 -> 00:53:30.216677 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 166ms)
+localhost_28003 -> 00:53:30.217054 raft.go:379: Nodo: 3 Vota por 4 en mandato 188
+localhost_28003 -> 00:53:30.382821 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 264ms)
+localhost_28003 -> 00:53:30.382899 raft.go:265: Nodo 3 inicia elección para mandato 189
+localhost_28003 -> 00:53:30.384234 raft.go:471: Nodo 3: respuesta de voto de 4: Term=189, VoteGranted=true
+localhost_28003 -> 00:53:30.384269 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 189
+localhost_28003 -> 00:53:30.584701 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{189 3 0 0}
+)
+localhost_28003 -> 00:53:30.584738 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{189 3 0 0}
+)
+localhost_28003 -> 00:53:30.584698 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{189 3 0 0}
+)
+localhost_28003 -> 00:53:30.646848 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 254ms)
+localhost_28003 -> 00:53:30.646917 raft.go:265: Nodo 3 inicia elección para mandato 190
+localhost_28003 -> 00:53:30.648058 raft.go:471: Nodo 3: respuesta de voto de 4: Term=190, VoteGranted=true
+localhost_28003 -> 00:53:30.648078 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 190
+localhost_28003 -> 00:53:30.848620 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{190 3 0 0}
+)
+localhost_28003 -> 00:53:30.848620 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{190 3 0 0}
+)
+localhost_28003 -> 00:53:30.848661 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{190 3 0 0}
+)
+localhost_28003 -> 00:53:30.871220 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 258ms)
+localhost_28003 -> 00:53:30.871253 raft.go:379: Nodo: 3 Vota por 4 en mandato 191
+localhost_28003 -> 00:53:31.129277 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 163ms)
+localhost_28003 -> 00:53:31.129337 raft.go:265: Nodo 3 inicia elección para mandato 192
+localhost_28003 -> 00:53:31.130464 raft.go:471: Nodo 3: respuesta de voto de 4: Term=192, VoteGranted=true
+localhost_28003 -> 00:53:31.130510 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 192
+localhost_28003 -> 00:53:31.292824 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 256ms)
+localhost_28003 -> 00:53:31.292877 raft.go:265: Nodo 3 inicia elección para mandato 193
+localhost_28003 -> 00:53:31.293982 raft.go:471: Nodo 3: respuesta de voto de 4: Term=193, VoteGranted=true
+localhost_28003 -> 00:53:31.294005 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 193
+localhost_28003 -> 00:53:31.330247 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{192 3 0 0}
+)
+localhost_28003 -> 00:53:31.330247 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{192 3 0 0}
+)
+localhost_28003 -> 00:53:31.330284 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{192 3 0 0}
+)
+localhost_28003 -> 00:53:31.493630 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{193 3 0 0}
+)
+localhost_28003 -> 00:53:31.493630 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{193 3 0 0}
+)
+localhost_28003 -> 00:53:31.493670 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{193 3 0 0}
+)
+localhost_28003 -> 00:53:31.522591 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 279ms)
+localhost_28003 -> 00:53:31.522681 raft.go:379: Nodo: 3 Vota por 4 en mandato 194
+localhost_28003 -> 00:53:31.802507 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 157ms)
+localhost_28003 -> 00:53:31.802565 raft.go:265: Nodo 3 inicia elección para mandato 195
+localhost_28003 -> 00:53:31.803600 raft.go:471: Nodo 3: respuesta de voto de 4: Term=195, VoteGranted=true
+localhost_28003 -> 00:53:31.803624 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 195
+localhost_28003 -> 00:53:31.960032 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 154ms)
+localhost_28003 -> 00:53:31.960110 raft.go:265: Nodo 3 inicia elección para mandato 196
+localhost_28003 -> 00:53:31.961409 raft.go:471: Nodo 3: respuesta de voto de 4: Term=196, VoteGranted=true
+localhost_28003 -> 00:53:31.961428 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 196
+localhost_28003 -> 00:53:32.003636 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{195 3 0 0}
+)
+localhost_28003 -> 00:53:32.003636 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{195 3 0 0}
+)
+localhost_28003 -> 00:53:32.003673 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{195 3 0 0}
+)
+localhost_28003 -> 00:53:32.114827 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 241ms)
+localhost_28003 -> 00:53:32.114886 raft.go:265: Nodo 3 inicia elección para mandato 197
+localhost_28003 -> 00:53:32.115852 raft.go:471: Nodo 3: respuesta de voto de 4: Term=197, VoteGranted=true
+localhost_28003 -> 00:53:32.115870 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 197
+localhost_28003 -> 00:53:32.161118 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{196 3 0 0}
+)
+localhost_28003 -> 00:53:32.161117 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{196 3 0 0}
+)
+localhost_28003 -> 00:53:32.161248 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{196 3 0 0}
+)
+localhost_28003 -> 00:53:32.297493 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 272ms)
+localhost_28003 -> 00:53:32.297535 raft.go:379: Nodo: 3 Vota por 4 en mandato 198
+localhost_28003 -> 00:53:32.315998 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{197 3 0 0}
+)
+localhost_28003 -> 00:53:32.315998 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{197 3 0 0}
+)
+localhost_28003 -> 00:53:32.316055 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{197 3 0 0}
+)
+localhost_28003 -> 00:53:32.465031 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 246ms)
+localhost_28003 -> 00:53:32.465069 raft.go:379: Nodo: 3 Vota por 4 en mandato 199
+localhost_28003 -> 00:53:32.711818 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 273ms)
+localhost_28003 -> 00:53:32.711872 raft.go:265: Nodo 3 inicia elección para mandato 200
+localhost_28003 -> 00:53:32.713117 raft.go:471: Nodo 3: respuesta de voto de 4: Term=200, VoteGranted=true
+localhost_28003 -> 00:53:32.713143 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 200
+localhost_28003 -> 00:53:32.885166 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 280ms)
+localhost_28003 -> 00:53:32.885199 raft.go:379: Nodo: 3 Vota por 4 en mandato 201
+localhost_28003 -> 00:53:32.912756 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{200 3 0 0}
+)
+localhost_28003 -> 00:53:32.912807 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{200 3 0 0}
+)
+localhost_28003 -> 00:53:32.912979 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{200 3 0 0}
+)
+localhost_28003 -> 00:53:33.127620 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 208ms)
+localhost_28003 -> 00:53:33.127677 raft.go:379: Nodo: 3 Vota por 4 en mandato 202
+localhost_28003 -> 00:53:33.336490 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 164ms)
+localhost_28003 -> 00:53:33.336537 raft.go:265: Nodo 3 inicia elección para mandato 203
+localhost_28003 -> 00:53:33.337833 raft.go:471: Nodo 3: respuesta de voto de 4: Term=203, VoteGranted=true
+localhost_28003 -> 00:53:33.337854 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 203
+localhost_28003 -> 00:53:33.501242 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 154ms)
+localhost_28003 -> 00:53:33.501297 raft.go:265: Nodo 3 inicia elección para mandato 204
+localhost_28003 -> 00:53:33.502449 raft.go:471: Nodo 3: respuesta de voto de 4: Term=204, VoteGranted=true
+localhost_28003 -> 00:53:33.502473 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 204
+localhost_28003 -> 00:53:33.537635 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{203 3 0 0}
+)
+localhost_28003 -> 00:53:33.537638 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{203 3 0 0}
+)
+localhost_28003 -> 00:53:33.537673 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{203 3 0 0}
+)
+localhost_28003 -> 00:53:33.656053 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 277ms)
+localhost_28003 -> 00:53:33.656111 raft.go:265: Nodo 3 inicia elección para mandato 205
+localhost_28003 -> 00:53:33.657399 raft.go:471: Nodo 3: respuesta de voto de 4: Term=205, VoteGranted=true
+localhost_28003 -> 00:53:33.657417 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 205
+localhost_28003 -> 00:53:33.702628 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{204 3 0 0}
+)
+localhost_28003 -> 00:53:33.702636 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{204 3 0 0}
+)
+localhost_28003 -> 00:53:33.702707 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{204 3 0 0}
+)
+localhost_28003 -> 00:53:33.857062 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{205 3 0 0}
+)
+localhost_28003 -> 00:53:33.857062 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{205 3 0 0}
+)
+localhost_28003 -> 00:53:33.857110 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{205 3 0 0}
+)
+localhost_28003 -> 00:53:33.928061 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 176ms)
+localhost_28003 -> 00:53:33.928101 raft.go:379: Nodo: 3 Vota por 4 en mandato 206
+localhost_28003 -> 00:53:34.104805 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 188ms)
+localhost_28003 -> 00:53:34.104882 raft.go:265: Nodo 3 inicia elección para mandato 207
+localhost_28003 -> 00:53:34.106215 raft.go:471: Nodo 3: respuesta de voto de 4: Term=207, VoteGranted=true
+localhost_28003 -> 00:53:34.106243 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 207
+localhost_28003 -> 00:53:34.259696 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 256ms)
+localhost_28003 -> 00:53:34.259748 raft.go:379: Nodo: 3 Vota por 4 en mandato 208
+localhost_28003 -> 00:53:34.305370 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{207 3 0 0}
+)
+localhost_28003 -> 00:53:34.306401 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{207 3 0 0}
+)
+localhost_28003 -> 00:53:34.306405 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{207 3 0 0}
+)
+localhost_28003 -> 00:53:34.516733 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 231ms)
+localhost_28003 -> 00:53:34.516812 raft.go:265: Nodo 3 inicia elección para mandato 209
+localhost_28003 -> 00:53:34.517992 raft.go:471: Nodo 3: respuesta de voto de 4: Term=209, VoteGranted=true
+localhost_28003 -> 00:53:34.518018 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 209
+localhost_28003 -> 00:53:34.717438 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{209 3 0 0}
+)
+localhost_28003 -> 00:53:34.717438 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{209 3 0 0}
+)
+localhost_28003 -> 00:53:34.717475 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{209 3 0 0}
+)
+localhost_28003 -> 00:53:34.748587 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 228ms)
+localhost_28003 -> 00:53:34.748648 raft.go:265: Nodo 3 inicia elección para mandato 210
+localhost_28003 -> 00:53:34.750004 raft.go:471: Nodo 3: respuesta de voto de 4: Term=210, VoteGranted=true
+localhost_28003 -> 00:53:34.750027 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 210
+localhost_28003 -> 00:53:34.949547 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{210 3 0 0}
+)
+localhost_28003 -> 00:53:34.949547 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{210 3 0 0}
+)
+localhost_28003 -> 00:53:34.949677 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{210 3 0 0}
+)
+localhost_28003 -> 00:53:34.967297 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 275ms)
+localhost_28003 -> 00:53:34.967360 raft.go:379: Nodo: 3 Vota por 4 en mandato 211
+localhost_28003 -> 00:53:35.120129 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 239ms)
+localhost_28003 -> 00:53:35.120313 raft.go:379: Nodo: 3 Vota por 4 en mandato 212
+localhost_28003 -> 00:53:35.283117 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 207ms)
+localhost_28003 -> 00:53:35.283201 raft.go:379: Nodo: 3 Vota por 4 en mandato 213
+localhost_28003 -> 00:53:35.482719 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 170ms)
+localhost_28003 -> 00:53:35.482750 raft.go:379: Nodo: 3 Vota por 4 en mandato 214
+localhost_28003 -> 00:53:35.652861 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 174ms)
+localhost_28003 -> 00:53:35.652937 raft.go:265: Nodo 3 inicia elección para mandato 215
+localhost_28003 -> 00:53:35.654161 raft.go:471: Nodo 3: respuesta de voto de 4: Term=215, VoteGranted=true
+localhost_28003 -> 00:53:35.654185 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 215
+localhost_28003 -> 00:53:35.827565 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 206ms)
+localhost_28003 -> 00:53:35.827621 raft.go:265: Nodo 3 inicia elección para mandato 216
+localhost_28003 -> 00:53:35.828892 raft.go:471: Nodo 3: respuesta de voto de 4: Term=216, VoteGranted=true
+localhost_28003 -> 00:53:35.828915 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 216
+localhost_28003 -> 00:53:35.854010 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{215 3 0 0}
+)
+localhost_28003 -> 00:53:35.854011 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{215 3 0 0}
+)
+localhost_28003 -> 00:53:35.854049 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{215 3 0 0}
+)
+localhost_28003 -> 00:53:36.028344 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{216 3 0 0}
+)
+localhost_28003 -> 00:53:36.028344 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{216 3 0 0}
+)
+localhost_28003 -> 00:53:36.028378 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{216 3 0 0}
+)
+localhost_28003 -> 00:53:36.034529 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 159ms)
+localhost_28003 -> 00:53:36.034572 raft.go:265: Nodo 3 inicia elección para mandato 217
+localhost_28003 -> 00:53:36.035948 raft.go:471: Nodo 3: respuesta de voto de 4: Term=217, VoteGranted=true
+localhost_28003 -> 00:53:36.036058 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 217
+localhost_28003 -> 00:53:36.194412 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 292ms)
+localhost_28003 -> 00:53:36.194488 raft.go:265: Nodo 3 inicia elección para mandato 218
+localhost_28003 -> 00:53:36.195718 raft.go:471: Nodo 3: respuesta de voto de 4: Term=218, VoteGranted=true
+localhost_28003 -> 00:53:36.195739 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 218
+localhost_28003 -> 00:53:36.235979 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{217 3 0 0}
+)
+localhost_28003 -> 00:53:36.235978 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{217 3 0 0}
+)
+localhost_28003 -> 00:53:36.236016 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{217 3 0 0}
+)
+localhost_28003 -> 00:53:36.395357 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{218 3 0 0}
+)
+localhost_28003 -> 00:53:36.395394 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{218 3 0 0}
+)
+localhost_28003 -> 00:53:36.395357 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{218 3 0 0}
+)
+localhost_28003 -> 00:53:36.486508 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 290ms)
+localhost_28003 -> 00:53:36.486564 raft.go:265: Nodo 3 inicia elección para mandato 219
+localhost_28003 -> 00:53:36.487898 raft.go:471: Nodo 3: respuesta de voto de 4: Term=219, VoteGranted=true
+localhost_28003 -> 00:53:36.487936 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 219
+localhost_28003 -> 00:53:36.670247 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 220ms)
+localhost_28003 -> 00:53:36.670283 raft.go:379: Nodo: 3 Vota por 4 en mandato 220
+localhost_28003 -> 00:53:36.687858 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{219 3 0 0}
+)
+localhost_28003 -> 00:53:36.687858 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{219 3 0 0}
+)
+localhost_28003 -> 00:53:36.687894 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{219 3 0 0}
+)
+localhost_28003 -> 00:53:36.891273 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 277ms)
+localhost_28003 -> 00:53:36.891317 raft.go:265: Nodo 3 inicia elección para mandato 221
+localhost_28003 -> 00:53:36.892493 raft.go:471: Nodo 3: respuesta de voto de 4: Term=221, VoteGranted=true
+localhost_28003 -> 00:53:36.892512 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 221
+localhost_28003 -> 00:53:37.091860 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{221 3 0 0}
+)
+localhost_28003 -> 00:53:37.091885 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{221 3 0 0}
+)
+localhost_28003 -> 00:53:37.091891 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{221 3 0 0}
+)
+localhost_28003 -> 00:53:37.137706 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 172ms)
+localhost_28003 -> 00:53:37.137740 raft.go:379: Nodo: 3 Vota por 4 en mandato 222
+localhost_28003 -> 00:53:37.310524 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 266ms)
+localhost_28003 -> 00:53:37.310580 raft.go:265: Nodo 3 inicia elección para mandato 223
+localhost_28003 -> 00:53:37.311925 raft.go:471: Nodo 3: respuesta de voto de 4: Term=223, VoteGranted=true
+localhost_28003 -> 00:53:37.311949 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 223
+localhost_28003 -> 00:53:37.511416 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{223 3 0 0}
+)
+localhost_28003 -> 00:53:37.511416 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{223 3 0 0}
+)
+localhost_28003 -> 00:53:37.511456 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{223 3 0 0}
+)
+localhost_28003 -> 00:53:37.557599 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 192ms)
+localhost_28003 -> 00:53:37.557642 raft.go:379: Nodo: 3 Vota por 4 en mandato 224
+localhost_28003 -> 00:53:37.750561 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 175ms)
+localhost_28003 -> 00:53:37.750642 raft.go:265: Nodo 3 inicia elección para mandato 225
+localhost_28003 -> 00:53:37.752309 raft.go:471: Nodo 3: respuesta de voto de 4: Term=225, VoteGranted=true
+localhost_28003 -> 00:53:37.752335 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 225
+localhost_28003 -> 00:53:37.925677 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 243ms)
+localhost_28003 -> 00:53:37.925753 raft.go:265: Nodo 3 inicia elección para mandato 226
+localhost_28003 -> 00:53:37.927158 raft.go:471: Nodo 3: respuesta de voto de 4: Term=226, VoteGranted=true
+localhost_28003 -> 00:53:37.927204 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 226
+localhost_28003 -> 00:53:37.952243 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{225 3 0 0}
+)
+localhost_28003 -> 00:53:37.952243 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{225 3 0 0}
+)
+localhost_28003 -> 00:53:37.952279 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{225 3 0 0}
+)
+localhost_28003 -> 00:53:38.126722 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{226 3 0 0}
+)
+localhost_28003 -> 00:53:38.126752 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{226 3 0 0}
+)
+localhost_28003 -> 00:53:38.126758 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{226 3 0 0}
+)
+localhost_28003 -> 00:53:38.168968 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 266ms)
+localhost_28003 -> 00:53:38.169020 raft.go:265: Nodo 3 inicia elección para mandato 227
+localhost_28003 -> 00:53:38.173946 raft.go:471: Nodo 3: respuesta de voto de 4: Term=227, VoteGranted=true
+localhost_28003 -> 00:53:38.173972 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 227
+localhost_28003 -> 00:53:38.370690 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{227 3 0 0}
+)
+localhost_28003 -> 00:53:38.370691 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{227 3 0 0}
+)
+localhost_28003 -> 00:53:38.370731 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{227 3 0 0}
+)
+localhost_28003 -> 00:53:38.415631 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 182ms)
+localhost_28003 -> 00:53:38.415742 raft.go:379: Nodo: 3 Vota por 4 en mandato 228
+localhost_28003 -> 00:53:38.598492 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 267ms)
+localhost_28003 -> 00:53:38.598549 raft.go:265: Nodo 3 inicia elección para mandato 229
+localhost_28003 -> 00:53:38.599599 raft.go:471: Nodo 3: respuesta de voto de 4: Term=229, VoteGranted=true
+localhost_28003 -> 00:53:38.599893 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 229
+localhost_28003 -> 00:53:38.799310 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{229 3 0 0}
+)
+localhost_28003 -> 00:53:38.799349 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{229 3 0 0}
+)
+localhost_28003 -> 00:53:38.799310 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{229 3 0 0}
+)
+localhost_28003 -> 00:53:38.866519 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 201ms)
+localhost_28003 -> 00:53:38.866579 raft.go:265: Nodo 3 inicia elección para mandato 230
+localhost_28003 -> 00:53:38.868662 raft.go:471: Nodo 3: respuesta de voto de 4: Term=230, VoteGranted=true
+localhost_28003 -> 00:53:38.868691 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 230
+localhost_28003 -> 00:53:39.039828 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 197ms)
+localhost_28003 -> 00:53:39.039867 raft.go:379: Nodo: 3 Vota por 4 en mandato 231
+localhost_28003 -> 00:53:39.067526 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{230 3 0 0}
+)
+localhost_28003 -> 00:53:39.068548 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{230 3 0 0}
+)
+localhost_28003 -> 00:53:39.068546 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{230 3 0 0}
+)
+localhost_28003 -> 00:53:39.237833 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 150ms)
+localhost_28003 -> 00:53:39.237885 raft.go:265: Nodo 3 inicia elección para mandato 232
+localhost_28003 -> 00:53:39.239217 raft.go:471: Nodo 3: respuesta de voto de 4: Term=232, VoteGranted=true
+localhost_28003 -> 00:53:39.239237 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 232
+localhost_28003 -> 00:53:39.388613 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 171ms)
+localhost_28003 -> 00:53:39.388665 raft.go:265: Nodo 3 inicia elección para mandato 233
+localhost_28003 -> 00:53:39.389940 raft.go:471: Nodo 3: respuesta de voto de 4: Term=233, VoteGranted=true
+localhost_28003 -> 00:53:39.389976 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 233
+localhost_28003 -> 00:53:39.439216 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{232 3 0 0}
+)
+localhost_28003 -> 00:53:39.439216 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{232 3 0 0}
+)
+localhost_28003 -> 00:53:39.439252 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{232 3 0 0}
+)
+localhost_28003 -> 00:53:39.560481 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 291ms)
+localhost_28003 -> 00:53:39.560541 raft.go:265: Nodo 3 inicia elección para mandato 234
+localhost_28003 -> 00:53:39.561587 raft.go:471: Nodo 3: respuesta de voto de 4: Term=234, VoteGranted=true
+localhost_28003 -> 00:53:39.561604 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 234
+localhost_28003 -> 00:53:39.589852 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{233 3 0 0}
+)
+localhost_28003 -> 00:53:39.589852 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{233 3 0 0}
+)
+localhost_28003 -> 00:53:39.589887 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{233 3 0 0}
+)
+localhost_28003 -> 00:53:39.735760 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 290ms)
+localhost_28003 -> 00:53:39.735870 raft.go:379: Nodo: 3 Vota por 4 en mandato 235
+localhost_28003 -> 00:53:39.761630 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{234 3 0 0}
+)
+localhost_28003 -> 00:53:39.761665 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{234 3 0 0}
+)
+localhost_28003 -> 00:53:39.761631 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{234 3 0 0}
+)
+localhost_28003 -> 00:53:39.946520 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 190ms)
+localhost_28003 -> 00:53:39.946554 raft.go:379: Nodo: 3 Vota por 4 en mandato 236
+localhost_28003 -> 00:53:40.121948 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 264ms)
+localhost_28003 -> 00:53:40.121994 raft.go:379: Nodo: 3 Vota por 4 en mandato 237
+localhost_28003 -> 00:53:40.386881 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 247ms)
+localhost_28003 -> 00:53:40.386939 raft.go:265: Nodo 3 inicia elección para mandato 238
+localhost_28003 -> 00:53:40.388222 raft.go:471: Nodo 3: respuesta de voto de 4: Term=238, VoteGranted=true
+localhost_28003 -> 00:53:40.388242 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 238
+localhost_28003 -> 00:53:40.556580 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 247ms)
+localhost_28003 -> 00:53:40.556984 raft.go:379: Nodo: 3 Vota por 4 en mandato 239
+localhost_28003 -> 00:53:40.588571 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{238 3 0 0}
+)
+localhost_28003 -> 00:53:40.588571 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{238 3 0 0}
+)
+localhost_28003 -> 00:53:40.588611 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{238 3 0 0}
+)
+localhost_28003 -> 00:53:40.709745 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 294ms)
+localhost_28003 -> 00:53:40.709788 raft.go:379: Nodo: 3 Vota por 4 en mandato 240
+localhost_28003 -> 00:53:40.956935 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 245ms)
+localhost_28003 -> 00:53:40.956967 raft.go:379: Nodo: 3 Vota por 4 en mandato 241
+localhost_28003 -> 00:53:41.181562 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 193ms)
+localhost_28003 -> 00:53:41.181598 raft.go:379: Nodo: 3 Vota por 4 en mandato 242
+localhost_28003 -> 00:53:41.356550 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 216ms)
+localhost_28003 -> 00:53:41.356597 raft.go:379: Nodo: 3 Vota por 4 en mandato 243
+localhost_28003 -> 00:53:41.572928 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 244ms)
+localhost_28003 -> 00:53:41.572974 raft.go:265: Nodo 3 inicia elección para mandato 244
+localhost_28003 -> 00:53:41.574284 raft.go:471: Nodo 3: respuesta de voto de 4: Term=244, VoteGranted=true
+localhost_28003 -> 00:53:41.574389 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 244
+localhost_28003 -> 00:53:41.773615 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{244 3 0 0}
+)
+localhost_28003 -> 00:53:41.773615 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{244 3 0 0}
+)
+localhost_28003 -> 00:53:41.774759 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{244 3 0 0}
+)
+localhost_28003 -> 00:53:41.817859 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 273ms)
+localhost_28003 -> 00:53:41.817910 raft.go:265: Nodo 3 inicia elección para mandato 245
+localhost_28003 -> 00:53:41.819014 raft.go:471: Nodo 3: respuesta de voto de 4: Term=245, VoteGranted=true
+localhost_28003 -> 00:53:41.819039 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 245
+localhost_28003 -> 00:53:42.018394 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{245 3 0 0}
+)
+localhost_28003 -> 00:53:42.018394 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{245 3 0 0}
+)
+localhost_28003 -> 00:53:42.019545 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{245 3 0 0}
+)
+localhost_28003 -> 00:53:42.062520 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 230ms)
+localhost_28003 -> 00:53:42.062574 raft.go:379: Nodo: 3 Vota por 4 en mandato 246
+localhost_28003 -> 00:53:42.293441 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 266ms)
+localhost_28003 -> 00:53:42.293497 raft.go:265: Nodo 3 inicia elección para mandato 247
+localhost_28003 -> 00:53:42.294829 raft.go:471: Nodo 3: respuesta de voto de 4: Term=247, VoteGranted=true
+localhost_28003 -> 00:53:42.294928 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 247
+localhost_28003 -> 00:53:42.451046 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 288ms)
+localhost_28003 -> 00:53:42.451079 raft.go:379: Nodo: 3 Vota por 4 en mandato 248
+localhost_28003 -> 00:53:42.494841 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{247 3 0 0}
+)
+localhost_28003 -> 00:53:42.494841 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{247 3 0 0}
+)
+localhost_28003 -> 00:53:42.494885 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{247 3 0 0}
+)
+localhost_28003 -> 00:53:42.658948 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 158ms)
+localhost_28003 -> 00:53:42.659000 raft.go:379: Nodo: 3 Vota por 4 en mandato 249
+localhost_28003 -> 00:53:42.817934 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 283ms)
+localhost_28003 -> 00:53:42.817990 raft.go:265: Nodo 3 inicia elección para mandato 250
+localhost_28003 -> 00:53:42.819319 raft.go:471: Nodo 3: respuesta de voto de 4: Term=250, VoteGranted=true
+localhost_28003 -> 00:53:42.819338 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 250
+localhost_28003 -> 00:53:42.974267 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 291ms)
+localhost_28003 -> 00:53:42.974306 raft.go:379: Nodo: 3 Vota por 4 en mandato 251
+localhost_28003 -> 00:53:43.018846 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{250 3 0 0}
+)
+localhost_28003 -> 00:53:43.018968 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{250 3 0 0}
+)
+localhost_28003 -> 00:53:43.018979 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{250 3 0 0}
+)
+localhost_28003 -> 00:53:43.182389 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 246ms)
+localhost_28003 -> 00:53:43.182429 raft.go:379: Nodo: 3 Vota por 4 en mandato 252
+localhost_28003 -> 00:53:43.361191 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 284ms)
+localhost_28003 -> 00:53:43.361233 raft.go:379: Nodo: 3 Vota por 4 en mandato 253
+localhost_28003 -> 00:53:43.579433 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 180ms)
+localhost_28003 -> 00:53:43.579493 raft.go:379: Nodo: 3 Vota por 4 en mandato 254
+localhost_28003 -> 00:53:43.760137 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 190ms)
+localhost_28003 -> 00:53:43.760195 raft.go:265: Nodo 3 inicia elección para mandato 255
+localhost_28003 -> 00:53:43.761404 raft.go:471: Nodo 3: respuesta de voto de 4: Term=255, VoteGranted=true
+localhost_28003 -> 00:53:43.761430 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 255
+localhost_28003 -> 00:53:43.927043 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 231ms)
+localhost_28003 -> 00:53:43.927097 raft.go:379: Nodo: 3 Vota por 4 en mandato 256
+localhost_28003 -> 00:53:43.960850 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{255 3 0 0}
+)
+localhost_28003 -> 00:53:43.960927 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{255 3 0 0}
+)
+localhost_28003 -> 00:53:43.960956 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{255 3 0 0}
+)
+localhost_28003 -> 00:53:44.120183 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 276ms)
+localhost_28003 -> 00:53:44.120219 raft.go:379: Nodo: 3 Vota por 4 en mandato 257
+localhost_28003 -> 00:53:44.283856 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 205ms)
+localhost_28003 -> 00:53:44.283899 raft.go:379: Nodo: 3 Vota por 4 en mandato 258
+localhost_28003 -> 00:53:44.489819 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 237ms)
+localhost_28003 -> 00:53:44.489865 raft.go:265: Nodo 3 inicia elección para mandato 259
+localhost_28003 -> 00:53:44.490917 raft.go:471: Nodo 3: respuesta de voto de 4: Term=259, VoteGranted=true
+localhost_28003 -> 00:53:44.490948 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 259
+localhost_28003 -> 00:53:44.649133 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 174ms)
+localhost_28003 -> 00:53:44.649166 raft.go:379: Nodo: 3 Vota por 4 en mandato 260
+localhost_28003 -> 00:53:44.690955 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{259 3 0 0}
+)
+localhost_28003 -> 00:53:44.691499 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{259 3 0 0}
+)
+localhost_28003 -> 00:53:44.691165 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{259 3 0 0}
+)
+localhost_28003 -> 00:53:44.815561 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 193ms)
+localhost_28003 -> 00:53:44.815596 raft.go:379: Nodo: 3 Vota por 4 en mandato 261
+localhost_28003 -> 00:53:45.008721 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 189ms)
+localhost_28003 -> 00:53:45.008802 raft.go:265: Nodo 3 inicia elección para mandato 262
+localhost_28003 -> 00:53:45.010207 raft.go:471: Nodo 3: respuesta de voto de 4: Term=262, VoteGranted=true
+localhost_28003 -> 00:53:45.010226 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 262
+localhost_28003 -> 00:53:45.198643 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 246ms)
+localhost_28003 -> 00:53:45.198702 raft.go:265: Nodo 3 inicia elección para mandato 263
+localhost_28003 -> 00:53:45.199937 raft.go:471: Nodo 3: respuesta de voto de 4: Term=263, VoteGranted=true
+localhost_28003 -> 00:53:45.200024 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 263
+localhost_28003 -> 00:53:45.210052 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{262 3 0 0}
+)
+localhost_28003 -> 00:53:45.210118 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{262 3 0 0}
+)
+localhost_28003 -> 00:53:45.210126 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{262 3 0 0}
+)
+localhost_28003 -> 00:53:45.377932 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 197ms)
+localhost_28003 -> 00:53:45.377965 raft.go:379: Nodo: 3 Vota por 4 en mandato 264
+localhost_28003 -> 00:53:45.400041 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{263 3 0 0}
+)
+localhost_28003 -> 00:53:45.400045 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{263 3 0 0}
+)
+localhost_28003 -> 00:53:45.400093 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{263 3 0 0}
+)
+localhost_28003 -> 00:53:45.565999 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 156ms)
+localhost_28003 -> 00:53:45.566034 raft.go:379: Nodo: 3 Vota por 4 en mandato 265
+localhost_28003 -> 00:53:45.722034 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 212ms)
+localhost_28003 -> 00:53:45.722091 raft.go:265: Nodo 3 inicia elección para mandato 266
+localhost_28003 -> 00:53:45.723155 raft.go:471: Nodo 3: respuesta de voto de 4: Term=266, VoteGranted=true
+localhost_28003 -> 00:53:45.723176 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 266
+localhost_28003 -> 00:53:45.909953 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 156ms)
+localhost_28003 -> 00:53:45.910014 raft.go:379: Nodo: 3 Vota por 4 en mandato 267
+localhost_28003 -> 00:53:45.923494 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{266 3 0 0}
+)
+localhost_28003 -> 00:53:45.923494 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{266 3 0 0}
+)
+localhost_28003 -> 00:53:45.923535 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{266 3 0 0}
+)
+localhost_28003 -> 00:53:46.067536 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 236ms)
+localhost_28003 -> 00:53:46.067571 raft.go:265: Nodo 3 inicia elección para mandato 268
+localhost_28003 -> 00:53:46.069342 raft.go:471: Nodo 3: respuesta de voto de 4: Term=268, VoteGranted=false
+localhost_28003 -> 00:53:46.241704 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 191ms)
+localhost_28003 -> 00:53:46.241743 raft.go:379: Nodo: 3 Vota por 4 en mandato 269
+localhost_28003 -> 00:53:46.268341 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{268 3 0 0}
+)
+localhost_28003 -> 00:53:46.268341 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{268 3 0 0}
+)
+localhost_28003 -> 00:53:46.268395 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{268 3 0 0}
+)
+localhost_28003 -> 00:53:46.433730 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 204ms)
+localhost_28003 -> 00:53:46.433822 raft.go:265: Nodo 3 inicia elección para mandato 270
+localhost_28003 -> 00:53:46.435664 raft.go:471: Nodo 3: respuesta de voto de 4: Term=270, VoteGranted=true
+localhost_28003 -> 00:53:46.435701 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 270
+localhost_28003 -> 00:53:46.587021 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 254ms)
+localhost_28003 -> 00:53:46.587058 raft.go:379: Nodo: 3 Vota por 4 en mandato 271
+localhost_28003 -> 00:53:46.634753 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{270 3 0 0}
+)
+localhost_28003 -> 00:53:46.634757 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{270 3 0 0}
+)
+localhost_28003 -> 00:53:46.635898 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{270 3 0 0}
+)
+localhost_28003 -> 00:53:46.841101 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 256ms)
+localhost_28003 -> 00:53:46.841157 raft.go:265: Nodo 3 inicia elección para mandato 272
+localhost_28003 -> 00:53:46.842417 raft.go:471: Nodo 3: respuesta de voto de 4: Term=272, VoteGranted=true
+localhost_28003 -> 00:53:46.842452 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 272
+localhost_28003 -> 00:53:47.041838 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{272 3 0 0}
+)
+localhost_28003 -> 00:53:47.041837 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{272 3 0 0}
+)
+localhost_28003 -> 00:53:47.041868 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{272 3 0 0}
+)
+localhost_28003 -> 00:53:47.080867 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 291ms)
+localhost_28003 -> 00:53:47.080914 raft.go:379: Nodo: 3 Vota por 4 en mandato 273
+localhost_28003 -> 00:53:47.365089 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 283ms)
+localhost_28003 -> 00:53:47.365123 raft.go:379: Nodo: 3 Vota por 4 en mandato 274
+localhost_28003 -> 00:53:47.573956 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 167ms)
+localhost_28003 -> 00:53:47.573995 raft.go:379: Nodo: 3 Vota por 4 en mandato 275
+localhost_28003 -> 00:53:47.732452 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 209ms)
+localhost_28003 -> 00:53:47.732487 raft.go:379: Nodo: 3 Vota por 4 en mandato 276
+localhost_28003 -> 00:53:47.941491 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 200ms)
+localhost_28003 -> 00:53:47.941623 raft.go:265: Nodo 3 inicia elección para mandato 277
+localhost_28003 -> 00:53:47.942647 raft.go:471: Nodo 3: respuesta de voto de 4: Term=277, VoteGranted=true
+localhost_28003 -> 00:53:47.942669 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 277
+localhost_28003 -> 00:53:48.103629 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 191ms)
+localhost_28003 -> 00:53:48.103666 raft.go:379: Nodo: 3 Vota por 4 en mandato 278
+localhost_28003 -> 00:53:48.142510 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{277 3 0 0}
+)
+localhost_28003 -> 00:53:48.142510 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{277 3 0 0}
+)
+localhost_28003 -> 00:53:48.142546 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{277 3 0 0}
+)
+localhost_28003 -> 00:53:48.294724 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 163ms)
+localhost_28003 -> 00:53:48.294781 raft.go:265: Nodo 3 inicia elección para mandato 279
+localhost_28003 -> 00:53:48.296137 raft.go:471: Nodo 3: respuesta de voto de 4: Term=279, VoteGranted=true
+localhost_28003 -> 00:53:48.296161 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 279
+localhost_28003 -> 00:53:48.458645 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 252ms)
+localhost_28003 -> 00:53:48.458700 raft.go:265: Nodo 3 inicia elección para mandato 280
+localhost_28003 -> 00:53:48.460077 raft.go:471: Nodo 3: respuesta de voto de 4: Term=280, VoteGranted=true
+localhost_28003 -> 00:53:48.460100 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 280
+localhost_28003 -> 00:53:48.496200 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{279 3 0 0}
+)
+localhost_28003 -> 00:53:48.496200 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{279 3 0 0}
+)
+localhost_28003 -> 00:53:48.496327 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{279 3 0 0}
+)
+localhost_28003 -> 00:53:48.659577 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{280 3 0 0}
+)
+localhost_28003 -> 00:53:48.659578 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{280 3 0 0}
+)
+localhost_28003 -> 00:53:48.659616 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{280 3 0 0}
+)
+localhost_28003 -> 00:53:48.693643 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 260ms)
+localhost_28003 -> 00:53:48.693682 raft.go:379: Nodo: 3 Vota por 4 en mandato 281
+localhost_28003 -> 00:53:48.902294 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 279ms)
+localhost_28003 -> 00:53:48.902333 raft.go:379: Nodo: 3 Vota por 4 en mandato 282
+localhost_28003 -> 00:53:49.077821 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 155ms)
+localhost_28003 -> 00:53:49.077856 raft.go:379: Nodo: 3 Vota por 4 en mandato 283
+localhost_28003 -> 00:53:49.233697 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 167ms)
+localhost_28003 -> 00:53:49.233755 raft.go:265: Nodo 3 inicia elección para mandato 284
+localhost_28003 -> 00:53:49.235063 raft.go:471: Nodo 3: respuesta de voto de 4: Term=284, VoteGranted=true
+localhost_28003 -> 00:53:49.235083 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 284
+localhost_28003 -> 00:53:49.401404 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 215ms)
+localhost_28003 -> 00:53:49.401462 raft.go:265: Nodo 3 inicia elección para mandato 285
+localhost_28003 -> 00:53:49.402607 raft.go:471: Nodo 3: respuesta de voto de 4: Term=285, VoteGranted=true
+localhost_28003 -> 00:53:49.402633 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 285
+localhost_28003 -> 00:53:49.434969 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{284 3 0 0}
+)
+localhost_28003 -> 00:53:49.434969 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{284 3 0 0}
+)
+localhost_28003 -> 00:53:49.435009 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{284 3 0 0}
+)
+localhost_28003 -> 00:53:49.602387 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{285 3 0 0}
+)
+localhost_28003 -> 00:53:49.602387 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{285 3 0 0}
+)
+localhost_28003 -> 00:53:49.602424 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{285 3 0 0}
+)
+localhost_28003 -> 00:53:49.605666 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 292ms)
+localhost_28003 -> 00:53:49.605705 raft.go:379: Nodo: 3 Vota por 4 en mandato 286
+localhost_28003 -> 00:53:49.887525 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 213ms)
+localhost_28003 -> 00:53:49.887564 raft.go:379: Nodo: 3 Vota por 4 en mandato 287
+localhost_28003 -> 00:53:50.101578 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 272ms)
+localhost_28003 -> 00:53:50.101652 raft.go:265: Nodo 3 inicia elección para mandato 288
+localhost_28003 -> 00:53:50.103035 raft.go:471: Nodo 3: respuesta de voto de 4: Term=288, VoteGranted=true
+localhost_28003 -> 00:53:50.103060 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 288
+localhost_28003 -> 00:53:50.302506 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{288 3 0 0}
+)
+localhost_28003 -> 00:53:50.302506 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{288 3 0 0}
+)
+localhost_28003 -> 00:53:50.302554 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{288 3 0 0}
+)
+localhost_28003 -> 00:53:50.334670 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 239ms)
+localhost_28003 -> 00:53:50.334720 raft.go:379: Nodo: 3 Vota por 4 en mandato 289
+localhost_28003 -> 00:53:50.574585 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 276ms)
+localhost_28003 -> 00:53:50.574636 raft.go:265: Nodo 3 inicia elección para mandato 290
+localhost_28003 -> 00:53:50.576003 raft.go:471: Nodo 3: respuesta de voto de 4: Term=290, VoteGranted=true
+localhost_28003 -> 00:53:50.576024 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 290
+localhost_28003 -> 00:53:50.776508 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{290 3 0 0}
+)
+localhost_28003 -> 00:53:50.776508 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{290 3 0 0}
+)
+localhost_28003 -> 00:53:50.776561 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{290 3 0 0}
+)
+localhost_28003 -> 00:53:50.850693 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 260ms)
+localhost_28003 -> 00:53:50.850746 raft.go:265: Nodo 3 inicia elección para mandato 291
+localhost_28003 -> 00:53:50.852746 raft.go:471: Nodo 3: respuesta de voto de 4: Term=291, VoteGranted=true
+localhost_28003 -> 00:53:50.852769 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 291
+localhost_28003 -> 00:53:51.010183 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 203ms)
+localhost_28003 -> 00:53:51.010384 raft.go:379: Nodo: 3 Vota por 4 en mandato 292
+localhost_28003 -> 00:53:51.052895 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{291 3 0 0}
+)
+localhost_28003 -> 00:53:51.052917 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{291 3 0 0}
+)
+localhost_28003 -> 00:53:51.053102 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{291 3 0 0}
+)
+localhost_28003 -> 00:53:51.214195 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 161ms)
+localhost_28003 -> 00:53:51.214233 raft.go:265: Nodo 3 inicia elección para mandato 293
+localhost_28003 -> 00:53:51.215538 raft.go:471: Nodo 3: respuesta de voto de 4: Term=293, VoteGranted=true
+localhost_28003 -> 00:53:51.215628 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 293
+localhost_28003 -> 00:53:51.375926 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 242ms)
+localhost_28003 -> 00:53:51.375990 raft.go:265: Nodo 3 inicia elección para mandato 294
+localhost_28003 -> 00:53:51.377737 raft.go:471: Nodo 3: respuesta de voto de 4: Term=294, VoteGranted=true
+localhost_28003 -> 00:53:51.377759 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 294
+localhost_28003 -> 00:53:51.414949 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{293 3 0 0}
+)
+localhost_28003 -> 00:53:51.414985 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{293 3 0 0}
+)
+localhost_28003 -> 00:53:51.414948 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{293 3 0 0}
+)
+localhost_28003 -> 00:53:51.577315 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{294 3 0 0}
+)
+localhost_28003 -> 00:53:51.577351 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{294 3 0 0}
+)
+localhost_28003 -> 00:53:51.577314 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{294 3 0 0}
+)
+localhost_28003 -> 00:53:51.595492 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 200ms)
+localhost_28003 -> 00:53:51.595532 raft.go:379: Nodo: 3 Vota por 4 en mandato 295
+localhost_28003 -> 00:53:51.796187 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 280ms)
+localhost_28003 -> 00:53:51.796218 raft.go:265: Nodo 3 inicia elección para mandato 296
+localhost_28003 -> 00:53:51.797424 raft.go:471: Nodo 3: respuesta de voto de 4: Term=296, VoteGranted=true
+localhost_28003 -> 00:53:51.797531 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 296
+localhost_28003 -> 00:53:51.977889 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 218ms)
+localhost_28003 -> 00:53:51.977963 raft.go:379: Nodo: 3 Vota por 4 en mandato 297
+localhost_28003 -> 00:53:51.997496 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{296 3 0 0}
+)
+localhost_28003 -> 00:53:51.997563 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{296 3 0 0}
+)
+localhost_28003 -> 00:53:51.997621 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{296 3 0 0}
+)
+localhost_28003 -> 00:53:52.195952 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 154ms)
+localhost_28003 -> 00:53:52.196002 raft.go:265: Nodo 3 inicia elección para mandato 298
+localhost_28003 -> 00:53:52.197241 raft.go:471: Nodo 3: respuesta de voto de 4: Term=298, VoteGranted=true
+localhost_28003 -> 00:53:52.197261 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 298
+localhost_28003 -> 00:53:52.350572 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 237ms)
+localhost_28003 -> 00:53:52.350631 raft.go:265: Nodo 3 inicia elección para mandato 299
+localhost_28003 -> 00:53:52.352296 raft.go:471: Nodo 3: respuesta de voto de 4: Term=299, VoteGranted=true
+localhost_28003 -> 00:53:52.352342 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 299
+localhost_28003 -> 00:53:52.397467 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{298 3 0 0}
+)
+localhost_28003 -> 00:53:52.397543 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{298 3 0 0}
+)
+localhost_28003 -> 00:53:52.397589 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{298 3 0 0}
+)
+localhost_28003 -> 00:53:52.551897 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{299 3 0 0}
+)
+localhost_28003 -> 00:53:52.551934 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{299 3 0 0}
+)
+localhost_28003 -> 00:53:52.551897 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{299 3 0 0}
+)
+localhost_28003 -> 00:53:52.588066 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 295ms)
+localhost_28003 -> 00:53:52.588110 raft.go:265: Nodo 3 inicia elección para mandato 300
+localhost_28003 -> 00:53:52.589193 raft.go:471: Nodo 3: respuesta de voto de 4: Term=300, VoteGranted=true
+localhost_28003 -> 00:53:52.589216 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 300
+localhost_28003 -> 00:53:52.751925 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 169ms)
+localhost_28003 -> 00:53:52.751963 raft.go:379: Nodo: 3 Vota por 4 en mandato 301
+localhost_28003 -> 00:53:52.789440 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{300 3 0 0}
+)
+localhost_28003 -> 00:53:52.789440 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{300 3 0 0}
+)
+localhost_28003 -> 00:53:52.789480 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{300 3 0 0}
+)
+localhost_28003 -> 00:53:52.921860 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 209ms)
+localhost_28003 -> 00:53:52.921908 raft.go:265: Nodo 3 inicia elección para mandato 302
+localhost_28003 -> 00:53:52.923020 raft.go:471: Nodo 3: respuesta de voto de 4: Term=302, VoteGranted=true
+localhost_28003 -> 00:53:52.923041 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 302
+localhost_28003 -> 00:53:53.084396 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 296ms)
+localhost_28003 -> 00:53:53.084431 raft.go:379: Nodo: 3 Vota por 4 en mandato 303
+localhost_28003 -> 00:53:53.123230 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{302 3 0 0}
+)
+localhost_28003 -> 00:53:53.123254 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{302 3 0 0}
+)
+localhost_28003 -> 00:53:53.123426 raft.go:466: Nodo 3: fallo al pedir voto a 0 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{302 3 0 0}
+)
+localhost_28003 -> 00:53:53.367163 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 184ms)
+localhost_28003 -> 00:53:53.367229 raft.go:379: Nodo: 3 Vota por 4 en mandato 304
+localhost_28003 -> 00:53:53.551295 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 184ms)
+localhost_28003 -> 00:53:53.551363 raft.go:265: Nodo 3 inicia elección para mandato 305
+localhost_28003 -> 00:53:53.552539 raft.go:471: Nodo 3: respuesta de voto de 4: Term=305, VoteGranted=true
+localhost_28003 -> 00:53:53.552659 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 305
+localhost_28003 -> 00:53:53.554883 raft.go:466: Nodo 3: fallo al pedir voto a 0 (unexpected EOF)
+localhost_28003 -> 00:53:53.735328 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 208ms)
+localhost_28003 -> 00:53:53.735378 raft.go:265: Nodo 3 inicia elección para mandato 306
+localhost_28003 -> 00:53:53.735909 raft.go:466: Nodo 3: fallo al pedir voto a 0 (dial tcp 127.0.0.1:28000: connect: connection refused)
+localhost_28003 -> 00:53:53.736444 raft.go:471: Nodo 3: respuesta de voto de 4: Term=306, VoteGranted=true
+localhost_28003 -> 00:53:53.736462 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 306
+localhost_28003 -> 00:53:53.752603 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{305 3 0 0}
+)
+localhost_28003 -> 00:53:53.752671 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{305 3 0 0}
+)
+localhost_28003 -> 00:53:53.925702 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 250ms)
+localhost_28003 -> 00:53:53.925732 raft.go:379: Nodo: 3 Vota por 4 en mandato 307
+localhost_28003 -> 00:53:53.936313 raft.go:466: Nodo 3: fallo al pedir voto a 1 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{306 3 0 0}
+)
+localhost_28003 -> 00:53:53.936317 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{306 3 0 0}
+)
+localhost_28003 -> 00:53:54.142465 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 290ms)
+localhost_28003 -> 00:53:54.142561 raft.go:379: Nodo: 3 Vota por 4 en mandato 308
+localhost_28003 -> 00:53:54.338020 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 167ms)
+localhost_28003 -> 00:53:54.338053 raft.go:379: Nodo: 3 Vota por 4 en mandato 309
+localhost_28003 -> 00:53:54.505059 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 237ms)
+localhost_28003 -> 00:53:54.505110 raft.go:265: Nodo 3 inicia elección para mandato 310
+localhost_28003 -> 00:53:54.505613 raft.go:466: Nodo 3: fallo al pedir voto a 0 (dial tcp 127.0.0.1:28000: connect: connection refused)
+localhost_28003 -> 00:53:54.506308 raft.go:471: Nodo 3: respuesta de voto de 4: Term=310, VoteGranted=true
+localhost_28003 -> 00:53:54.506329 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 310
+localhost_28003 -> 00:53:54.566417 raft.go:466: Nodo 3: fallo al pedir voto a 1 (unexpected EOF)
+localhost_28003 -> 00:53:54.668600 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 216ms)
+localhost_28003 -> 00:53:54.668732 raft.go:379: Nodo: 3 Vota por 4 en mandato 311
+localhost_28003 -> 00:53:54.706289 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{310 3 0 0}
+)
+localhost_28003 -> 00:53:54.885459 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 192ms)
+localhost_28003 -> 00:53:54.885497 raft.go:265: Nodo 3 inicia elección para mandato 312
+localhost_28003 -> 00:53:54.885853 raft.go:466: Nodo 3: fallo al pedir voto a 0 (dial tcp 127.0.0.1:28000: connect: connection refused)
+localhost_28003 -> 00:53:54.885939 raft.go:466: Nodo 3: fallo al pedir voto a 1 (dial tcp 127.0.0.1:28001: connect: connection refused)
+localhost_28003 -> 00:53:54.886296 raft.go:471: Nodo 3: respuesta de voto de 4: Term=312, VoteGranted=true
+localhost_28003 -> 00:53:54.886331 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 312
+localhost_28003 -> 00:53:55.070143 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 240ms)
+localhost_28003 -> 00:53:55.070188 raft.go:379: Nodo: 3 Vota por 4 en mandato 313
+localhost_28003 -> 00:53:55.087115 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{312 3 0 0}
+)
+localhost_28003 -> 00:53:55.310257 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 190ms)
+localhost_28003 -> 00:53:55.310299 raft.go:265: Nodo 3 inicia elección para mandato 314
+localhost_28003 -> 00:53:55.310691 raft.go:466: Nodo 3: fallo al pedir voto a 1 (dial tcp 127.0.0.1:28001: connect: connection refused)
+localhost_28003 -> 00:53:55.310705 raft.go:466: Nodo 3: fallo al pedir voto a 0 (dial tcp 127.0.0.1:28000: connect: connection refused)
+localhost_28003 -> 00:53:55.311315 raft.go:471: Nodo 3: respuesta de voto de 4: Term=314, VoteGranted=true
+localhost_28003 -> 00:53:55.311335 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 314
+localhost_28003 -> 00:53:55.463298 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 284ms)
+localhost_28003 -> 00:53:55.463325 raft.go:379: Nodo: 3 Vota por 4 en mandato 315
+localhost_28003 -> 00:53:55.511050 raft.go:466: Nodo 3: fallo al pedir voto a 2 (Timeout in CallTimeout with method: NodoRaft.PedirVoto, args: &{314 3 0 0}
+)
+localhost_28003 -> 00:53:55.655847 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 257ms)
+localhost_28003 -> 00:53:55.655882 raft.go:379: Nodo: 3 Vota por 4 en mandato 316
+localhost_28003 -> 00:53:55.883292 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 153ms)
+localhost_28003 -> 00:53:55.883329 raft.go:379: Nodo: 3 Vota por 4 en mandato 317
+localhost_28003 -> 00:53:56.037019 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 240ms)
+localhost_28003 -> 00:53:56.037076 raft.go:265: Nodo 3 inicia elección para mandato 318
+localhost_28003 -> 00:53:56.037392 raft.go:466: Nodo 3: fallo al pedir voto a 2 (dial tcp 127.0.0.1:28002: connect: connection refused)
+localhost_28003 -> 00:53:56.037414 raft.go:466: Nodo 3: fallo al pedir voto a 1 (dial tcp 127.0.0.1:28001: connect: connection refused)
+localhost_28003 -> 00:53:56.037706 raft.go:466: Nodo 3: fallo al pedir voto a 0 (dial tcp 127.0.0.1:28000: connect: connection refused)
+localhost_28003 -> 00:53:56.038835 raft.go:471: Nodo 3: respuesta de voto de 4: Term=318, VoteGranted=true
+localhost_28003 -> 00:53:56.038859 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 318
+localhost_28003 -> 00:53:56.243135 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 239ms)
+localhost_28003 -> 00:53:56.243160 raft.go:379: Nodo: 3 Vota por 4 en mandato 319
+localhost_28003 -> 00:53:56.482897 raft.go:135: [Nodo 3] Temporizador reiniciado (timeout: 229ms)
+localhost_28003 -> 00:53:56.482946 raft.go:265: Nodo 3 inicia elección para mandato 320
+localhost_28003 -> 00:53:56.483214 raft.go:466: Nodo 3: fallo al pedir voto a 0 (dial tcp 127.0.0.1:28000: connect: connection refused)
+localhost_28003 -> 00:53:56.483244 raft.go:466: Nodo 3: fallo al pedir voto a 1 (dial tcp 127.0.0.1:28001: connect: connection refused)
+localhost_28003 -> 00:53:56.483316 raft.go:466: Nodo 3: fallo al pedir voto a 2 (dial tcp 127.0.0.1:28002: connect: connection refused)
+localhost_28003 -> 00:53:56.483850 raft.go:471: Nodo 3: respuesta de voto de 4: Term=320, VoteGranted=true
+localhost_28003 -> 00:53:56.483877 raft.go:499: Nodo: 3 Recibido voto #2 en mandato 320

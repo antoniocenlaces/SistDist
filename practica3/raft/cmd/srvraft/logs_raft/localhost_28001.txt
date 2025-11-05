@@ -1,0 +1,84 @@
+localhost_28001 -> 00:52:54.295687 raft.go:181: logger initialized
+localhost_28001 -> 00:52:54.295861 raft.go:135: [Nodo 1] Temporizador reiniciado (timeout: 200ms)
+localhost_28001 -> 00:52:54.366926 raft.go:135: [Nodo 1] Temporizador reiniciado (timeout: 254ms)
+localhost_28001 -> 00:52:54.366959 raft.go:379: Nodo: 1 Vota por 0 en mandato 8
+localhost_28001 -> 00:52:54.539194 raft.go:135: [Nodo 1] Temporizador reiniciado (timeout: 287ms)
+localhost_28001 -> 00:52:54.539227 raft.go:379: Nodo: 1 Vota por 0 en mandato 9
+localhost_28001 -> 00:52:54.742511 raft.go:135: [Nodo 1] Temporizador reiniciado (timeout: 191ms)
+localhost_28001 -> 00:52:54.742553 raft.go:379: Nodo: 1 Vota por 0 en mandato 10
+localhost_28001 -> 00:52:54.933626 raft.go:135: [Nodo 1] Temporizador reiniciado (timeout: 238ms)
+localhost_28001 -> 00:52:54.933683 raft.go:265: Nodo 1 inicia elección para mandato 11
+localhost_28001 -> 00:52:54.933982 raft.go:466: Nodo 1: fallo al pedir voto a 2 (dial tcp 127.0.0.1:28002: connect: connection refused)
+localhost_28001 -> 00:52:54.934041 raft.go:466: Nodo 1: fallo al pedir voto a 3 (dial tcp 127.0.0.1:28003: connect: connection refused)
+localhost_28001 -> 00:52:54.934055 raft.go:466: Nodo 1: fallo al pedir voto a 4 (dial tcp 127.0.0.1:28004: connect: connection refused)
+localhost_28001 -> 00:52:54.934917 raft.go:471: Nodo 1: respuesta de voto de 0: Term=11, VoteGranted=true
+localhost_28001 -> 00:52:54.934937 raft.go:499: Nodo: 1 Recibido voto #2 en mandato 11
+localhost_28001 -> 00:52:55.172354 raft.go:135: [Nodo 1] Temporizador reiniciado (timeout: 150ms)
+localhost_28001 -> 00:52:55.172438 raft.go:265: Nodo 1 inicia elección para mandato 12
+localhost_28001 -> 00:52:55.172705 raft.go:466: Nodo 1: fallo al pedir voto a 3 (dial tcp 127.0.0.1:28003: connect: connection refused)
+localhost_28001 -> 00:52:55.172729 raft.go:466: Nodo 1: fallo al pedir voto a 4 (dial tcp 127.0.0.1:28004: connect: connection refused)
+localhost_28001 -> 00:52:55.172736 raft.go:466: Nodo 1: fallo al pedir voto a 2 (dial tcp 127.0.0.1:28002: connect: connection refused)
+localhost_28001 -> 00:52:55.173424 raft.go:471: Nodo 1: respuesta de voto de 0: Term=12, VoteGranted=true
+localhost_28001 -> 00:52:55.173451 raft.go:499: Nodo: 1 Recibido voto #2 en mandato 12
+localhost_28001 -> 00:52:55.322771 raft.go:135: [Nodo 1] Temporizador reiniciado (timeout: 190ms)
+localhost_28001 -> 00:52:55.322848 raft.go:265: Nodo 1 inicia elección para mandato 13
+localhost_28001 -> 00:52:55.323233 raft.go:466: Nodo 1: fallo al pedir voto a 4 (dial tcp 127.0.0.1:28004: connect: connection refused)
+localhost_28001 -> 00:52:55.323270 raft.go:466: Nodo 1: fallo al pedir voto a 2 (dial tcp 127.0.0.1:28002: connect: connection refused)
+localhost_28001 -> 00:52:55.323581 raft.go:466: Nodo 1: fallo al pedir voto a 3 (dial tcp 127.0.0.1:28003: connect: connection refused)
+localhost_28001 -> 00:52:55.323679 raft.go:471: Nodo 1: respuesta de voto de 0: Term=13, VoteGranted=true
+localhost_28001 -> 00:52:55.323693 raft.go:499: Nodo: 1 Recibido voto #2 en mandato 13
+localhost_28001 -> 00:52:55.506902 raft.go:135: [Nodo 1] Temporizador reiniciado (timeout: 173ms)
+localhost_28001 -> 00:52:55.506939 raft.go:379: Nodo: 1 Vota por 0 en mandato 14
+localhost_28001 -> 00:52:55.680730 raft.go:135: [Nodo 1] Temporizador reiniciado (timeout: 241ms)
+localhost_28001 -> 00:52:55.680801 raft.go:265: Nodo 1 inicia elección para mandato 15
+localhost_28001 -> 00:52:55.681088 raft.go:466: Nodo 1: fallo al pedir voto a 3 (dial tcp 127.0.0.1:28003: connect: connection refused)
+localhost_28001 -> 00:52:55.681144 raft.go:466: Nodo 1: fallo al pedir voto a 4 (dial tcp 127.0.0.1:28004: connect: connection refused)
+localhost_28001 -> 00:52:55.681163 raft.go:466: Nodo 1: fallo al pedir voto a 2 (dial tcp 127.0.0.1:28002: connect: connection refused)
+localhost_28001 -> 00:52:55.681655 raft.go:471: Nodo 1: respuesta de voto de 0: Term=15, VoteGranted=true
+localhost_28001 -> 00:52:55.681675 raft.go:499: Nodo: 1 Recibido voto #2 en mandato 15
+localhost_28001 -> 00:52:55.922255 raft.go:135: [Nodo 1] Temporizador reiniciado (timeout: 231ms)
+localhost_28001 -> 00:52:55.922329 raft.go:265: Nodo 1 inicia elección para mandato 16
+localhost_28001 -> 00:52:55.922593 raft.go:466: Nodo 1: fallo al pedir voto a 3 (dial tcp 127.0.0.1:28003: connect: connection refused)
+localhost_28001 -> 00:52:55.922656 raft.go:466: Nodo 1: fallo al pedir voto a 4 (dial tcp 127.0.0.1:28004: connect: connection refused)
+localhost_28001 -> 00:52:55.922670 raft.go:466: Nodo 1: fallo al pedir voto a 2 (dial tcp 127.0.0.1:28002: connect: connection refused)
+localhost_28001 -> 00:52:55.923135 raft.go:471: Nodo 1: respuesta de voto de 0: Term=16, VoteGranted=true
+localhost_28001 -> 00:52:55.923156 raft.go:499: Nodo: 1 Recibido voto #2 en mandato 16
+localhost_28001 -> 00:52:56.153654 raft.go:135: [Nodo 1] Temporizador reiniciado (timeout: 165ms)
+localhost_28001 -> 00:52:56.153710 raft.go:265: Nodo 1 inicia elección para mandato 17
+localhost_28001 -> 00:52:56.154032 raft.go:466: Nodo 1: fallo al pedir voto a 4 (dial tcp 127.0.0.1:28004: connect: connection refused)
+localhost_28001 -> 00:52:56.154111 raft.go:466: Nodo 1: fallo al pedir voto a 3 (dial tcp 127.0.0.1:28003: connect: connection refused)
+localhost_28001 -> 00:52:56.154136 raft.go:466: Nodo 1: fallo al pedir voto a 2 (dial tcp 127.0.0.1:28002: connect: connection refused)
+localhost_28001 -> 00:52:56.154703 raft.go:471: Nodo 1: respuesta de voto de 0: Term=17, VoteGranted=true
+localhost_28001 -> 00:52:56.154726 raft.go:499: Nodo: 1 Recibido voto #2 en mandato 17
+localhost_28001 -> 00:52:56.319072 raft.go:135: [Nodo 1] Temporizador reiniciado (timeout: 189ms)
+localhost_28001 -> 00:52:56.319129 raft.go:265: Nodo 1 inicia elección para mandato 18
+localhost_28001 -> 00:52:56.319410 raft.go:466: Nodo 1: fallo al pedir voto a 2 (dial tcp 127.0.0.1:28002: connect: connection refused)
+localhost_28001 -> 00:52:56.319604 raft.go:466: Nodo 1: fallo al pedir voto a 3 (dial tcp 127.0.0.1:28003: connect: connection refused)
+localhost_28001 -> 00:52:56.319724 raft.go:466: Nodo 1: fallo al pedir voto a 4 (dial tcp 127.0.0.1:28004: connect: connection refused)
+localhost_28001 -> 00:52:56.320078 raft.go:471: Nodo 1: respuesta de voto de 0: Term=18, VoteGranted=true
+localhost_28001 -> 00:52:56.320104 raft.go:499: Nodo: 1 Recibido voto #2 en mandato 18
+localhost_28001 -> 00:52:56.508469 raft.go:135: [Nodo 1] Temporizador reiniciado (timeout: 150ms)
+localhost_28001 -> 00:52:56.508525 raft.go:265: Nodo 1 inicia elección para mandato 19
+localhost_28001 -> 00:52:56.508839 raft.go:466: Nodo 1: fallo al pedir voto a 2 (dial tcp 127.0.0.1:28002: connect: connection refused)
+localhost_28001 -> 00:52:56.509049 raft.go:466: Nodo 1: fallo al pedir voto a 3 (dial tcp 127.0.0.1:28003: connect: connection refused)
+localhost_28001 -> 00:52:56.509160 raft.go:466: Nodo 1: fallo al pedir voto a 4 (dial tcp 127.0.0.1:28004: connect: connection refused)
+localhost_28001 -> 00:52:56.509486 raft.go:471: Nodo 1: respuesta de voto de 0: Term=19, VoteGranted=true
+localhost_28001 -> 00:52:56.509507 raft.go:499: Nodo: 1 Recibido voto #2 en mandato 19
+localhost_28001 -> 00:52:56.658865 raft.go:135: [Nodo 1] Temporizador reiniciado (timeout: 241ms)
+localhost_28001 -> 00:52:56.658932 raft.go:265: Nodo 1 inicia elección para mandato 20
+localhost_28001 -> 00:52:56.659252 raft.go:466: Nodo 1: fallo al pedir voto a 4 (dial tcp 127.0.0.1:28004: connect: connection refused)
+localhost_28001 -> 00:52:56.659280 raft.go:466: Nodo 1: fallo al pedir voto a 3 (dial tcp 127.0.0.1:28003: connect: connection refused)
+localhost_28001 -> 00:52:56.659291 raft.go:466: Nodo 1: fallo al pedir voto a 2 (dial tcp 127.0.0.1:28002: connect: connection refused)
+localhost_28001 -> 00:52:56.659839 raft.go:471: Nodo 1: respuesta de voto de 0: Term=20, VoteGranted=true
+localhost_28001 -> 00:52:56.659861 raft.go:499: Nodo: 1 Recibido voto #2 en mandato 20
+localhost_28001 -> 00:52:56.855942 raft.go:135: [Nodo 1] Temporizador reiniciado (timeout: 220ms)
+localhost_28001 -> 00:52:56.855986 raft.go:379: Nodo: 1 Vota por 0 en mandato 21
+localhost_28001 -> 00:52:57.076819 raft.go:135: [Nodo 1] Temporizador reiniciado (timeout: 199ms)
+localhost_28001 -> 00:52:57.076893 raft.go:265: Nodo 1 inicia elección para mandato 22
+localhost_28001 -> 00:52:57.077736 raft.go:471: Nodo 1: respuesta de voto de 0: Term=22, VoteGranted=true
+localhost_28001 -> 00:52:57.077743 raft.go:466: Nodo 1: fallo al pedir voto a 3 (dial tcp 127.0.0.1:28003: connect: connection refused)
+localhost_28001 -> 00:52:57.077752 raft.go:499: Nodo: 1 Recibido voto #2 en mandato 22
+localhost_28001 -> 00:52:57.077766 raft.go:466: Nodo 1: fallo al pedir voto a 4 (dial tcp 127.0.0.1:28004: connect: connection refused)
+localhost_28001 -> 00:52:57.078227 raft.go:471: Nodo 1: respuesta de voto de 2: Term=22, VoteGranted=true
+localhost_28001 -> 00:52:57.078249 raft.go:499: Nodo: 1 Recibido voto #3 en mandato 22
+localhost_28001 -> 00:52:57.078254 raft.go:506: Nodo: 1 Es elegido LIDER en mandato 22

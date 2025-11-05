@@ -112,10 +112,10 @@ type NodoRaft struct {
 	// más alto conocido a ser replicado en ese servidor
 
 	// Estado temporal (no persistente)
-	role          state         // "Follower", "Candidate", "Leader"
-	votesReceived int           // votos durante elección
-	electionReset time.Duration // última vez que recibió mensaje válido
-	timer         *time.Timer   // para gestionar timeout de elecciones
+	role          state // "Follower", "Candidate", "Leader"
+	votesReceived int   // votos durante elección
+	// electionReset time.Duration // última vez que recibió mensaje válido
+	timer *time.Timer // para gestionar timeout de elecciones
 	// Canal para aplicar operaciones comprometidas a la máquina de estados
 	canalAplicarOperacion chan AplicaOperacion
 }
@@ -132,7 +132,7 @@ func (nr *NodoRaft) resetTimer() {
 	} else {
 		nr.timer.Reset(dur)
 	}
-	nr.Logger.Printf("[Nodo %d] Temporizador reiniciado (timeout: %v)", nr.Yo, nr.electionReset)
+	nr.Logger.Printf("[Nodo %d] Temporizador reiniciado (timeout: %v)", nr.Yo, dur)
 }
 
 // Creacion de un nuevo nodo de eleccion
