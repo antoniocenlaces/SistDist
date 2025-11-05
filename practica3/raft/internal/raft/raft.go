@@ -59,6 +59,8 @@ const (
 	ceilTimer = 300
 	// Timeout de la llamada RPC en ms (ajustar al entorno donde se ejecuta)
 	rpcTimeout = 200
+	// tiempo entre latidos enviados por el líder (ms)
+	heartbeatRate = 50
 	// definición de estados del servidor
 	Follower state = iota
 	Candidate
@@ -92,9 +94,9 @@ type NodoRaft struct {
 	//
 
 	// Estado persistente en todos los nodos
-	currentTerm int               // último mandato visto por el nodo. 0 al inicializar.
-	votedFor    int               // candidato que recibió mi voto en mandato actual
-	logEntries  []AplicaOperacion // registro de entradas en máquina estados
+	currentTerm int                // último mandato visto por el nodo. 0 al inicializar.
+	votedFor    int                // candidato que recibió mi voto en mandato actual
+	logEntries  []*AplicaOperacion // registro de entradas en máquina estados
 
 	// Estado volatil
 	commitIndex int // índice de la mayor entrada en logEntries que ha de ser
@@ -183,7 +185,7 @@ func NuevoNodo(nodos []rpctimeout.HostPort, yo int,
 
 	nr.currentTerm = 0
 	nr.votedFor = IntNOINICIALIZADO
-	nr.logEntries = make([]AplicaOperacion, 0)
+	nr.logEntries = make([]*AplicaOperacion, 0)
 
 	nr.commitIndex = 0
 	nr.lastApplied = 0
@@ -388,7 +390,7 @@ type ArgAppendEntries struct {
 }
 
 type Results struct {
-	Term    int  // mandato actaual del follower
+	Term    int  // mandato actual del follower
 	Success bool // true si el follower acepta la entrada (o latido)
 }
 
@@ -407,6 +409,7 @@ func (nr *NodoRaft) AppendEntries(args *ArgAppendEntries,
 		return nil
 	}
 	// si llega de mandato igual o superior al mío, me actualizo y acepto la entrada
+	// por ahora solo llegarán latidos
 	if args.Term >= nr.currentTerm {
 		nr.currentTerm = args.Term
 		nr.role = Follower
@@ -513,5 +516,46 @@ func (nr *NodoRaft) tratarRespuestaVoto(reply RespuestaPeticionVoto) {
 }
 
 func (nr *NodoRaft) enviarLatido() {
+	// repeater usa time.NewTicker para crear evento repetitivo
+	repeater := time.NewTicker(heartbeatRate * time.Millisecond)
+	defer repeater.Stop()
+	// mientras sea líder envía latidos a todos los nodos
+	for {
+		nr.Mux.Lock()
+		// si deja de ser líder para los latidos
+		if nr.role != Leader {
+			nr.Mux.Unlock()
+			return
+		}
+		// crea args para enivar el latido dentro de bucle
+		// para reflejar si cambia el mandato en esa ejecución del bucle
+		args := ArgAppendEntries{
+			Term:     nr.currentTerm,
+			IdLeader: nr.Yo,
+		}
+		// bucle para enviar a todos los nodos
+		for node, peer := range nr.Nodos {
+			if node != nr.Yo {
+				go func(peer rpctimeout.HostPort, node int, args ArgAppendEntries) {
+					reply := Results{}
+					err := peer.CallTimeout("NodoRaft.AppendEntries", &args, &reply,
+						rpcTimeout*time.Millisecond)
+					if err != nil && reply.Term > nr.currentTerm {
+						// hay un nodo con mandato superior => Follower
+						nr.Mux.Lock()
+						nr.currentTerm = reply.Term
+						nr.role = Follower
+						nr.votedFor = IntNOINICIALIZADO
+						nr.IdLider = IntNOINICIALIZADO
+						nr.resetTimer()
+						nr.Mux.Unlock()
+					}
+				}(peer, node, args)
+			}
+		}
+		nr.Mux.Lock()
+		// espera a que transcurra heartbeatRate ms y llegará señal
+		<-repeater.C
+	}
 
 }
