@@ -1,0 +1,6 @@
+localhost_28000 -> 18:57:08.587702 raft.go:158: logger initialized
+localhost_28000 -> 18:57:11.090642 raft.go:240: [0] Comienza elección en término 1
+localhost_28000 -> 18:57:11.091754 raft.go:307: [0] *** Soy líder en término 1 ***
+localhost_28000 -> 18:57:13.588880 main.go:55: Nodo 0 intenta descubrir el líder actual...
+localhost_28000 -> 18:57:13.589568 main.go:70: Líder actual detectado: nodo 0
+localhost_28000 -> 18:57:13.590964 main.go:94: Respuesta de líder 0: índice=1 mandato=1 EsLider=true IdLider=0 Valor=''

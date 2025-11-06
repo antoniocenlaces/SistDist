@@ -1,0 +1,51 @@
+/ Metodo de tratamiento de llamadas RPC AppendEntries
+// func (nr *NodoRaft) AppendEntries(args *ArgAppendEntries, results *Results) error {
+// 	nr.Mux.Lock()
+// 	defer nr.Mux.Unlock()
+
+// 	results.Success = false
+// 	results.Term = nr.currentTerm
+
+// 	// 1 Si el líder remoto tiene mandato menor, rechazamos
+// 	if args.Term < nr.currentTerm {
+// 		nr.Logger.Printf("Nodo %d rechaza AppendEntries de %d (mandato %d < %d)",
+// 			nr.Yo, args.IdLeader, args.Term, nr.currentTerm)
+// 		return nil
+// 	}
+
+// 	// 2️ Si llega un mandato mayor, me actualizo
+// 	if args.Term > nr.currentTerm {
+// 		nr.currentTerm = args.Term
+// 		nr.votedFor = IntNOINICIALIZADO
+// 		nr.role = Follower
+// 		nr.IdLider = args.IdLeader
+// 	}
+
+// 	// 4️ Es un AppendEntries válido desde el líder actual o igual mandato
+// 	nr.electionReset = time.Now()
+// 	nr.resetTimer()
+// 	nr.role = Follower
+// 	nr.IdLider = args.IdLeader
+
+// 	// 5️ Comprobar coherencia del log
+// 	if args.PrevLogIndex > nr.lastLogIndex() ||
+// 		(args.PrevLogIndex > 0 && nr.logEntries[args.PrevLogIndex].Term != args.PrevLogTerm) {
+// 		nr.Logger.Printf("Nodo %d inconsistencia de log con líder %d: PrevLogIndex=%d PrevLogTerm=%d (local len=%d)",
+// 			nr.Yo, args.IdLeader, args.PrevLogIndex, args.PrevLogTerm, len(nr.logEntries))
+// 		return nil
+// 	}
+
+// 	// 6️ Eliminar entradas en conflicto y añadir nuevas
+// 	nr.logEntries = nr.logEntries[:args.PrevLogIndex+1]
+// 	nr.logEntries = append(nr.logEntries, args.Entries...)
+
+// 	// 7️ Actualizar commitIndex
+// 	if args.LeaderCommit > nr.commitIndex {
+// 		nr.commitIndex = min(args.LeaderCommit, len(nr.logEntries)-1)
+// 		go nr.aplicarEntradas()
+// 	}
+
+// 	results.Success = true
+// 	results.Term = nr.currentTerm
+// 	return nil
+// }

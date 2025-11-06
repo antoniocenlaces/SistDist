@@ -1,0 +1,16 @@
+localhost_28001 -> 18:57:08.943268 raft.go:158: logger initialized
+localhost_28001 -> 18:57:11.091439 raft.go:292: [1] Paso a follower, término=1, líder=0
+localhost_28001 -> 18:57:44.981089 raft.go:240: [1] Comienza elección en término 2
+localhost_28001 -> 18:57:44.981578 raft.go:642: [1] RPC PedirVoto a 0 ERROR: dial tcp 127.0.0.1:28000: connect: connection refused
+localhost_28001 -> 18:57:44.982207 raft.go:307: [1] *** Soy líder en término 2 ***
+localhost_28001 -> 18:57:44.982366 raft.go:654: [1] RPC AppendEntries a 0 ERROR: dial tcp 127.0.0.1:28000: connect: connection refused
+localhost_28001 -> 18:57:45.033360 raft.go:654: [1] RPC AppendEntries a 0 ERROR: dial tcp 127.0.0.1:28000: connect: connection refused
+localhost_28001 -> 18:57:45.084370 raft.go:654: [1] RPC AppendEntries a 0 ERROR: dial tcp 127.0.0.1:28000: connect: connection refused
+localhost_28001 -> 18:57:45.135632 raft.go:654: [1] RPC AppendEntries a 0 ERROR: dial tcp 127.0.0.1:28000: connect: connection refused
+localhost_28001 -> 18:57:45.186704 raft.go:654: [1] RPC AppendEntries a 0 ERROR: dial tcp 127.0.0.1:28000: connect: connection refused
+localhost_28001 -> 18:57:45.237726 raft.go:654: [1] RPC AppendEntries a 0 ERROR: dial tcp 127.0.0.1:28000: connect: connection refused
+localhost_28001 -> 18:57:45.288668 raft.go:654: [1] RPC AppendEntries a 0 ERROR: dial tcp 127.0.0.1:28000: connect: connection refused
+localhost_28001 -> 18:57:45.339656 raft.go:654: [1] RPC AppendEntries a 0 ERROR: dial tcp 127.0.0.1:28000: connect: connection refused
+localhost_28001 -> 18:57:45.390877 raft.go:654: [1] RPC AppendEntries a 0 ERROR: dial tcp 127.0.0.1:28000: connect: connection refused
+localhost_28001 -> 18:57:45.441924 raft.go:654: [1] RPC AppendEntries a 0 ERROR: dial tcp 127.0.0.1:28000: connect: connection refused
+localhost_28001 -> 18:57:45.493095 raft.go:654: [1] RPC AppendEntries a 0 ERROR: dial tcp 127.0.0.1:28000: connect: connection refused

@@ -1,0 +1,12 @@
+localhost_28002 -> 18:57:09.460866 raft.go:158: logger initialized
+localhost_28002 -> 18:57:11.091340 raft.go:292: [2] Paso a follower, término=1, líder=0
+localhost_28002 -> 18:57:44.981981 raft.go:292: [2] Paso a follower, término=2, líder=1
+localhost_28002 -> 18:57:45.788833 raft.go:240: [2] Comienza elección en término 3
+localhost_28002 -> 18:57:45.789131 raft.go:642: [2] RPC PedirVoto a 0 ERROR: dial tcp 127.0.0.1:28000: connect: connection refused
+localhost_28002 -> 18:57:45.789206 raft.go:642: [2] RPC PedirVoto a 1 ERROR: dial tcp 127.0.0.1:28001: connect: connection refused
+localhost_28002 -> 18:57:46.041152 raft.go:240: [2] Comienza elección en término 4
+localhost_28002 -> 18:57:46.041400 raft.go:642: [2] RPC PedirVoto a 1 ERROR: dial tcp 127.0.0.1:28001: connect: connection refused
+localhost_28002 -> 18:57:46.041412 raft.go:642: [2] RPC PedirVoto a 0 ERROR: dial tcp 127.0.0.1:28000: connect: connection refused
+localhost_28002 -> 18:57:46.257437 raft.go:240: [2] Comienza elección en término 5
+localhost_28002 -> 18:57:46.257723 raft.go:642: [2] RPC PedirVoto a 0 ERROR: dial tcp 127.0.0.1:28000: connect: connection refused
+localhost_28002 -> 18:57:46.257763 raft.go:642: [2] RPC PedirVoto a 1 ERROR: dial tcp 127.0.0.1:28001: connect: connection refused
