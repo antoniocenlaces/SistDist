@@ -37,6 +37,12 @@ func main() {
 	// nr := raft.NuevoNodo(nodos, me, make(chan raft.AplicaOperacion, 1000))
 	// rpc := rpc.NewServer()
 	canalAplicar := make(chan raft.AplicaOperacion, 1000)
+	// --- Monitorear operaciones aplicadas ---
+	go func() {
+		for ap := range canalAplicar {
+			fmt.Printf("[Nodo %d] Aplicada operación: %+v\n", me, ap)
+		}
+	}()
 	nr := raft.NuevoNodo(nodos, me, canalAplicar)
 	rpc.Register(nr)
 
@@ -94,13 +100,6 @@ func main() {
 		nr.Logger.Printf("Respuesta de líder %d: índice=%d mandato=%d EsLider=%v IdLider=%d Valor='%s'\n",
 			liderIdx, res.IndiceRegistro, res.Mandato, res.EsLider, res.IdLider, res.ValorADevolver)
 	}
-
-	// --- Monitorear operaciones aplicadas ---
-	go func() {
-		for ap := range canalAplicar {
-			fmt.Printf("[Nodo %d] Aplicada operación: %+v\n", me, ap)
-		}
-	}()
 
 	select {} // no termina
 

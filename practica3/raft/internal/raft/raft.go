@@ -372,8 +372,10 @@ func (nr *NodoRaft) applyCommittedEntriesLocked() {
 	nr.lastApplied = end
 
 	// Enviar por el canal fuera de la sección crítica
+
 	go func(ops []AplicaOperacion) {
 		for _, op := range ops {
+			nr.Logger.Printf("Nodo %d Mando aplicar %v", nr.Yo, op)
 			nr.canalAplicarOperacion <- op
 		}
 	}(applies)
