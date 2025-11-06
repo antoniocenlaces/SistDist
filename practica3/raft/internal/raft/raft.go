@@ -115,18 +115,28 @@ type NodoRaft struct {
 	role          state // "Follower", "Candidate", "Leader"
 	votesReceived int   // votos durante elección
 	// electionReset time.Duration // última vez que recibió mensaje válido
-	timer *time.Timer // para gestionar timeout de elecciones
-	rng   *rand.Rand  // para usar una semilla diferente para cada nodo
+	timer                    *time.Timer // para gestionar timeout de elecciones
+	rng                      *rand.Rand  // para usar una semilla diferente para cada nodo
+	initialElectionDelayUsed bool        // retardo de primera elección mayor
 	// Canal para aplicar operaciones comprometidas a la máquina de estados
 	canalAplicarOperacion chan AplicaOperacion
 }
 
+// PRE: nr.Mux debe estar bloqueado por quien realiza la llamada
+// POST:
 // resetTimer reinicia el temporizador de elección del nodo.
 // Cancela el temporizador anterior (si existe) y programa uno nuevo
-// con una duración aleatoria en el rango [150ms, 300ms].
+// con una duración aleatoria en el rango [baseTimer, ceilTimer].
+// la primera vez que se llama inicia con un timer entre 1000 y 1500 ms
 func (nr *NodoRaft) resetTimer() {
-	// Duración aleatoria para evitar colisiones simultáneas de elección
-	dur := time.Duration(baseTimer+nr.rng.Intn(ceilTimer-baseTimer)) * time.Millisecond
+	var dur time.Duration
+	if !nr.initialElectionDelayUsed { // primera vez el retardo es mayor: espera resto de nodos
+		nr.initialElectionDelayUsed = true
+		dur = time.Duration(1000+nr.rng.Intn(500)) * time.Millisecond
+	} else {
+		// Duración aleatoria para evitar colisiones simultáneas de elección
+		dur = time.Duration(baseTimer+nr.rng.Intn(ceilTimer-baseTimer)) * time.Millisecond
+	}
 	// para evitar condiciones de carrera solo lanzamos AfterFunc() si no hay timer
 	if nr.timer == nil {
 		nr.timer = time.AfterFunc(dur, nr.iniciarEleccion)
@@ -197,7 +207,7 @@ func NuevoNodo(nodos []rpctimeout.HostPort, yo int,
 
 	nr.role = Follower
 	nr.votesReceived = 0
-
+	nr.initialElectionDelayUsed = false
 	nr.resetTimer()
 
 	return nr
@@ -258,7 +268,7 @@ func (nr *NodoRaft) someterOperacion(operacion TipoOperacion) (int, int,
 
 func (nr *NodoRaft) iniciarEleccion() {
 	nr.Mux.Lock()
-	if nr.role != Follower { // solo un seguidor lanza nueva elección
+	if nr.role == Leader { // solo los líderes no lanzan nueva elección
 		nr.Mux.Unlock()
 		return
 	}
@@ -519,11 +529,11 @@ func (nr *NodoRaft) tratarRespuestaVoto(reply RespuestaPeticionVoto) {
 			if nr.timer != nil {
 				nr.timer.Stop()
 			}
+			// AQUI se debe comenzar a enviar latidos a los otros nodos
+			go nr.enviarLatido()
+			nr.Logger.Printf("Nodo: %d en mandato %d ha iniciado envío de latidos\n",
+				nr.Yo, nr.currentTerm)
 		}
-		// AQUI se debe comenzar a enviar latidos a los otros nodos
-		go nr.enviarLatido()
-		nr.Logger.Printf("Nodo: %d en mandato %d ha iniciado envío de latidos\n",
-			nr.Yo, nr.currentTerm)
 	}
 }
 

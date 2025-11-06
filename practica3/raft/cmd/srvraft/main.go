@@ -11,7 +11,6 @@ import (
 	"raft/internal/comun/rpctimeout"
 	"raft/internal/raft"
 	"strconv"
-	"time"
 )
 
 func main() {
@@ -27,12 +26,12 @@ func main() {
 	}
 
 	// Parte Servidor
-	switch me {
-	case 0:
-		time.Sleep(1500 * time.Millisecond)
-	case 1:
-		time.Sleep(1000 * time.Millisecond)
-	}
+	// switch me {
+	// case 0:
+	// 	time.Sleep(200 * time.Millisecond)
+	// case 1:
+	// 	time.Sleep(100 * time.Millisecond)
+	// }
 	nr := raft.NuevoNodo(nodos, me, make(chan raft.AplicaOperacion, 1000))
 	// rpc := rpc.NewServer()
 	rpc.Register(nr)
