@@ -1,3 +1,0 @@
-localhost_28001 -> 19:15:47.174189 raft.go:158: logger initialized
-localhost_28001 -> 19:15:49.363428 raft.go:292: [1] Paso a follower, término=1, líder=0
-localhost_28001 -> 19:15:51.880734 raft.go:378: Nodo 1 Mando aplicar {1 {escribir x valor551}}
