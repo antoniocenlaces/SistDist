@@ -27,9 +27,14 @@ func main() {
 	}
 
 	// Parte Servidor
-	time.Sleep(30000 * time.Millisecond)
+	switch me {
+	case 0:
+		time.Sleep(1500 * time.Millisecond)
+	case 1:
+		time.Sleep(1000 * time.Millisecond)
+	}
 	nr := raft.NuevoNodo(nodos, me, make(chan raft.AplicaOperacion, 1000))
-	rpc := rpc.NewServer()
+	// rpc := rpc.NewServer()
 	rpc.Register(nr)
 
 	fmt.Println("Replica escucha en :", me, " de ", os.Args[2:])

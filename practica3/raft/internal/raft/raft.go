@@ -50,17 +50,17 @@ const (
 	kEnableDebugLogs = true
 
 	// Poner a true para logear a stdout en lugar de a fichero
-	kLogToStdout = false
+	kLogToStdout = true
 
 	// Cambiar esto para salida de logs en un directorio diferente
 	kLogOutputDir = "./logs_raft/"
 	// base y techo del timer para nueva elección (ms)
-	baseTimer = 150
-	ceilTimer = 300
+	baseTimer = 200
+	ceilTimer = 600
 	// Timeout de la llamada RPC en ms (ajustar al entorno donde se ejecuta)
 	rpcTimeout = 200
 	// tiempo entre latidos enviados por el líder (ms)
-	heartbeatRate = 50
+	heartbeatRate = 80
 	// definición de estados del servidor
 	Follower state = iota
 	Candidate
@@ -116,6 +116,7 @@ type NodoRaft struct {
 	votesReceived int   // votos durante elección
 	// electionReset time.Duration // última vez que recibió mensaje válido
 	timer *time.Timer // para gestionar timeout de elecciones
+	rng   *rand.Rand  // para usar una semilla diferente para cada nodo
 	// Canal para aplicar operaciones comprometidas a la máquina de estados
 	canalAplicarOperacion chan AplicaOperacion
 }
@@ -125,7 +126,7 @@ type NodoRaft struct {
 // con una duración aleatoria en el rango [150ms, 300ms].
 func (nr *NodoRaft) resetTimer() {
 	// Duración aleatoria para evitar colisiones simultáneas de elección
-	dur := time.Duration(baseTimer+rand.Intn(ceilTimer-baseTimer)) * time.Millisecond
+	dur := time.Duration(baseTimer+nr.rng.Intn(ceilTimer-baseTimer)) * time.Millisecond
 	// para evitar condiciones de carrera solo lanzamos AfterFunc() si no hay timer
 	if nr.timer == nil {
 		nr.timer = time.AfterFunc(dur, nr.iniciarEleccion)
@@ -155,6 +156,7 @@ func NuevoNodo(nodos []rpctimeout.HostPort, yo int,
 	nr.Nodos = nodos
 	nr.Yo = yo
 	nr.IdLider = -1
+	nr.rng = rand.New(rand.NewSource(time.Now().UnixNano() + int64(nr.Yo)))
 
 	if kEnableDebugLogs {
 		nombreNodo := nodos[yo].Host() + "_" + nodos[yo].Port()
@@ -256,20 +258,29 @@ func (nr *NodoRaft) someterOperacion(operacion TipoOperacion) (int, int,
 
 func (nr *NodoRaft) iniciarEleccion() {
 	nr.Mux.Lock()
+	if nr.role != Follower { // solo un seguidor lanza nueva elección
+		nr.Mux.Unlock()
+		return
+	}
 	// incrementa mandato para esta nueva elección
 	nr.currentTerm++
 	nr.votedFor = nr.Yo
 	nr.votesReceived = 1 // voto por mí mismo
 	nr.role = Candidate
 	nr.resetTimer() // para evitar que vuelva a dispararse elección
+	// copia de los valores que necesito antes de liberar Mutex
+	currentTerm := nr.currentTerm
+	yo := nr.Yo
+	nodos := append([]rpctimeout.HostPort(nil), nr.Nodos...)
+	nr.Mux.Unlock()
 	nr.Logger.Printf("Nodo %d inicia elección para mandato %d\n", nr.Yo, nr.currentTerm)
 
 	args := ArgsPeticionVoto{
-		Term:        nr.currentTerm,
-		CandidateId: nr.Yo,
+		Term:        currentTerm,
+		CandidateId: yo,
 	}
-	for node, peer := range nr.Nodos {
-		if node == nr.Yo {
+	for node, peer := range nodos {
+		if node == yo {
 			continue
 		}
 		go func(peer rpctimeout.HostPort, node int) {
@@ -280,7 +291,6 @@ func (nr *NodoRaft) iniciarEleccion() {
 			}
 		}(peer, node)
 	}
-	nr.Mux.Unlock()
 }
 
 // -----------------------------------------------------------------------
@@ -512,6 +522,8 @@ func (nr *NodoRaft) tratarRespuestaVoto(reply RespuestaPeticionVoto) {
 		}
 		// AQUI se debe comenzar a enviar latidos a los otros nodos
 		go nr.enviarLatido()
+		nr.Logger.Printf("Nodo: %d en mandato %d ha iniciado envío de latidos\n",
+			nr.Yo, nr.currentTerm)
 	}
 }
 
@@ -536,11 +548,13 @@ func (nr *NodoRaft) enviarLatido() {
 		// bucle para enviar a todos los nodos
 		for node, peer := range nr.Nodos {
 			if node != nr.Yo {
+				nr.Logger.Printf("Nodo: %d en mandato %d se prepara a enivar latido a nodo %d\n",
+					nr.Yo, nr.currentTerm, node)
 				go func(peer rpctimeout.HostPort, node int, args ArgAppendEntries) {
 					reply := Results{}
 					err := peer.CallTimeout("NodoRaft.AppendEntries", &args, &reply,
 						rpcTimeout*time.Millisecond)
-					if err != nil && reply.Term > nr.currentTerm {
+					if err == nil && reply.Term > nr.currentTerm {
 						// hay un nodo con mandato superior => Follower
 						nr.Mux.Lock()
 						nr.currentTerm = reply.Term
@@ -549,11 +563,13 @@ func (nr *NodoRaft) enviarLatido() {
 						nr.IdLider = IntNOINICIALIZADO
 						nr.resetTimer()
 						nr.Mux.Unlock()
+						nr.Logger.Printf("Nodo: %d ha recibido respuesta a latido de nodo %d que está en mandato superior %d\n",
+							nr.Yo, node, reply.Term)
 					}
 				}(peer, node, args)
 			}
 		}
-		nr.Mux.Lock()
+		nr.Mux.Unlock()
 		// espera a que transcurra heartbeatRate ms y llegará señal
 		<-repeater.C
 	}
