@@ -346,6 +346,37 @@ func (nr *NodoRaft) tryAdvanceCommitIndexLocked() {
 			break
 		}
 	}
+	// APLICAR entradas comprometidas recién alcanzadas
+	nr.applyCommittedEntriesLocked()
+}
+
+// Aplica en la máquina de estados (vía canalAplicarOperacion) todas las
+// entradas comprometidas que aún no han sido aplicadas.
+// Debe llamarse SIEMPRE con el mutex tomado.
+func (nr *NodoRaft) applyCommittedEntriesLocked() {
+	if nr.lastApplied >= nr.commitIndex {
+		return
+	}
+
+	start := nr.lastApplied + 1
+	end := nr.commitIndex
+
+	// Preparamos fuera del candado qué operaciones enviar
+	applies := make([]AplicaOperacion, 0, end-start+1)
+	for i := start; i <= end; i++ {
+		applies = append(applies, AplicaOperacion{
+			Indice:    i,
+			Operacion: nr.logEntries[i].Operacion,
+		})
+	}
+	nr.lastApplied = end
+
+	// Enviar por el canal fuera de la sección crítica
+	go func(ops []AplicaOperacion) {
+		for _, op := range ops {
+			nr.canalAplicarOperacion <- op
+		}
+	}(applies)
 }
 
 // Empuja log a un peer: maneja conflictos (retrocede nextIndex) y reintenta
@@ -398,7 +429,7 @@ func (nr *NodoRaft) pushLogToPeer(peer int) {
 				nr.matchIndex[peer] = args.PrevLogIndex + len(entries)
 				nr.nextIndex[peer] = nr.matchIndex[peer] + 1
 			}
-			// Intentar avanzar commit con la nueva mayoría
+			// Intentar avanzar commit con la nueva mayoría (y aplicar)
 			nr.tryAdvanceCommitIndexLocked()
 			nr.Mux.Unlock()
 			return
@@ -459,11 +490,9 @@ func (nr *NodoRaft) someterOperacion(operacion TipoOperacion) (int, int, bool, i
 	}
 	wg.Wait()
 
-	// 3) Intentar avanzar commit por mayoría
-
+	// 3) Intentar avanzar commit por mayoría (y aplicar)
 	nr.Mux.Lock()
 	nr.tryAdvanceCommitIndexLocked()
-	nr.canalAplicarOperacion <- AplicaOperacion{Indice: index + 1, Operacion: operacion}
 	nr.Mux.Unlock()
 
 	return index, term, true, leaderId, ""
@@ -616,7 +645,7 @@ func (nr *NodoRaft) AppendEntries(args *ArgAppendEntries, results *Results) erro
 		nr.logEntries = append(nr.logEntries, args.Entries[i])
 	}
 
-	// 5) Actualizar commitIndex (sin aplicar a SM en práctica 3)
+	// 5) Actualizar commitIndex (y aplicar a SM)
 	if args.LeaderCommit > nr.commitIndex {
 		lastNew := nr.lastLogIndex()
 		if args.LeaderCommit < lastNew {
@@ -624,6 +653,8 @@ func (nr *NodoRaft) AppendEntries(args *ArgAppendEntries, results *Results) erro
 		} else {
 			nr.commitIndex = lastNew
 		}
+		// aplicar lo que acaba de quedar comprometido
+		nr.applyCommittedEntriesLocked()
 	}
 
 	results.Success = true
