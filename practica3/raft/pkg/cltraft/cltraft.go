@@ -92,13 +92,18 @@ func main() {
 			Clave:     "x",
 			Valor:     fmt.Sprintf("valor%d", time.Now().Unix()%1000),
 		}
-
+		claves := []string{"a", "b", "c", "d", "e"}
 		var res raft.ResultadoRemoto
-		err = client.Call("NodoRaft.SometerOperacionRaft", op, &res)
-		check.CheckError(err, "Error en llamada SometerOperacionRaft:")
+		for i := 0; i < 5; i++ {
+			op.Clave = claves[i]
+			op.Valor = fmt.Sprintf("valor%d", time.Now().Unix()%1000)
+			err = client.Call("NodoRaft.SometerOperacionRaft", op, &res)
+			check.CheckError(err, "Error en llamada SometerOperacionRaft:")
 
-		nr.Logger.Printf("Respuesta de líder %d: índice=%d mandato=%d EsLider=%v IdLider=%d Valor='%s'\n",
-			liderIdx, res.IndiceRegistro, res.Mandato, res.EsLider, res.IdLider, res.ValorADevolver)
+			nr.Logger.Printf("Respuesta de líder %d: índice=%d mandato=%d EsLider=%v IdLider=%d Valor='%s'\n",
+				liderIdx, res.IndiceRegistro, res.Mandato, res.EsLider, res.IdLider, res.ValorADevolver)
+			time.Sleep(1000 * time.Millisecond)
+		}
 	}
 
 	select {} // no termina
