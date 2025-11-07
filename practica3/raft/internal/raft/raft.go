@@ -135,6 +135,7 @@ func (nr *NodoRaft) resetElectionTimerLocked() {
 
 // --- Creación de un nuevo nodo de elección ---
 func NuevoNodo(nodos []rpctimeout.HostPort, yo int, canalAplicarOperacion chan AplicaOperacion) *NodoRaft {
+	fmt.Printf("[Nodo %d] inicia NuevoNodo\n", yo)
 	nr := &NodoRaft{}
 	nr.Nodos = nodos
 	nr.Yo = yo
@@ -176,7 +177,7 @@ func NuevoNodo(nodos []rpctimeout.HostPort, yo int, canalAplicarOperacion chan A
 	nr.canalAplicarOperacion = canalAplicarOperacion
 
 	nr.resetElectionTimerLocked() // inicializa electionReset y el timer
-
+	fmt.Printf("[Nodo %d] creado. Inicia goroutinas run() runWatchdog\n", yo)
 	// Gorutina principal: gestiona timeout de elección y latidos
 	go nr.run()
 	go nr.runWatchdog()
