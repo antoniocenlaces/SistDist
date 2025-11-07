@@ -44,10 +44,10 @@ const (
 	kLogOutputDir = "./logs_raft/"
 
 	// Intervalos de temporización (ajustables)
-	electionMinMs     = 150 // recomendado 150–300ms
-	electionMaxMs     = 300
-	heartbeatInterval = 50 // latido del líder
-	rpcTimeoutMs      = 80 // timeout por RPC (ajustad a vuestro entorno)
+	electionMinMs     = 500 // recomendado 150–300ms
+	electionMaxMs     = 800
+	heartbeatInterval = 166 // latido del líder
+	rpcTimeoutMs      = 200 // timeout por RPC (ajustad a vuestro entorno)
 )
 
 // Tipo de operación que expone la máquina de estados (clave/valor)
