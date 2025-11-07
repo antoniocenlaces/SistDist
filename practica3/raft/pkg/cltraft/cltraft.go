@@ -1,4 +1,4 @@
-package cltraft
+package main
 
 import (
 	//"errors"

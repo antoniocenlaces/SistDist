@@ -1,0 +1,80 @@
+localhost_29280 -> 13:53:54.497268 raft.go:158: logger initialized
+localhost_29280 -> 13:53:56.998058 raft.go:240: [0] Comienza elección en término 1
+localhost_29280 -> 13:53:56.999337 raft.go:307: [0] *** Soy líder en término 1 ***
+localhost_29280 -> 13:53:59.499204 cltraft.go:61: Nodo 0 intenta descubrir el líder actual...
+localhost_29280 -> 13:53:59.499928 cltraft.go:76: Líder actual detectado: nodo 0
+localhost_29280 -> 13:53:59.501031 raft.go:378: Nodo 0 Mando aplicar {1 {escribir x valor639}}
+localhost_29280 -> 13:53:59.501381 cltraft.go:100: Respuesta de líder 0: índice=1 mandato=1 EsLider=true IdLider=0 Valor=''
+localhost_29280 -> 13:54:04.079027 raft.go:687: [0] RPC AppendEntries a 1 ERROR: dial tcp 127.0.0.1:29281: connect: connection refused
+localhost_29280 -> 13:54:04.130110 raft.go:687: [0] RPC AppendEntries a 1 ERROR: dial tcp 127.0.0.1:29281: connect: connection refused
+localhost_29280 -> 13:54:04.181237 raft.go:687: [0] RPC AppendEntries a 1 ERROR: dial tcp 127.0.0.1:29281: connect: connection refused
+localhost_29280 -> 13:54:04.232421 raft.go:687: [0] RPC AppendEntries a 1 ERROR: dial tcp 127.0.0.1:29281: connect: connection refused
+localhost_29280 -> 13:54:04.283245 raft.go:687: [0] RPC AppendEntries a 1 ERROR: dial tcp 127.0.0.1:29281: connect: connection refused
+localhost_29280 -> 13:54:04.334225 raft.go:687: [0] RPC AppendEntries a 1 ERROR: dial tcp 127.0.0.1:29281: connect: connection refused
+localhost_29280 -> 13:54:04.385176 raft.go:687: [0] RPC AppendEntries a 1 ERROR: dial tcp 127.0.0.1:29281: connect: connection refused
+localhost_29280 -> 13:54:04.436321 raft.go:687: [0] RPC AppendEntries a 1 ERROR: dial tcp 127.0.0.1:29281: connect: connection refused
+localhost_29280 -> 13:54:04.487364 raft.go:687: [0] RPC AppendEntries a 1 ERROR: dial tcp 127.0.0.1:29281: connect: connection refused
+localhost_29280 -> 13:54:04.538715 raft.go:687: [0] RPC AppendEntries a 1 ERROR: dial tcp 127.0.0.1:29281: connect: connection refused
+localhost_29280 -> 13:54:04.589877 raft.go:687: [0] RPC AppendEntries a 1 ERROR: dial tcp 127.0.0.1:29281: connect: connection refused
+localhost_29280 -> 13:54:04.640948 raft.go:687: [0] RPC AppendEntries a 1 ERROR: dial tcp 127.0.0.1:29281: connect: connection refused
+localhost_29280 -> 13:54:04.692001 raft.go:687: [0] RPC AppendEntries a 1 ERROR: dial tcp 127.0.0.1:29281: connect: connection refused
+localhost_29280 -> 13:54:04.743028 raft.go:687: [0] RPC AppendEntries a 1 ERROR: dial tcp 127.0.0.1:29281: connect: connection refused
+localhost_29280 -> 13:54:04.794178 raft.go:687: [0] RPC AppendEntries a 1 ERROR: dial tcp 127.0.0.1:29281: connect: connection refused
+localhost_29280 -> 13:54:04.845350 raft.go:687: [0] RPC AppendEntries a 1 ERROR: dial tcp 127.0.0.1:29281: connect: connection refused
+localhost_29280 -> 13:54:04.896349 raft.go:687: [0] RPC AppendEntries a 1 ERROR: dial tcp 127.0.0.1:29281: connect: connection refused
+localhost_29280 -> 13:54:04.947494 raft.go:687: [0] RPC AppendEntries a 1 ERROR: dial tcp 127.0.0.1:29281: connect: connection refused
+localhost_29280 -> 13:54:04.947546 raft.go:687: [0] RPC AppendEntries a 2 ERROR: dial tcp 127.0.0.1:29282: connect: connection refused
+localhost_29280 -> 13:54:04.998019 raft.go:687: [0] RPC AppendEntries a 1 ERROR: dial tcp 127.0.0.1:29281: connect: connection refused
+localhost_29280 -> 13:54:04.998016 raft.go:687: [0] RPC AppendEntries a 2 ERROR: dial tcp 127.0.0.1:29282: connect: connection refused
+localhost_29280 -> 13:54:05.048554 raft.go:687: [0] RPC AppendEntries a 1 ERROR: dial tcp 127.0.0.1:29281: connect: connection refused
+localhost_29280 -> 13:54:05.048622 raft.go:687: [0] RPC AppendEntries a 2 ERROR: dial tcp 127.0.0.1:29282: connect: connection refused
+localhost_29280 -> 13:54:05.098943 raft.go:687: [0] RPC AppendEntries a 1 ERROR: dial tcp 127.0.0.1:29281: connect: connection refused
+localhost_29280 -> 13:54:05.098999 raft.go:687: [0] RPC AppendEntries a 2 ERROR: dial tcp 127.0.0.1:29282: connect: connection refused
+localhost_29280 -> 13:54:05.149489 raft.go:687: [0] RPC AppendEntries a 2 ERROR: dial tcp 127.0.0.1:29282: connect: connection refused
+localhost_29280 -> 13:54:05.149513 raft.go:687: [0] RPC AppendEntries a 1 ERROR: dial tcp 127.0.0.1:29281: connect: connection refused
+localhost_29280 -> 13:54:05.200012 raft.go:687: [0] RPC AppendEntries a 2 ERROR: dial tcp 127.0.0.1:29282: connect: connection refused
+localhost_29280 -> 13:54:05.200021 raft.go:687: [0] RPC AppendEntries a 1 ERROR: dial tcp 127.0.0.1:29281: connect: connection refused
+localhost_29280 -> 13:54:05.250573 raft.go:687: [0] RPC AppendEntries a 2 ERROR: dial tcp 127.0.0.1:29282: connect: connection refused
+localhost_29280 -> 13:54:05.250605 raft.go:687: [0] RPC AppendEntries a 1 ERROR: dial tcp 127.0.0.1:29281: connect: connection refused
+localhost_29280 -> 13:54:05.301195 raft.go:687: [0] RPC AppendEntries a 1 ERROR: dial tcp 127.0.0.1:29281: connect: connection refused
+localhost_29280 -> 13:54:05.301392 raft.go:687: [0] RPC AppendEntries a 2 ERROR: dial tcp 127.0.0.1:29282: connect: connection refused
+localhost_29280 -> 13:54:05.351855 raft.go:687: [0] RPC AppendEntries a 1 ERROR: dial tcp 127.0.0.1:29281: connect: connection refused
+localhost_29280 -> 13:54:05.351855 raft.go:687: [0] RPC AppendEntries a 2 ERROR: dial tcp 127.0.0.1:29282: connect: connection refused
+localhost_29280 -> 13:54:05.402332 raft.go:687: [0] RPC AppendEntries a 2 ERROR: dial tcp 127.0.0.1:29282: connect: connection refused
+localhost_29280 -> 13:54:05.402363 raft.go:687: [0] RPC AppendEntries a 1 ERROR: dial tcp 127.0.0.1:29281: connect: connection refused
+localhost_29280 -> 13:54:05.452928 raft.go:687: [0] RPC AppendEntries a 1 ERROR: dial tcp 127.0.0.1:29281: connect: connection refused
+localhost_29280 -> 13:54:05.452979 raft.go:687: [0] RPC AppendEntries a 2 ERROR: dial tcp 127.0.0.1:29282: connect: connection refused
+localhost_29280 -> 13:54:05.503518 raft.go:687: [0] RPC AppendEntries a 2 ERROR: dial tcp 127.0.0.1:29282: connect: connection refused
+localhost_29280 -> 13:54:05.503518 raft.go:687: [0] RPC AppendEntries a 1 ERROR: dial tcp 127.0.0.1:29281: connect: connection refused
+localhost_29280 -> 13:54:05.554058 raft.go:687: [0] RPC AppendEntries a 2 ERROR: dial tcp 127.0.0.1:29282: connect: connection refused
+localhost_29280 -> 13:54:05.554058 raft.go:687: [0] RPC AppendEntries a 1 ERROR: dial tcp 127.0.0.1:29281: connect: connection refused
+localhost_29280 -> 13:54:05.604655 raft.go:687: [0] RPC AppendEntries a 2 ERROR: dial tcp 127.0.0.1:29282: connect: connection refused
+localhost_29280 -> 13:54:05.604655 raft.go:687: [0] RPC AppendEntries a 1 ERROR: dial tcp 127.0.0.1:29281: connect: connection refused
+localhost_29280 -> 13:54:05.655326 raft.go:687: [0] RPC AppendEntries a 2 ERROR: dial tcp 127.0.0.1:29282: connect: connection refused
+localhost_29280 -> 13:54:05.655326 raft.go:687: [0] RPC AppendEntries a 1 ERROR: dial tcp 127.0.0.1:29281: connect: connection refused
+localhost_29280 -> 13:54:05.705884 raft.go:687: [0] RPC AppendEntries a 2 ERROR: dial tcp 127.0.0.1:29282: connect: connection refused
+localhost_29280 -> 13:54:05.705901 raft.go:687: [0] RPC AppendEntries a 1 ERROR: dial tcp 127.0.0.1:29281: connect: connection refused
+localhost_29280 -> 13:54:05.756421 raft.go:687: [0] RPC AppendEntries a 1 ERROR: dial tcp 127.0.0.1:29281: connect: connection refused
+localhost_29280 -> 13:54:05.756421 raft.go:687: [0] RPC AppendEntries a 2 ERROR: dial tcp 127.0.0.1:29282: connect: connection refused
+localhost_29280 -> 13:54:05.806892 raft.go:687: [0] RPC AppendEntries a 2 ERROR: dial tcp 127.0.0.1:29282: connect: connection refused
+localhost_29280 -> 13:54:05.806951 raft.go:687: [0] RPC AppendEntries a 1 ERROR: dial tcp 127.0.0.1:29281: connect: connection refused
+localhost_29280 -> 13:54:05.857462 raft.go:687: [0] RPC AppendEntries a 2 ERROR: dial tcp 127.0.0.1:29282: connect: connection refused
+localhost_29280 -> 13:54:05.857503 raft.go:687: [0] RPC AppendEntries a 1 ERROR: dial tcp 127.0.0.1:29281: connect: connection refused
+localhost_29280 -> 13:54:05.908001 raft.go:687: [0] RPC AppendEntries a 2 ERROR: dial tcp 127.0.0.1:29282: connect: connection refused
+localhost_29280 -> 13:54:05.908001 raft.go:687: [0] RPC AppendEntries a 1 ERROR: dial tcp 127.0.0.1:29281: connect: connection refused
+localhost_29280 -> 13:54:05.958527 raft.go:687: [0] RPC AppendEntries a 1 ERROR: dial tcp 127.0.0.1:29281: connect: connection refused
+localhost_29280 -> 13:54:05.958685 raft.go:687: [0] RPC AppendEntries a 2 ERROR: dial tcp 127.0.0.1:29282: connect: connection refused
+localhost_29280 -> 13:54:06.009379 raft.go:687: [0] RPC AppendEntries a 1 ERROR: dial tcp 127.0.0.1:29281: connect: connection refused
+localhost_29280 -> 13:54:06.009377 raft.go:687: [0] RPC AppendEntries a 2 ERROR: dial tcp 127.0.0.1:29282: connect: connection refused
+localhost_29280 -> 13:54:06.059908 raft.go:687: [0] RPC AppendEntries a 2 ERROR: dial tcp 127.0.0.1:29282: connect: connection refused
+localhost_29280 -> 13:54:06.059908 raft.go:687: [0] RPC AppendEntries a 1 ERROR: dial tcp 127.0.0.1:29281: connect: connection refused
+localhost_29280 -> 13:54:06.110459 raft.go:687: [0] RPC AppendEntries a 2 ERROR: dial tcp 127.0.0.1:29282: connect: connection refused
+localhost_29280 -> 13:54:06.110459 raft.go:687: [0] RPC AppendEntries a 1 ERROR: dial tcp 127.0.0.1:29281: connect: connection refused
+localhost_29280 -> 13:54:06.160901 raft.go:687: [0] RPC AppendEntries a 2 ERROR: dial tcp 127.0.0.1:29282: connect: connection refused
+localhost_29280 -> 13:54:06.160926 raft.go:687: [0] RPC AppendEntries a 1 ERROR: dial tcp 127.0.0.1:29281: connect: connection refused
+localhost_29280 -> 13:54:06.211503 raft.go:687: [0] RPC AppendEntries a 1 ERROR: dial tcp 127.0.0.1:29281: connect: connection refused
+localhost_29280 -> 13:54:06.211503 raft.go:687: [0] RPC AppendEntries a 2 ERROR: dial tcp 127.0.0.1:29282: connect: connection refused
+localhost_29280 -> 13:54:06.262043 raft.go:687: [0] RPC AppendEntries a 2 ERROR: dial tcp 127.0.0.1:29282: connect: connection refused
+localhost_29280 -> 13:54:06.262043 raft.go:687: [0] RPC AppendEntries a 1 ERROR: dial tcp 127.0.0.1:29281: connect: connection refused
+localhost_29280 -> 13:54:06.312587 raft.go:687: [0] RPC AppendEntries a 2 ERROR: dial tcp 127.0.0.1:29282: connect: connection refused
+localhost_29280 -> 13:54:06.312588 raft.go:687: [0] RPC AppendEntries a 1 ERROR: dial tcp 127.0.0.1:29281: connect: connection refused
