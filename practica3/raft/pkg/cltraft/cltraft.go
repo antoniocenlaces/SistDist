@@ -1,111 +1,134 @@
 package main
 
 import (
-	//"errors"
 	"fmt"
-	"time"
-
-	//"log"
-	"net"
+	"log"
 	"net/rpc"
 	"os"
 	"raft/internal/comun/check"
 	"raft/internal/comun/rpctimeout"
 	"raft/internal/raft"
 	"strconv"
+	"time"
 )
 
 func main() {
-	// obtener entero de indice de este nodo
+
+	if len(os.Args) < 3 {
+		fmt.Println("Uso: cliente #cliente <endpoint1> <endpoint2> ...")
+		return
+	}
+
 	me, err := strconv.Atoi(os.Args[1])
-	check.CheckError(err, "Main, mal numero entero de indice de nodo:")
+	check.CheckError(err, "Main, mal numero entero de indice de cliente:")
 
 	var nodos []rpctimeout.HostPort
-	// Resto de argumento son los end points como strings
-	// De todas la replicas-> pasarlos a HostPort
-	for _, endPoint := range os.Args[2:] {
-		nodos = append(nodos, rpctimeout.HostPort(endPoint))
+	for _, e := range os.Args[2:] {
+		nodos = append(nodos, rpctimeout.HostPort(e))
 	}
+	log.SetFlags(log.Lshortfile | log.Lmicroseconds)
+	log.Printf("[CLIENTE %d] Iniciado con endpoints: %v", me, nodos)
 
-	// Parte Servidor
-	// switch me {
-	// case 0:
-	// 	time.Sleep(200 * time.Millisecond)
-	// case 1:
-	// 	time.Sleep(100 * time.Millisecond)
-	// }
-	// nr := raft.NuevoNodo(nodos, me, make(chan raft.AplicaOperacion, 1000))
-	// rpc := rpc.NewServer()
-	canalAplicar := make(chan raft.AplicaOperacion, 1000)
-	// --- Monitorear operaciones aplicadas ---
-	go func() {
-		for ap := range canalAplicar {
-			fmt.Printf("[Nodo %d] Aplicada operación: %+v\n", me, ap)
-		}
-	}()
-	nr := raft.NuevoNodo(nodos, me, canalAplicar)
-	rpc.Register(nr)
+	// ===============================
+	// DESCUBRIR LÍDER
+	// ===============================
 
-	fmt.Println("Replica escucha en :", me, " de ", os.Args[2:])
+	lider := descubrirLider(nodos)
+	log.Printf("[CLIENTE %d] Líder inicial detectado: %d", me, lider)
 
-	l, err := net.Listen("tcp", os.Args[2:][me])
-	check.CheckError(err, "Main listen error:")
-
-	go rpc.Accept(l)
-
-	// Espera más de 2.5 s para garantizar que hay líder
-	time.Sleep(5 * time.Second)
-
-	// Cliente de prueba se usa el nodo 0
-	if me == 0 {
-		nr.Logger.Println("Nodo 0 intenta descubrir el líder actual...")
-
-		var liderIdx = -1
-		for _, peer := range nodos {
-			client, err := rpc.Dial("tcp", string(peer))
-			if err != nil {
-				nr.Logger.Printf("No se pudo conectar con %s\n", peer)
-				continue
-			}
-			defer client.Close()
-
-			var reply raft.EstadoRemoto
-			err = client.Call("NodoRaft.ObtenerEstadoNodo", raft.Vacio{}, &reply)
-			if err == nil && reply.EsLider {
-				liderIdx = reply.IdNodo
-				nr.Logger.Printf("Líder actual detectado: nodo %d\n", liderIdx)
-				break
-			}
-		}
-
-		if liderIdx == -1 {
-			nr.Logger.Println("No se encontró líder, abortando prueba.")
-			return
-		}
-
-		// Enviar operación de prueba al líder
-		client, err := rpc.Dial("tcp", string(nodos[liderIdx]))
-		check.CheckError(err, "Dial al líder falló:")
-
+	// ===============================
+	// ENVIAR OPERACIONES AL LÍDER
+	// ===============================
+	contador := 0
+	for {
 		op := raft.TipoOperacion{
 			Operacion: "escribir",
-			Clave:     "x",
-			Valor:     fmt.Sprintf("valor%d", time.Now().Unix()%1000),
+			Clave:     fmt.Sprintf("C%d:k%d", me, contador),
+			Valor:     fmt.Sprintf("v%d", contador),
 		}
-		claves := []string{"a", "b", "c", "d", "e"}
-		var res raft.ResultadoRemoto
-		for i := 0; i < 5; i++ {
-			op.Clave = claves[i]
-			op.Valor = fmt.Sprintf("valor%d", time.Now().Unix()%1000)
-			err = client.Call("NodoRaft.SometerOperacionRaft", op, &res)
-			check.CheckError(err, "Error en llamada SometerOperacionRaft:")
 
-			nr.Logger.Printf("Respuesta de líder %d: índice=%d mandato=%d EsLider=%v IdLider=%d Valor='%s'\n",
-				liderIdx, res.IndiceRegistro, res.Mandato, res.EsLider, res.IdLider, res.ValorADevolver)
-			time.Sleep(1000 * time.Millisecond)
+		log.Printf("[CLIENTE %d] Enviando operación %+v al líder %d", me, op, lider)
+
+		res, nuevoLider := enviarOperacion(nodos, lider, op)
+
+		// Si el cliente no ha podido contactar o el nodo dice "no soy líder"
+		if nuevoLider != -1 {
+			log.Printf("[CLIENTE %d] ❗ Nuevo líder detectado: %d (antes era %d)", me, nuevoLider, lider)
+			lider = nuevoLider
+			continue
 		}
+
+		if res == nil {
+			log.Printf("[CLIENTE %d] ❗ Líder desconocido: redescubriendo...", me)
+			lider = descubrirLider(nodos)
+			continue
+		}
+
+		log.Printf("[CLIENTE %d] ✔ Respuesta del líder %d: %+v", me, lider, res)
+
+		contador++
+		time.Sleep(1 * time.Second)
+	}
+}
+
+// ==========================================
+// DESCUBRIR LÍDER CICLANDO POR LOS NODOS
+// ==========================================
+func descubrirLider(nodos []rpctimeout.HostPort) int {
+	for {
+		for i, n := range nodos {
+			client, err := rpc.Dial("tcp", string(n))
+			if err != nil {
+				log.Printf("[descubrirLider] Nodo %d no responde (%v)", i, err)
+				continue
+			}
+
+			var est raft.EstadoRemoto
+			err = client.Call("NodoRaft.ObtenerEstadoNodo", raft.Vacio{}, &est)
+			client.Close()
+
+			if err != nil {
+				log.Printf("[descubrirLider] Error RPC con nodo %d: %v", i, err)
+				continue
+			}
+
+			if est.EsLider {
+				log.Printf("[descubrirLider] ✔ Líder encontrado: %d", est.IdNodo)
+				return est.IdNodo
+			}
+		}
+
+		log.Printf("[descubrirLider] ❗ No se encontró líder, reintentando...")
+		time.Sleep(500 * time.Millisecond)
+	}
+}
+
+// ==========================================
+// ENVÍA UNA OPERACIÓN AL LÍDER
+// ==========================================
+func enviarOperacion(nodos []rpctimeout.HostPort, lider int, op raft.TipoOperacion) (*raft.ResultadoRemoto, int) {
+	client, err := rpc.Dial("tcp", string(nodos[lider]))
+	if err != nil {
+		log.Printf("[enviarOperacion] ❌ Fallo al conectar con nodo %d (%v)", lider, err)
+		return nil, -1
+	}
+	defer client.Close()
+
+	var res raft.ResultadoRemoto
+	err = client.Call("NodoRaft.SometerOperacionRaft", op, &res)
+	if err != nil {
+		log.Printf("[enviarOperacion] ❌ Error RPC al enviar a nodo %d: %v", lider, err)
+		return nil, -1
 	}
 
-	select {} // no termina
+	if !res.EsLider {
+		log.Printf("[enviarOperacion] ⚠ Nodo %d dice que NO es líder. El líder real es: %d",
+			lider, res.IdLider)
+		if res.IdLider >= 0 {
+			return nil, res.IdLider
+		}
+		return nil, -1
+	}
 
+	return &res, -1
 }

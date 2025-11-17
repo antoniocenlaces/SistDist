@@ -684,9 +684,9 @@ func (nr *NodoRaft) enviarPeticionVoto(nodo int, args *ArgsPeticionVoto, reply *
 func (nr *NodoRaft) enviarAppendEntries(nodo int, args *ArgAppendEntries, reply *Results) bool {
 	err := nr.Nodos[nodo].CallTimeout("NodoRaft.AppendEntries", args, reply, time.Duration(rpcTimeoutMs)*time.Millisecond)
 	if err != nil {
-		// if kEnableDebugLogs {
-		// 	nr.Logger.Printf("[%d] RPC AppendEntries a %d ERROR: %v", nr.Yo, nodo, err)
-		// }
+		if kEnableDebugLogs {
+			nr.Logger.Printf("[%d] RPC AppendEntries a %d ERROR: %v", nr.Yo, nodo, err)
+		}
 		return false
 	}
 	return true
