@@ -224,8 +224,8 @@ func NuevoNodo(nodos []rpctimeout.HostPort, yo int, canalAplicarOperacion chan A
 		nr.matchIndex[i] = 0
 	}
 
-	nr.resetTimer()
-	go nr.runWatchdog()
+	// nr.resetTimer()
+	// go nr.runWatchdog()
 	return nr
 }
 
@@ -271,6 +271,24 @@ func (nr *NodoRaft) SometerOperacionRaft(operacion TipoOperacion, reply *Resulta
 
 func (nr *NodoRaft) ParaNodo(args Vacio, reply *Vacio) error {
 	defer nr.para()
+	return nil
+}
+
+// ActivarTimers: RPC que ha de ser llamada en cada nodo para comenzar
+// proceso de elecciones
+func (nr *NodoRaft) ActivarTimers(args Vacio, reply *Vacio) error {
+	nr.Mux.Lock()
+	// Si hay un timer de elección en marcha: llamada duplicada a ActivarTimers
+	// no se hace nada
+	if nr.timer != nil {
+		nr.Mux.Unlock()
+		return nil
+	}
+	nr.initialElectionDelayUsed = false
+	nr.electionReset = time.Now()
+	nr.resetTimer()
+	nr.Mux.Unlock()
+	go nr.runWatchdog()
 	return nil
 }
 

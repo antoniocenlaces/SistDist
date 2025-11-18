@@ -186,11 +186,15 @@ func (cfg *configDespliegue) soloArranqueYparadaTest1(t *testing.T) {
 
 // Primer lider en marcha - 3 NODOS RAFT
 func (cfg *configDespliegue) elegirPrimerLiderTest2(t *testing.T) {
-	t.Skip("SKIPPED ElegirPrimerLiderTest2")
+	// t.Skip("SKIPPED ElegirPrimerLiderTest2")
 
 	fmt.Println(t.Name(), ".....................")
 
 	cfg.startDistributedProcesses()
+
+	// Activa proceso de elección en todos los nodos
+	time.Sleep(200 * time.Millisecond)
+	cfg.activarTimersEnTodosLosNodos()
 
 	// Se ha elegido lider ?
 	fmt.Printf("Probando lider en curso\n")
@@ -353,6 +357,18 @@ func (cfg *configDespliegue) stopDistributedProcesses() {
 		err := endPoint.CallTimeout("NodoRaft.ParaNodo",
 			raft.Vacio{}, &reply, 10*time.Millisecond)
 		check.CheckError(err, "Error en llamada RPC Para nodo")
+	}
+}
+
+func (cfg *configDespliegue) activarTimersEnTodosLosNodos() {
+	var reply raft.Vacio
+	for i := range cfg.nodosRaft {
+		err := cfg.nodosRaft[i].CallTimeout(
+			"NodoRaft.ActivarTimers",
+			raft.Vacio{},
+			&reply,
+			10*time.Millisecond)
+		check.CheckError(err, "Error en llamada RPC ActivarTimers")
 	}
 }
 
