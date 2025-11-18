@@ -3,6 +3,8 @@ package main
 import (
 	//"errors"
 	"fmt"
+	"reflect"
+
 	//"log"
 	"net"
 	"net/rpc"
@@ -29,6 +31,12 @@ func main() {
 	// Parte Servidor
 	nr := raft.NuevoNodo(nodos, me, make(chan raft.AplicaOperacion, 1000))
 	rpc.Register(nr)
+
+	fmt.Println("Métodos RPC registrados:")
+	t := reflect.TypeOf(nr)
+	for i := 0; i < t.NumMethod(); i++ {
+		fmt.Println("-", t.Method(i).Name)
+	}
 
 	fmt.Println("Replica escucha en :", me, " de ", os.Args[2:])
 
