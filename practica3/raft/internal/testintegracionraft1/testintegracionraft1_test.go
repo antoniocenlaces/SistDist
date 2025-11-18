@@ -209,18 +209,27 @@ func (cfg *configDespliegue) elegirPrimerLiderTest2(t *testing.T) {
 
 // Fallo de un primer lider y reeleccion de uno nuevo - 3 NODOS RAFT
 func (cfg *configDespliegue) falloAnteriorElegirNuevoLiderTest3(t *testing.T) {
-	t.Skip("SKIPPED FalloAnteriorElegirNuevoLiderTest3")
+	// t.Skip("SKIPPED FalloAnteriorElegirNuevoLiderTest3")
 
 	fmt.Println(t.Name(), ".....................")
 
 	cfg.startDistributedProcesses()
+	// Activa proceso de elección en todos los nodos
+	time.Sleep(200 * time.Millisecond)
+	cfg.activarTimersEnTodosLosNodos()
 
 	fmt.Printf("Lider inicial\n")
-	cfg.pruebaUnLider(3)
+	liderActual := cfg.pruebaUnLider(3)
 
 	// Desconectar lider
-	// ???
+	var reply raft.Vacio
+	err := cfg.nodosRaft[liderActual].CallTimeout("NodoRaft.ParaNodo",
+		raft.Vacio{}, &reply, 10*time.Millisecond)
+	check.CheckError(err, "Error en llamada RPC Para nodo")
+	cfg.conectados[liderActual] = false
 
+	// Damos un tiempo a que surja nuevo líder
+	time.Sleep(1100 * time.Millisecond)
 	fmt.Printf("Comprobar nuevo lider\n")
 	cfg.pruebaUnLider(3)
 
@@ -291,7 +300,7 @@ func (cfg *configDespliegue) SometerConcurrentementeOperaciones(t *testing.T) {
 func (cfg *configDespliegue) pruebaUnLider(numreplicas int) int {
 	for iters := 0; iters < 10; iters++ {
 		time.Sleep(2000 * time.Millisecond)
-		mapaLideres := make(map[int][]int)
+		mapaLideres := make(map[int][]int) // para almacenar en cada mandato la lista de líderes
 		for i := 0; i < numreplicas; i++ {
 			if cfg.conectados[i] {
 				if _, mandato, eslider, _ := cfg.obtenerEstadoRemoto(i); eslider {
@@ -354,10 +363,12 @@ func (cfg *configDespliegue) startDistributedProcesses() {
 func (cfg *configDespliegue) stopDistributedProcesses() {
 	var reply raft.Vacio
 
-	for _, endPoint := range cfg.nodosRaft {
-		err := endPoint.CallTimeout("NodoRaft.ParaNodo",
-			raft.Vacio{}, &reply, 10*time.Millisecond)
-		check.CheckError(err, "Error en llamada RPC Para nodo")
+	for i, endPoint := range cfg.nodosRaft {
+		if cfg.conectados[i] {
+			err := endPoint.CallTimeout("NodoRaft.ParaNodo",
+				raft.Vacio{}, &reply, 10*time.Millisecond)
+			check.CheckError(err, "Error en llamada RPC Para nodo")
+		}
 	}
 }
 
