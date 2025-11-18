@@ -167,8 +167,8 @@ func (cfg *configDespliegue) soloArranqueYparadaTest1(t *testing.T) {
 
 	// Poner en marcha replicas en remoto con un tiempo de espera incluido
 	cfg.startDistributedProcesses()
-	fmt.Println("--------------Ahora puedes ir a comprobar si los tres nodos están en ejecución-------------------")
-	time.Sleep(600 * time.Second)
+
+	time.Sleep(4 * time.Second)
 
 	// Comprobar estado replica 0
 	cfg.comprobarEstadoRemoto(0, 0, false, -1)
