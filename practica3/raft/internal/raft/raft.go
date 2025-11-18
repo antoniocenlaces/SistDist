@@ -40,7 +40,7 @@ const (
 	// Aseguraros de poner kEnableDebugLogs a false antes de la entrega
 	kEnableDebugLogs = true
 	// Poner a true para logear a stdout en lugar de a fichero
-	kLogToStdout  = true
+	kLogToStdout  = false
 	kLogOutputDir = "./logs_raft/"
 
 	// timers / rates (ajustables)
