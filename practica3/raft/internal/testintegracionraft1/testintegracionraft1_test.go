@@ -240,119 +240,27 @@ func (cfg *configDespliegue) falloAnteriorElegirNuevoLiderTest3(t *testing.T) {
 }
 
 // // 3 operaciones comprometidas con situacion estable y sin fallos - 3 NODOS RAFT
-// func (cfg *configDespliegue) tresOperacionesComprometidasEstable(t *testing.T) {
-// 	// t.Skip("SKIPPED tresOperacionesComprometidasEstable")
-
-// 	fmt.Println(t.Name(), ".....................")
-
-// 	cfg.startDistributedProcesses()
-// 	// Activa proceso de elección en todos los nodos
-// 	time.Sleep(200 * time.Millisecond)
-// 	cfg.activarTimersEnTodosLosNodos()
-
-// 	fmt.Printf("Busacando al Lider inicial\n")
-// 	liderActual := cfg.pruebaUnLider(3)
-// 	fmt.Printf("Líder estable identificado: %d", liderActual+1)
-// 	// preparamos datos para someter operaciones al líder
-// 	var reply raft.ResultadoRemoto
-// 	for i := 1; i <= 3; i++ {
-// 		op := raft.TipoOperacion{
-// 			Operacion: "escribir",
-// 			Clave:     fmt.Sprintf("k%d", i),
-// 			Valor:     fmt.Sprintf("v%d", i),
-// 		}
-// 		err := cfg.nodosRaft[liderActual].CallTimeout(
-// 			"NodoRaft.SometerOperacionRaft",
-// 			op,
-// 			&reply,
-// 			30*time.Millisecond,
-// 		)
-// 		check.CheckError(err, "Error RPC SometerOperacion")
-// 	}
-// 	// sometidas tres operaciones al líder estable
-// 	// espera para dar tiempo a resto de nodos replicar
-// 	time.Sleep(2000 * time.Millisecond)
-// 	// recupera situación de los tres nodos
-// 	estadoNodo := make([]raft.EstadoNodo, 3)
-// 	for i := 0; i < 3; i++ {
-// 		err := cfg.nodosRaft[i].CallTimeout(
-// 			"NodoRaft.ObtenerEstadoParaTest",
-// 			raft.Vacio{},
-// 			&estadoNodo[i],
-// 			10*time.Millisecond)
-// 		check.CheckError(err, "Error RPC ObtenerEstadoParaTest")
-// 	}
-// 	// ahora estadoNodo[i]contiene el estado de nodo i
-// 	// Parar réplicas almacenamiento en remoto
-// 	cfg.stopDistributedProcesses()
-// 	estadoNodo[0].Role = raft.Leader
-// 	estadoNodo[0].CommitIndex = 0
-// 	estadoNodo[0].LastApplied = 0
-// 	estadoNodo[0].LogLength = 0
-// 	// comprueba resultados
-// 	for i := 0; i < 3; i++ {
-// 		if i == liderActual {
-// 			if estadoNodo[i].Role != raft.Leader {
-// 				cfg.t.Fatalf("Líder identificado en operaciones: %d líder final: %d",
-// 					liderActual+1, func() int {
-// 						for j := range estadoNodo {
-// 							if j == i {
-// 								continue
-// 							}
-// 							if estadoNodo[j].Role == raft.Leader {
-// 								return j + 1
-// 							}
-// 						}
-// 						return 0
-// 					}())
-// 			}
-// 		}
-// 		if estadoNodo[i].CommitIndex != 3 {
-// 			cfg.t.Fatalf("Replica %d commitIndex=%d, esperado=3", i+1, estadoNodo[i].CommitIndex)
-// 		}
-// 		if estadoNodo[i].LastApplied != 3 {
-// 			cfg.t.Fatalf("Replica %d lastApplied=%d, esperado=3", i+1, estadoNodo[i].LastApplied)
-// 		}
-// 		if estadoNodo[i].LogLength < 4 {
-// 			cfg.t.Fatalf("Replica %d LogLength=%d, esperado=3", i+1, estadoNodo[i].LogLength)
-// 		}
-// 	}
-// }
-
-// 3 operaciones comprometidas con situacion estable y sin fallos - 3 NODOS RAFT
 func (cfg *configDespliegue) tresOperacionesComprometidasEstable(t *testing.T) {
 	// t.Skip("SKIPPED tresOperacionesComprometidasEstable")
 
 	fmt.Println(t.Name(), ".....................")
-	cfg.t = t
 
-	// ----------------------------------------------------
-	// 1. Arrancar procesos remotos y activar timers
-	// ----------------------------------------------------
 	cfg.startDistributedProcesses()
-
+	// Activa proceso de elección en todos los nodos
 	time.Sleep(200 * time.Millisecond)
 	cfg.activarTimersEnTodosLosNodos()
 
-	// ----------------------------------------------------
-	// 2. Elegir líder
-	// ----------------------------------------------------
-	fmt.Printf("Buscando al líder inicial\n")
+	fmt.Printf("Busacando al Lider inicial\n")
 	liderActual := cfg.pruebaUnLider(3)
-	fmt.Printf("Líder estable identificado: %d\n", liderActual+1)
-
-	// ----------------------------------------------------
-	// 3. Enviar 3 operaciones al líder
-	// ----------------------------------------------------
+	fmt.Printf("Líder estable identificado: %d", liderActual+1)
+	// preparamos datos para someter operaciones al líder
 	var reply raft.ResultadoRemoto
-
 	for i := 1; i <= 3; i++ {
 		op := raft.TipoOperacion{
 			Operacion: "escribir",
 			Clave:     fmt.Sprintf("k%d", i),
 			Valor:     fmt.Sprintf("v%d", i),
 		}
-
 		err := cfg.nodosRaft[liderActual].CallTimeout(
 			"NodoRaft.SometerOperacionRaft",
 			op,
@@ -361,70 +269,59 @@ func (cfg *configDespliegue) tresOperacionesComprometidasEstable(t *testing.T) {
 		)
 		check.CheckError(err, "Error RPC SometerOperacion")
 	}
-
-	// Esperar propagación
+	// sometidas tres operaciones al líder estable
+	// espera para dar tiempo a resto de nodos replicar
 	time.Sleep(2000 * time.Millisecond)
-
-	// ----------------------------------------------------
-	// 4. Obtener estado de todos los nodos
-	// ----------------------------------------------------
+	// recupera situación de los tres nodos
 	estadoNodo := make([]raft.EstadoNodo, 3)
-
 	for i := 0; i < 3; i++ {
 		err := cfg.nodosRaft[i].CallTimeout(
 			"NodoRaft.ObtenerEstadoParaTest",
 			raft.Vacio{},
 			&estadoNodo[i],
-			10*time.Millisecond,
-		)
+			10*time.Millisecond)
 		check.CheckError(err, "Error RPC ObtenerEstadoParaTest")
 	}
-
-	// ----------------------------------------------------
-	// 5. Parar procesos remotos
-	// ----------------------------------------------------
+	// ahora estadoNodo[i]contiene el estado de nodo i
+	// Parar réplicas almacenamiento en remoto
 	cfg.stopDistributedProcesses()
+	estadoNodo[0].Role = raft.Leader
 	estadoNodo[0].CommitIndex = 0
 	estadoNodo[0].LastApplied = 0
 	estadoNodo[0].LogLength = 0
-	// ----------------------------------------------------
-	// 6. Comprobaciones finales
-	// ----------------------------------------------------
-	for i := 0; i < 3; i++ {
-
-		// (A) Comprobación del rol del líder
-		if i == liderActual && estadoNodo[i].Role != raft.Leader {
-			liderFinal := -1
-			for j := range estadoNodo {
-				if estadoNodo[j].Role == raft.Leader {
-					liderFinal = j + 1
-					break
-				}
-			}
-			t.Fatalf("Líder inicial era %d, pero líder final es %d",
-				liderActual+1, liderFinal)
-		}
-
-		// (B) commitIndex
-		if estadoNodo[i].CommitIndex != 3 {
-			t.Fatalf("Replica %d commitIndex=%d, esperado=3",
-				i+1, estadoNodo[i].CommitIndex)
-		}
-
-		// (C) lastApplied
-		if estadoNodo[i].LastApplied != 3 {
-			t.Fatalf("Replica %d lastApplied=%d, esperado=3",
-				i+1, estadoNodo[i].LastApplied)
-		}
-
-		// (D) log length (3 entradas + entrada vacía en índice 0)
-		if estadoNodo[i].LogLength < 4 {
-			t.Fatalf("Replica %d LogLength=%d, esperado>=4",
-				i+1, estadoNodo[i].LogLength)
+	// comprueba resultados
+	if err := cfg.verificarEstados(estadoNodo, liderActual); err != nil {
+		t.Fatalf("Error en verificación de estado: %s", err)
+	}
+	fmt.Println(".............", t.Name(), "Superado")
+}
+func findLeader(estadoNodo []raft.EstadoNodo) int {
+	for i := range estadoNodo {
+		if estadoNodo[i].Role == raft.Leader {
+			return i
 		}
 	}
-
-	fmt.Println(".............", t.Name(), "Superado")
+	return -1
+}
+func (cfg *configDespliegue) verificarEstados(estadoNodo []raft.EstadoNodo,
+	liderActual int) error {
+	for i := 0; i < 3; i++ {
+		if i == liderActual && estadoNodo[i].Role != raft.Leader {
+			return fmt.Errorf(
+				"líder inicial %d pero final %d",
+				liderActual+1, findLeader(estadoNodo)+1)
+		}
+		if estadoNodo[i].CommitIndex != 3 {
+			return fmt.Errorf("Replica %d commitIndex=%d, esperado=3", i+1, estadoNodo[i].CommitIndex)
+		}
+		if estadoNodo[i].LastApplied != 3 {
+			return fmt.Errorf("Replica %d lastApplied=%d, esperado=3", i+1, estadoNodo[i].LastApplied)
+		}
+		if estadoNodo[i].LogLength < 4 {
+			return fmt.Errorf("Replica %d LogLength=%d, esperado=3", i+1, estadoNodo[i].LogLength)
+		}
+	}
+	return nil
 }
 
 // estadoNodo[0].Role = raft.Leader
