@@ -297,7 +297,7 @@ func (cfg *configDespliegue) tresOperacionesComprometidasEstable(t *testing.T) {
 							}
 						}
 						return 0
-					})
+					}())
 			}
 		}
 		if estadoNodo[i].CommitIndex != 3 {
