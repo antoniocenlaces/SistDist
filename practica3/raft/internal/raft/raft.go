@@ -252,6 +252,35 @@ func (nr *NodoRaft) ObtenerEstadoNodo(args Vacio, reply *EstadoRemoto) error {
 	return nil
 }
 
+// EstadoNodo para poder verificar desde los tests la ejecución de operaciones
+type EstadoNodo struct {
+	Term        int
+	Role        string
+	CommitIndex int
+	LastApplied int
+	LogLength   int
+}
+
+// método RPC que permite observar las variables internas de un nodo:
+func (nr *NodoRaft) ObtenerEstadoParaTest(args Vacio, reply *EstadoNodo) error {
+	nr.Mux.Lock()
+	defer nr.Mux.Unlock()
+
+	switch nr.role {
+	case Follower:
+		reply.Role = "Follower"
+	case Candidate:
+		reply.Role = "Candidate"
+	default:
+		reply.Role = "Leader"
+	}
+	reply.Term = nr.currentTerm
+	reply.CommitIndex = nr.commitIndex
+	reply.LastApplied = nr.lastApplied
+	reply.LogLength = len(nr.logEntries)
+	return nil
+}
+
 type ResultadoRemoto struct {
 	ValorADevolver string
 	IndiceRegistro int

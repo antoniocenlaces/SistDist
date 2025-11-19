@@ -252,7 +252,7 @@ func (cfg *configDespliegue) tresOperacionesComprometidasEstable(t *testing.T) {
 
 	fmt.Printf("Busacando al Lider inicial\n")
 	liderActual := cfg.pruebaUnLider(3)
-	fmt.Printf("Líder estable identificado: %d", liderActual)
+	fmt.Printf("Líder estable identificado: %d", liderActual+1)
 	// preparamos datos para someter operaciones al líder
 	var reply raft.ResultadoRemoto
 	for i := 1; i <= 3; i++ {
@@ -265,11 +265,41 @@ func (cfg *configDespliegue) tresOperacionesComprometidasEstable(t *testing.T) {
 			"NodoRaft.SometerOperacionRaft",
 			op,
 			&reply,
-			10*time.Millisecond,
+			30*time.Millisecond,
 		)
 		check.CheckError(err, "Error RPC SometerOperacion")
 	}
+	// sometidas tres operaciones al líder estable
+	// espera para dar tiempo a resto de nodos replicar
 	time.Sleep(2000 * time.Millisecond)
+	// recupera situación de los tres nodos
+	estadoNodo := make([]raft.EstadoNodo, 3)
+	for i := 0; i < 3; i++ {
+		err := cfg.nodosRaft[i].CallTimeout(
+			"NodoRaft.ObtenerEstadoParaTest",
+			raft.Vacio{},
+			&estadoNodo[i],
+			10*time.Millisecond)
+		check.CheckError(err, "Error RPC ObtenerEstadoParaTest")
+	}
+	// ahora estadoNodo[i]contiene el estado de nodo i
+	// Parar réplicas almacenamiento en remoto
+	cfg.stopDistributedProcesses()
+	// comprueba resultados
+	for i := 0; i < 3; i++ {
+		if i == liderActual {
+
+		}
+		if estadoNodo[i].CommitIndex != 3 {
+			t.Fatalf("Replica %d commitIndex=%d, esperado=3", i+1, estadoNodo[i].CommitIndex)
+		}
+		if estadoNodo[i].LastApplied != 3 {
+			t.Fatalf("Replica %d lastApplied=%d, esperado=3", i+1, estadoNodo[i].LastApplied)
+		}
+		if estadoNodo[i].LogLength < 4 {
+			t.Fatalf("Replica %d LogLength=%d, esperado=3", i+1, estadoNodo[i].LogLength)
+		}
+	}
 }
 
 // Se consigue acuerdo a pesar de desconexiones de seguidor -- 3 NODOS RAFT
