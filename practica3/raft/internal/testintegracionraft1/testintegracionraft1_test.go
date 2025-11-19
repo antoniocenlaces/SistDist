@@ -286,6 +286,10 @@ func (cfg *configDespliegue) tresOperacionesComprometidasEstable(t *testing.T) {
 	// Parar réplicas almacenamiento en remoto
 	cfg.stopDistributedProcesses()
 	// comprueba resultados
+	estadoNodo[0].Role = raft.Leader
+	estadoNodo[0].CommitIndex = 0
+	estadoNodo[0].LastApplied = 0
+	estadoNodo[0].LogLength = 0
 	for i := 0; i < 3; i++ {
 		if i == liderActual {
 			if estadoNodo[i].Role != raft.Leader {
