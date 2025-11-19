@@ -288,7 +288,17 @@ func (cfg *configDespliegue) tresOperacionesComprometidasEstable(t *testing.T) {
 	// comprueba resultados
 	for i := 0; i < 3; i++ {
 		if i == liderActual {
-
+			if estadoNodo[i].Role != raft.Leader {
+				t.Fatalf("Líder identificado en operaciones: %d líder final: %d",
+					liderActual+1, func() int {
+						for j := range estadoNodo {
+							if estadoNodo[j].Role == raft.Leader {
+								return j + 1
+							}
+						}
+						return 0
+					})
+			}
 		}
 		if estadoNodo[i].CommitIndex != 3 {
 			t.Fatalf("Replica %d commitIndex=%d, esperado=3", i+1, estadoNodo[i].CommitIndex)

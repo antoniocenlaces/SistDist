@@ -255,7 +255,7 @@ func (nr *NodoRaft) ObtenerEstadoNodo(args Vacio, reply *EstadoRemoto) error {
 // EstadoNodo para poder verificar desde los tests la ejecución de operaciones
 type EstadoNodo struct {
 	Term        int
-	Role        string
+	Role        state
 	CommitIndex int
 	LastApplied int
 	LogLength   int
@@ -266,14 +266,7 @@ func (nr *NodoRaft) ObtenerEstadoParaTest(args Vacio, reply *EstadoNodo) error {
 	nr.Mux.Lock()
 	defer nr.Mux.Unlock()
 
-	switch nr.role {
-	case Follower:
-		reply.Role = "Follower"
-	case Candidate:
-		reply.Role = "Candidate"
-	default:
-		reply.Role = "Leader"
-	}
+	reply.Role = nr.role
 	reply.Term = nr.currentTerm
 	reply.CommitIndex = nr.commitIndex
 	reply.LastApplied = nr.lastApplied
