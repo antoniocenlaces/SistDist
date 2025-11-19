@@ -247,7 +247,7 @@ func (cfg *configDespliegue) tresOperacionesComprometidasEstable(t *testing.T) {
 
 	cfg.startDistributedProcesses()
 	// Activa proceso de elección en todos los nodos
-	time.Sleep(200 * time.Millisecond)
+	time.Sleep(400 * time.Millisecond)
 	cfg.activarTimersEnTodosLosNodos()
 
 	fmt.Printf("Busacando al Lider inicial\n")
@@ -285,10 +285,7 @@ func (cfg *configDespliegue) tresOperacionesComprometidasEstable(t *testing.T) {
 	// ahora estadoNodo[i]contiene el estado de nodo i
 	// Parar réplicas almacenamiento en remoto
 	cfg.stopDistributedProcesses()
-	estadoNodo[0].Role = raft.Leader
-	estadoNodo[0].CommitIndex = 0
-	estadoNodo[0].LastApplied = 0
-	estadoNodo[0].LogLength = 0
+
 	// comprueba resultados
 	if err := cfg.verificarEstados(estadoNodo, liderActual); err != nil {
 		t.Fatalf("Error en verificación de estado: %s", err)
