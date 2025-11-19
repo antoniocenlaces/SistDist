@@ -41,7 +41,7 @@ const (
 	kEnableDebugLogs = true
 	// Poner a true para logear a stdout en lugar de a fichero
 	kLogToStdout  = false
-	kLogOutputDir = "./logs_raft/"
+	kLogOutputDir = "/misc/alumnos/sd/sd2526/a143045/SistDist/practica3/raft/cmd/srvraft/logs_raft/"
 
 	// timers / rates (ajustables)
 	baseTimer     = 450

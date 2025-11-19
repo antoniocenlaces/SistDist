@@ -243,7 +243,33 @@ func (cfg *configDespliegue) falloAnteriorElegirNuevoLiderTest3(t *testing.T) {
 func (cfg *configDespliegue) tresOperacionesComprometidasEstable(t *testing.T) {
 	t.Skip("SKIPPED tresOperacionesComprometidasEstable")
 
-	// A completar ???
+	fmt.Println(t.Name(), ".....................")
+
+	cfg.startDistributedProcesses()
+	// Activa proceso de elección en todos los nodos
+	time.Sleep(200 * time.Millisecond)
+	cfg.activarTimersEnTodosLosNodos()
+
+	fmt.Printf("Busacando al Lider inicial\n")
+	liderActual := cfg.pruebaUnLider(3)
+	fmt.Printf("Líder estable identificado: %d", liderActual)
+	// preparamos datos para someter operaciones al líder
+	var reply raft.ResultadoRemoto
+	for i := 1; i <= 3; i++ {
+		op := raft.TipoOperacion{
+			Operacion: "escribir",
+			Clave:     fmt.Sprintf("k%d", i),
+			Valor:     fmt.Sprintf("v%d", i),
+		}
+		err := cfg.nodosRaft[liderActual].CallTimeout(
+			"NodoRaft.SometerOperacionRaft",
+			op,
+			&reply,
+			10*time.Millisecond,
+		)
+		check.CheckError(err, "Error RPC SometerOperacion")
+	}
+	time.Sleep(2000 * time.Millisecond)
 }
 
 // Se consigue acuerdo a pesar de desconexiones de seguidor -- 3 NODOS RAFT
