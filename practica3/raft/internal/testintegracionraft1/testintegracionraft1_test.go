@@ -241,7 +241,7 @@ func (cfg *configDespliegue) falloAnteriorElegirNuevoLiderTest3(t *testing.T) {
 
 // 3 operaciones comprometidas con situacion estable y sin fallos - 3 NODOS RAFT
 func (cfg *configDespliegue) tresOperacionesComprometidasEstable(t *testing.T) {
-	t.Skip("SKIPPED tresOperacionesComprometidasEstable")
+	// t.Skip("SKIPPED tresOperacionesComprometidasEstable")
 
 	fmt.Println(t.Name(), ".....................")
 
@@ -292,6 +292,9 @@ func (cfg *configDespliegue) tresOperacionesComprometidasEstable(t *testing.T) {
 				t.Fatalf("Líder identificado en operaciones: %d líder final: %d",
 					liderActual+1, func() int {
 						for j := range estadoNodo {
+							if j == i {
+								continue
+							}
 							if estadoNodo[j].Role == raft.Leader {
 								return j + 1
 							}
