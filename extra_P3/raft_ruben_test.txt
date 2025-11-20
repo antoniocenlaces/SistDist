@@ -19,7 +19,7 @@ package raft
 
 import (
 	"fmt"
-	"io/ioutil"
+	"io"
 	"log"
 	"math/rand"
 	"os"
@@ -28,6 +28,8 @@ import (
 
 	"raft/internal/comun/rpctimeout"
 )
+
+type state int
 
 const (
 	// Constante para fijar valor entero no inicializado
@@ -44,10 +46,14 @@ const (
 	kLogOutputDir = "./logs_raft/"
 
 	// Intervalos de temporización (ajustables)
-	electionMinMs     = 500 // recomendado 150–300ms
-	electionMaxMs     = 800
-	heartbeatInterval = 166 // latido del líder
+	electionMinMs     = 450 // recomendado 150–300ms
+	electionMaxMs     = 900
+	heartbeatInterval = 90  // latido del líder
 	rpcTimeoutMs      = 200 // timeout por RPC (ajustad a vuestro entorno)
+
+	Follower state = iota
+	Candidate
+	Leader
 )
 
 // Tipo de operación que expone la máquina de estados (clave/valor)
@@ -93,7 +99,7 @@ type NodoRaft struct {
 	matchIndex map[int]int // índice más alto replicado en cada seguidor
 
 	// Estado temporal (no persistente)
-	role                     int         // 0=follower, 1=candidate, 2=leader
+	role                     state       // Follower, Candidate, Leader
 	votesReceived            int         // votos recibidos durante la elección
 	electionReset            time.Time   // última vez que se recibió mensaje válido / se reseteó la elección
 	timer                    *time.Timer // para gestionar timeout de elecciones
@@ -158,13 +164,13 @@ func NuevoNodo(nodos []rpctimeout.HostPort, yo int, canalAplicarOperacion chan A
 		}
 		nr.Logger.Println("logger initialized")
 	} else {
-		nr.Logger = log.New(ioutil.Discard, "", 0)
+		nr.Logger = log.New(io.Discard, "", 0)
 	}
 
 	// Estado inicial
 	seed := time.Now().UnixNano() + int64(nr.Yo)*1000003
 	nr.rng = rand.New(rand.NewSource(seed))
-	nr.role = 0 // follower
+	nr.role = Follower // follower
 	nr.votesReceived = 0
 	nr.votedFor = -1
 	nr.currentTerm = 0
@@ -176,11 +182,11 @@ func NuevoNodo(nodos []rpctimeout.HostPort, yo int, canalAplicarOperacion chan A
 	nr.matchIndex = make(map[int]int)
 	nr.canalAplicarOperacion = canalAplicarOperacion
 
-	nr.resetElectionTimerLocked() // inicializa electionReset y el timer
-	fmt.Printf("[Nodo %d] creado. Inicia goroutinas run() runWatchdog\n", yo)
+	// nr.resetElectionTimerLocked() // inicializa electionReset y el timer
+	fmt.Printf("[Nodo %d] creado. AÚN NO Inicia goroutinas run() runWatchdog\n", yo)
 	// Gorutina principal: gestiona timeout de elección y latidos
-	go nr.run()
-	go nr.runWatchdog()
+	// go nr.run()
+	// go nr.runWatchdog()
 
 	return nr
 }
@@ -193,7 +199,7 @@ func (nr *NodoRaft) runWatchdog() {
 	for range ticker.C {
 		nr.Mux.Lock()
 		// Consideramos “OK” si soy líder o he recibido AE recientemente
-		ok := nr.role == 2 || time.Since(nr.electionReset) < deadline
+		ok := nr.role == Leader || time.Since(nr.electionReset) < deadline
 		nr.Mux.Unlock()
 		if ok {
 			lastOk = time.Now()
@@ -214,7 +220,7 @@ func (nr *NodoRaft) run() {
 		t := nr.timer
 		nr.Mux.Unlock()
 
-		if role == 2 { // Líder: envía heartbeats periódicos
+		if role == Leader { // Líder: envía heartbeats periódicos
 			nr.enviarHeartbeats()
 			time.Sleep(heartbeatInterval * time.Millisecond)
 			continue
@@ -232,7 +238,7 @@ func (nr *NodoRaft) run() {
 
 func (nr *NodoRaft) startElection() {
 	nr.Mux.Lock()
-	nr.role = 1 // candidate
+	nr.role = Candidate
 	nr.currentTerm++
 	nr.votedFor = nr.Yo
 	nr.votesReceived = 1 // voto para sí mismo
@@ -268,7 +274,7 @@ func (nr *NodoRaft) startElection() {
 				nr.becomeFollowerLocked(reply.Term, -1)
 				return
 			}
-			if nr.role == 1 && reply.VoteGranted && reply.Term == term {
+			if nr.role == Candidate && reply.VoteGranted && reply.Term == term {
 				nr.votesReceived++
 				if nr.hasMajority(nr.votesReceived) {
 					nr.becomeLeaderLocked()
@@ -284,7 +290,7 @@ func (nr *NodoRaft) hasMajority(votes int) bool {
 }
 
 func (nr *NodoRaft) becomeFollowerLocked(newTerm int, leader int) {
-	nr.role = 0
+	nr.role = Follower
 	nr.currentTerm = newTerm
 	nr.votedFor = -1
 	nr.IdLider = leader
@@ -294,7 +300,7 @@ func (nr *NodoRaft) becomeFollowerLocked(newTerm int, leader int) {
 }
 
 func (nr *NodoRaft) becomeLeaderLocked() {
-	nr.role = 2
+	nr.role = Leader
 	nr.IdLider = nr.Yo
 	// Inicializa nextIndex/matchIndex
 	lastIdx := nr.lastLogIndex()
@@ -324,7 +330,7 @@ func (nr *NodoRaft) lastLogTerm() int {
 // En esta práctica NO aplicamos a la máquina de estados (eso será en la 5).
 // Aun así, avanzamos commitIndex cuando exista mayoría.
 func (nr *NodoRaft) tryAdvanceCommitIndexLocked() {
-	if nr.role != 2 { // solo líder
+	if nr.role != Leader { // solo líder
 		return
 	}
 	N := nr.commitIndex + 1
@@ -387,7 +393,7 @@ func (nr *NodoRaft) pushLogToPeer(peer int) {
 	for {
 		// Captura consistente bajo cerrojo
 		nr.Mux.Lock()
-		if nr.role != 2 {
+		if nr.role != Leader {
 			nr.Mux.Unlock()
 			return
 		}
@@ -423,7 +429,7 @@ func (nr *NodoRaft) pushLogToPeer(peer int) {
 			nr.Mux.Unlock()
 			return
 		}
-		if nr.role != 2 {
+		if nr.role != Leader {
 			nr.Mux.Unlock()
 			return
 		}
@@ -456,12 +462,12 @@ func (nr *NodoRaft) para() {
 func (nr *NodoRaft) obtenerEstado() (int, int, bool, int) {
 	nr.Mux.Lock()
 	defer nr.Mux.Unlock()
-	return nr.Yo, nr.currentTerm, nr.role == 2, nr.IdLider
+	return nr.Yo, nr.currentTerm, nr.role == Leader, nr.IdLider
 }
 
 func (nr *NodoRaft) someterOperacion(operacion TipoOperacion) (int, int, bool, int, string) {
 	nr.Mux.Lock()
-	if nr.role != 2 {
+	if nr.role != Leader {
 		defer nr.Mux.Unlock()
 		return -1, nr.currentTerm, false, nr.IdLider, ""
 	}
@@ -536,6 +542,48 @@ type ResultadoRemoto struct {
 
 func (nr *NodoRaft) SometerOperacionRaft(operacion TipoOperacion, reply *ResultadoRemoto) error {
 	reply.IndiceRegistro, reply.Mandato, reply.EsLider, reply.IdLider, reply.ValorADevolver = nr.someterOperacion(operacion)
+	return nil
+}
+
+// EstadoNodo para poder verificar desde los tests la ejecución de operaciones
+type EstadoNodo struct {
+	Term        int
+	Role        state
+	CommitIndex int
+	LastApplied int
+	LogLength   int
+}
+
+// método RPC que permite observar las variables internas de un nodo:
+func (nr *NodoRaft) ObtenerEstadoParaTest(args Vacio, reply *EstadoNodo) error {
+	nr.Mux.Lock()
+	defer nr.Mux.Unlock()
+
+	reply.Role = nr.role
+	reply.Term = nr.currentTerm
+	reply.CommitIndex = nr.commitIndex
+	reply.LastApplied = nr.lastApplied
+	reply.LogLength = len(nr.logEntries)
+	return nil
+}
+
+// ActivarTimers: RPC que ha de ser llamada en cada nodo para comenzar
+// proceso de elecciones
+func (nr *NodoRaft) ActivarTimers(args Vacio, reply *Vacio) error {
+	nr.Mux.Lock()
+	// Si hay un timer de elección en marcha: llamada duplicada a ActivarTimers
+	// no se hace nada
+	if nr.timer != nil {
+		nr.Mux.Unlock()
+		return nil
+	}
+	nr.initialElectionDelayUsed = false
+	nr.electionReset = time.Now()
+	nr.resetElectionTimerLocked() // inicializa electionReset y el timer
+	fmt.Printf("[Nodo %d] creado. AÚN NO Inicia goroutinas run() runWatchdog\n", nr.Yo)
+	nr.Mux.Unlock()
+	go nr.run()
+	go nr.runWatchdog()
 	return nil
 }
 
@@ -616,7 +664,7 @@ func (nr *NodoRaft) AppendEntries(args *ArgAppendEntries, results *Results) erro
 		return nil
 	}
 	// Vemos un término >=: nos alineamos como follower y reconocemos líder
-	if args.Term > nr.currentTerm || nr.role != 0 {
+	if args.Term > nr.currentTerm || nr.role != Follower {
 		nr.becomeFollowerLocked(args.Term, args.LeaderId)
 	} else {
 		nr.IdLider = args.LeaderId
@@ -695,7 +743,7 @@ func (nr *NodoRaft) enviarAppendEntries(nodo int, args *ArgAppendEntries, reply 
 // Envío periódico de latidos por el líder
 func (nr *NodoRaft) enviarHeartbeats() {
 	nr.Mux.Lock()
-	if nr.role != 2 {
+	if nr.role != Leader {
 		nr.Mux.Unlock()
 		return
 	}
