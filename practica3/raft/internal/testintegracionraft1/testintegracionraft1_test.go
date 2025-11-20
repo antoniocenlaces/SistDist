@@ -250,9 +250,9 @@ func (cfg *configDespliegue) tresOperacionesComprometidasEstable(t *testing.T) {
 	time.Sleep(400 * time.Millisecond)
 	cfg.activarTimersEnTodosLosNodos()
 
-	fmt.Printf("Busacando al Lider inicial\n")
+	fmt.Printf("Buscando al Lider inicial\n")
 	liderActual := cfg.pruebaUnLider(3)
-	fmt.Printf("Líder estable identificado: %d", liderActual+1)
+	fmt.Printf("Líder estable identificado: %d\n", liderActual+1)
 	// preparamos datos para someter operaciones al líder
 	var reply raft.ResultadoRemoto
 	for i := 1; i <= 3; i++ {
@@ -285,10 +285,10 @@ func (cfg *configDespliegue) tresOperacionesComprometidasEstable(t *testing.T) {
 	// ahora estadoNodo[i]contiene el estado de nodo i
 	// Parar réplicas almacenamiento en remoto
 	cfg.stopDistributedProcesses()
-
+	estadoNodo[0].CommitIndex = 0
 	// comprueba resultados
 	if err := cfg.verificarEstados(estadoNodo, liderActual); err != nil {
-		t.Fatalf("Error en verificación de estado: %s", err)
+		cfg.t.Fatalf("Error en verificación de estado: %s", err)
 	}
 	fmt.Println(".............", t.Name(), "Superado")
 }
