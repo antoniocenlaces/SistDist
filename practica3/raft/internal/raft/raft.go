@@ -223,7 +223,7 @@ func NuevoNodo(nodos []rpctimeout.HostPort, yo int, canalAplicarOperacion chan A
 		nr.nextIndex[i] = lastIdx + 1
 		nr.matchIndex[i] = 0
 	}
-
+	nr.Logger.Printf("Nodo: %d valores de Term: %d IdLider: %d", yo, nr.currentTerm, nr.IdLider)
 	// nr.resetTimer()
 	// go nr.runWatchdog()
 	return nr

@@ -472,8 +472,8 @@ func (cfg *configDespliegue) comprobarEstadoRemoto(idNodoDeseado int,
 
 	if idNodo != idNodoDeseado || mandato != mandatoDeseado ||
 		esLider != esLiderDeseado || idLider != IdLiderDeseado {
-		cfg.t.Fatalf("Estado incorrecto en replica %d en subtest %s",
-			idNodoDeseado, cfg.t.Name())
+		cfg.t.Fatalf("Estado incorrecto en replica %d en subtest %s; idNodo recibido: %d, term: %d, esLider? %v, idLider= %d\n",
+			idNodoDeseado, cfg.t.Name(), idNodo, mandato, esLider, idLider)
 	}
 
 }
