@@ -285,7 +285,7 @@ func (cfg *configDespliegue) tresOperacionesComprometidasEstable(t *testing.T) {
 	// ahora estadoNodo[i]contiene el estado de nodo i
 	// Parar réplicas almacenamiento en remoto
 	cfg.stopDistributedProcesses()
-	// estadoNodo[0].CommitIndex = 0
+
 	// comprueba resultados
 	if err := cfg.verificarEstados(estadoNodo, liderActual); err != nil {
 		cfg.t.Fatalf("Error en verificación de estado: %s", err)
@@ -321,23 +321,122 @@ func (cfg *configDespliegue) verificarEstados(estadoNodo []raft.EstadoNodo,
 	return nil
 }
 
-// estadoNodo[0].Role = raft.Leader
-// estadoNodo[0].CommitIndex = 0
-// estadoNodo[0].LastApplied = 0
-// estadoNodo[0].LogLength = 0
 // Se consigue acuerdo a pesar de desconexiones de seguidor -- 3 NODOS RAFT
 func (cfg *configDespliegue) AcuerdoApesarDeSeguidor(t *testing.T) {
-	t.Skip("SKIPPED AcuerdoApesarDeSeguidor")
+	// t.Skip("SKIPPED AcuerdoApesarDeSeguidor")
+	fmt.Println(t.Name(), ".....................")
 
-	// A completar ???
+	cfg.startDistributedProcesses()
+	time.Sleep(200 * time.Millisecond)
+	cfg.activarTimersEnTodosLosNodos()
 
-	// Comprometer una entrada
+	// 1. Obtener líder
+	lider := cfg.pruebaUnLider(3)
+	fmt.Printf("Líder inicial: %d\n", lider)
 
-	//  Obtener un lider y, a continuación desconectar una de los nodos Raft
+	// 2. Comprometer 1 operación con todos conectados
+	var reply raft.ResultadoRemoto
+	op1 := raft.TipoOperacion{
+		Operacion: "escribir",
+		Clave:     "k1",
+		Valor:     "v1",
+	}
+	err := cfg.nodosRaft[lider].CallTimeout(
+		"NodoRaft.SometerOperacionRaft",
+		op1,
+		&reply,
+		30*time.Millisecond,
+	)
+	check.CheckError(err, "Error RPC SometerOperacion (op1)")
 
-	// Comprobar varios acuerdos con una réplica desconectada
+	// Esperar propagación
+	time.Sleep(1500 * time.Millisecond)
 
-	// reconectar nodo Raft previamente desconectado y comprobar varios acuerdos
+	// 3. Desconectar un seguidor
+	var seguidor int
+	if lider == 0 {
+		seguidor = 1
+	} else {
+		seguidor = 0
+	}
+	fmt.Printf("Desconectando seguidor %d\n", seguidor)
+
+	var vacio raft.Vacio
+	err = cfg.nodosRaft[seguidor].CallTimeout(
+		"NodoRaft.ParaNodo",
+		raft.Vacio{},
+		&vacio,
+		10*time.Millisecond)
+	check.CheckError(err, "Error RPC ParaNodo")
+	cfg.conectados[seguidor] = false
+
+	// 4. Comprometer varias operaciones con solo 2 nodos activos (mayoría)
+	for i := 2; i <= 4; i++ {
+		op := raft.TipoOperacion{
+			Operacion: "escribir",
+			Clave:     fmt.Sprintf("k%d", i),
+			Valor:     fmt.Sprintf("v%d", i),
+		}
+		err := cfg.nodosRaft[lider].CallTimeout(
+			"NodoRaft.SometerOperacionRaft",
+			op,
+			&reply,
+			40*time.Millisecond,
+		)
+		check.CheckError(err, "Error RPC SometerOperacion (con seguidor desconectado)")
+	}
+
+	// Esperar replicación a 2 nodos
+	time.Sleep(2000 * time.Millisecond)
+
+	// 5. Reconectar nodo previamente desconectado
+	fmt.Printf("Reconectando nodo %d\n", seguidor)
+	despliegue.ExecMutipleHosts(
+		EXECREPLICACMD+" "+strconv.Itoa(seguidor)+" "+
+			rpctimeout.HostPortArrayToString(cfg.nodosRaft),
+		[]string{cfg.nodosRaft[seguidor].Host()},
+		cfg.cr,
+		PRIVKEYFILE,
+	)
+	cfg.conectados[seguidor] = true
+
+	// Activar de nuevo timers en ese nodo
+	err = cfg.nodosRaft[seguidor].CallTimeout(
+		"NodoRaft.ActivarTimers",
+		raft.Vacio{},
+		&vacio,
+		10*time.Millisecond)
+	// si error, no abortamos, puede tardar
+	if err != nil {
+		fmt.Println("Aviso: error activando timers en reconexión:", err)
+	}
+	time.Sleep(2500 * time.Millisecond)
+	// 6. Obtener estado final
+	estado := make([]raft.EstadoNodo, 3)
+	for i := 0; i < 3; i++ {
+		if cfg.conectados[i] {
+			err := cfg.nodosRaft[i].CallTimeout(
+				"NodoRaft.ObtenerEstadoParaTest",
+				raft.Vacio{},
+				&estado[i],
+				20*time.Millisecond)
+			check.CheckError(err, "Error RPC ObtenerEstadoParaTest")
+		}
+	}
+
+	// 7. Verificar que todos tienen commitIndex >= 4
+	for i := 0; i < 3; i++ {
+		if !cfg.conectados[i] {
+			continue
+		}
+		if estado[i].CommitIndex < 4 {
+			t.Fatalf("Replica %d commitIndex=%d, esperado >=4", i+1, estado[i].CommitIndex)
+		}
+	}
+
+	fmt.Println(".............", t.Name(), "Superado")
+
+	cfg.stopDistributedProcesses()
 }
 
 // NO se consigue acuerdo al desconectarse mayoría de seguidores -- 3 NODOS RAFT
