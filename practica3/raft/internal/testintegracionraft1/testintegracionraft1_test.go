@@ -386,7 +386,7 @@ func (cfg *configDespliegue) AcuerdoApesarDeSeguidor(t *testing.T) {
 		check.CheckError(err, "Error RPC SometerOperacion (con seguidor desconectado)")
 	}
 
-	// Esperar replicación a 2 nodos
+	// Esperar replicación a 1 nodo
 	time.Sleep(2000 * time.Millisecond)
 
 	// 5. Reconectar nodo previamente desconectado
@@ -399,7 +399,7 @@ func (cfg *configDespliegue) AcuerdoApesarDeSeguidor(t *testing.T) {
 		PRIVKEYFILE,
 	)
 	cfg.conectados[seguidor] = true
-
+	time.Sleep(250 * time.Millisecond)
 	// Activar de nuevo timers en ese nodo
 	err = cfg.nodosRaft[seguidor].CallTimeout(
 		"NodoRaft.ActivarTimers",
