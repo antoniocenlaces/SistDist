@@ -107,7 +107,7 @@ func TestAcuerdosConFallos(t *testing.T) { // (m *testing.M) {
 	cfg := makeCfgDespliegue(t,
 		3,
 		[]string{REPLICA1, REPLICA2, REPLICA3},
-		[]bool{true, true, true})
+		[]bool{false, false, false})
 
 	// tear down code
 	// eliminar procesos en máquinas remotas
