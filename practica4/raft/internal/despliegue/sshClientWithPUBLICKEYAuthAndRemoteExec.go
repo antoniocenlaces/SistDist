@@ -12,8 +12,9 @@ package despliegue
 import (
 	"bufio"
 	"bytes"
+
 	//"fmt"
-	"io/ioutil"
+
 	"log"
 	"os"
 	"path/filepath"
@@ -126,8 +127,8 @@ func ExecMutipleHosts(cmd string,
 	//results := make(chan string, 1000)
 
 	//Read private key file for user
-	pkey, err := ioutil.ReadFile(
-						  filepath.Join(os.Getenv("HOME"), ".ssh", privKeyFile))
+	pkey, err := os.ReadFile(
+		filepath.Join(os.Getenv("HOME"), ".ssh", privKeyFile))
 
 	//fmt.Println("PrivKey: ", string(pkey))
 
