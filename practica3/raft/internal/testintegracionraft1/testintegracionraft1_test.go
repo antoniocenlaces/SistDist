@@ -399,7 +399,7 @@ func (cfg *configDespliegue) AcuerdoApesarDeSeguidor(t *testing.T) {
 		PRIVKEYFILE,
 	)
 	cfg.conectados[seguidor] = true
-	time.Sleep(250 * time.Millisecond)
+	time.Sleep(2250 * time.Millisecond)
 	// Activar de nuevo timers en ese nodo
 	err = cfg.nodosRaft[seguidor].CallTimeout(
 		"NodoRaft.ActivarTimers",
@@ -410,7 +410,7 @@ func (cfg *configDespliegue) AcuerdoApesarDeSeguidor(t *testing.T) {
 	if err != nil {
 		fmt.Println("Aviso: error activando timers en reconexión:", err)
 	}
-	time.Sleep(2500 * time.Millisecond)
+	time.Sleep(3500 * time.Millisecond)
 	// 6. Obtener estado final
 	estado := make([]raft.EstadoNodo, 3)
 	for i := 0; i < 3; i++ {
