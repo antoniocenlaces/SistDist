@@ -2,6 +2,8 @@ package testintegracionraft1
 
 import (
 	"fmt"
+	"os"
+	"path/filepath"
 	"raft/internal/comun/check"
 
 	//"log"
@@ -46,8 +48,9 @@ const (
 
 // PATH de los ejecutables de modulo golang de servicio Raft
 // var PATH string = filepath.Join(os.Getenv("HOME"), "tmp", "p3", "raft")
-// var PATH string = filepath.Join(os.Getenv("PWD"), "..", "..")
-var PATH string = "/misc/alumnos/sd/sd2526/a143045/SistDist/practica3/raft"
+var PATH string = filepath.Join(os.Getenv("PWD"), "..", "..")
+
+// var PATH string = "/misc/alumnos/sd/sd2526/a143045/SistDist/practica3/raft"
 
 // go run cmd/srvraft/main.go 0 127.0.0.1:29001 127.0.0.1:29002 127.0.0.1:29003
 var EXECREPLICACMD string = "cd " + PATH + "; go run " + EXECREPLICA
