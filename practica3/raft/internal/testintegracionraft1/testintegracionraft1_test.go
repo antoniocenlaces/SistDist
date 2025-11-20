@@ -399,7 +399,8 @@ func (cfg *configDespliegue) AcuerdoApesarDeSeguidor(t *testing.T) {
 		PRIVKEYFILE,
 	)
 	cfg.conectados[seguidor] = true
-	time.Sleep(2250 * time.Millisecond)
+	fmt.Printf("Verifica si en nodo %d está corriendo el server", seguidor)
+	time.Sleep(15250 * time.Millisecond)
 	// Activar de nuevo timers en ese nodo
 	err = cfg.nodosRaft[seguidor].CallTimeout(
 		"NodoRaft.ActivarTimers",
