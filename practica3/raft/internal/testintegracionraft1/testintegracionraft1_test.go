@@ -59,7 +59,9 @@ func TestPrimerasPruebas(t *testing.T) { // (m *testing.M) {
 	cfg := makeCfgDespliegue(t,
 		3,
 		[]string{REPLICA1, REPLICA2, REPLICA3},
-		[]bool{true, true, true})
+		// sistema de test arranc con nodos parados
+		// en el arranque se marca quién está activo
+		[]bool{false, false, false})
 
 	// tear down code
 	// eliminar procesos en máquinas remotas
@@ -69,19 +71,33 @@ func TestPrimerasPruebas(t *testing.T) { // (m *testing.M) {
 
 	// Test1 : No debería haber ningun primario, si SV no ha recibido aún latidos
 	t.Run("T1:soloArranqueYparada",
-		func(t *testing.T) { cfg.soloArranqueYparadaTest1(t) })
+		func(t *testing.T) {
+			// para garantizar que aunque el test falle se paran los nodos
+			// que queden activos
+			defer cfg.stopDistributedProcesses()
+			cfg.soloArranqueYparadaTest1(t)
+		})
 
 	// Test2 : No debería haber ningun primario, si SV no ha recibido aún latidos
 	t.Run("T2:ElegirPrimerLider",
-		func(t *testing.T) { cfg.elegirPrimerLiderTest2(t) })
+		func(t *testing.T) {
+			defer cfg.stopDistributedProcesses()
+			cfg.elegirPrimerLiderTest2(t)
+		})
 
 	// Test3: tenemos el primer primario correcto
 	t.Run("T3:FalloAnteriorElegirNuevoLider",
-		func(t *testing.T) { cfg.falloAnteriorElegirNuevoLiderTest3(t) })
+		func(t *testing.T) {
+			defer cfg.stopDistributedProcesses()
+			cfg.falloAnteriorElegirNuevoLiderTest3(t)
+		})
 
 	// Test4: Tres operaciones comprometidas en configuración estable
 	t.Run("T4:tresOperacionesComprometidasEstable",
-		func(t *testing.T) { cfg.tresOperacionesComprometidasEstable(t) })
+		func(t *testing.T) {
+			defer cfg.stopDistributedProcesses()
+			cfg.tresOperacionesComprometidasEstable(t)
+		})
 }
 
 // TEST primer rango
@@ -99,13 +115,22 @@ func TestAcuerdosConFallos(t *testing.T) { // (m *testing.M) {
 
 	// Test5: Se consigue acuerdo a pesar de desconexiones de seguidor
 	t.Run("T5:AcuerdoAPesarDeDesconexionesDeSeguidor ",
-		func(t *testing.T) { cfg.AcuerdoApesarDeSeguidor(t) })
+		func(t *testing.T) {
+			defer cfg.stopDistributedProcesses()
+			cfg.AcuerdoApesarDeSeguidor(t)
+		})
 
 	t.Run("T5:SinAcuerdoPorFallos ",
-		func(t *testing.T) { cfg.SinAcuerdoPorFallos(t) })
+		func(t *testing.T) {
+			defer cfg.stopDistributedProcesses()
+			cfg.SinAcuerdoPorFallos(t)
+		})
 
 	t.Run("T5:SometerConcurrentementeOperaciones ",
-		func(t *testing.T) { cfg.SometerConcurrentementeOperaciones(t) })
+		func(t *testing.T) {
+			defer cfg.stopDistributedProcesses()
+			cfg.SometerConcurrentementeOperaciones(t)
+		})
 
 }
 
@@ -147,7 +172,9 @@ func makeCfgDespliegue(t *testing.T, n int, nodosraft []string,
 }
 
 func (cfg *configDespliegue) stop() {
-	//cfg.stopDistributedProcesses()
+	// la rutina que para los procesos controla los que están activos
+	// usando cfg.conectados[]
+	cfg.stopDistributedProcesses()
 
 	time.Sleep(50 * time.Millisecond)
 
@@ -526,6 +553,7 @@ func (cfg *configDespliegue) startDistributedProcesses() {
 	//cfg.t.Log("Before starting following distributed processes: ", cfg.nodosRaft)
 
 	for i, endPoint := range cfg.nodosRaft {
+		cfg.conectados[i] = true // control de qué nodos están activos
 		despliegue.ExecMutipleHosts(EXECREPLICACMD+
 			" "+strconv.Itoa(i)+" "+
 			rpctimeout.HostPortArrayToString(cfg.nodosRaft),
@@ -547,6 +575,8 @@ func (cfg *configDespliegue) stopDistributedProcesses() {
 			err := endPoint.CallTimeout("NodoRaft.ParaNodo",
 				raft.Vacio{}, &reply, 10*time.Millisecond)
 			check.CheckError(err, "Error en llamada RPC Para nodo")
+			cfg.conectados[i] = false // para poder llamar a
+			// stopDistributedProcesses desde stop()
 		}
 	}
 }
