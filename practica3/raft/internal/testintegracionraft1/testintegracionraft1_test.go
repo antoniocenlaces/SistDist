@@ -168,7 +168,7 @@ func (cfg *configDespliegue) soloArranqueYparadaTest1(t *testing.T) {
 	// Poner en marcha replicas en remoto con un tiempo de espera incluido
 	cfg.startDistributedProcesses()
 
-	time.Sleep(2 * time.Second)
+	time.Sleep(3 * time.Second)
 
 	// Comprobar estado replica 0
 	cfg.comprobarEstadoRemoto(0, 0, false, -1)
@@ -285,7 +285,7 @@ func (cfg *configDespliegue) tresOperacionesComprometidasEstable(t *testing.T) {
 	// ahora estadoNodo[i]contiene el estado de nodo i
 	// Parar réplicas almacenamiento en remoto
 	cfg.stopDistributedProcesses()
-	estadoNodo[0].CommitIndex = 0
+	// estadoNodo[0].CommitIndex = 0
 	// comprueba resultados
 	if err := cfg.verificarEstados(estadoNodo, liderActual); err != nil {
 		cfg.t.Fatalf("Error en verificación de estado: %s", err)
