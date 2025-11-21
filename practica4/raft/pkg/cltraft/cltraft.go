@@ -28,7 +28,10 @@ func main() {
 	}
 	log.SetFlags(log.Lshortfile | log.Lmicroseconds)
 	log.Printf("[CLIENTE %d] Iniciado con endpoints: %v", me, nodos)
+	// Activa timers en todos los nodos
+	// for i, node := range nodos{
 
+	// }
 	// ===============================
 	// DESCUBRIR LÍDER
 	// ===============================

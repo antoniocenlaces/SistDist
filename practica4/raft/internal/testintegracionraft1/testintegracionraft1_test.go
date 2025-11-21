@@ -518,11 +518,11 @@ func (cfg *configDespliegue) SinAcuerdoPorFallos(t *testing.T) {
 
 		// Aquí NO comprobamos error → es normal que no pueda comprometer
 		_ = cfg.nodosRaft[lider].CallTimeout("NodoRaft.SometerOperacionRaft",
-			op, &reply, 40*time.Millisecond)
+			op, &reply, 90*time.Millisecond)
 	}
 
 	// 5. Verificar que el commitIndex del líder permanece en 1
-	time.Sleep(1200 * time.Millisecond)
+	time.Sleep(2200 * time.Millisecond)
 
 	var estLider raft.EstadoNodo
 	err = cfg.nodosRaft[lider].CallTimeout("NodoRaft.ObtenerEstadoParaTest",
