@@ -343,11 +343,10 @@ func (nr *NodoRaft) someterOperacion(operacion TipoOperacion) (int, int, bool, i
 
 	// Operación OP2 = leer
 	if operacion.Operacion == OP2 {
-		// valor, ok := nr.logStore[operacion.Clave]
-		// if !ok {
-		// 	return -1, mandato, true, nr.Yo, nil // clave no existe
-		// }
-		valor := "k1_para_siempre"
+		valor, ok := nr.logStore[operacion.Clave]
+		if !ok {
+			return -1, mandato, true, nr.Yo, nil // clave no existe
+		}
 		return -1, mandato, true, nr.Yo, &valor
 	}
 	// solo operaciones que añaden registros clave-valor van a nr.logEntries

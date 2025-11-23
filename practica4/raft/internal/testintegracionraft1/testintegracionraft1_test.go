@@ -313,9 +313,9 @@ func (cfg *configDespliegue) tresOperacionesComprometidasEstable(t *testing.T) {
 		)
 		check.CheckError(err, "Error RPC SometerOperacion")
 		if reply.ValorADevolver == nil {
-			fmt.Printf("No existe la clave %d en el diccionario", i)
+			fmt.Printf("No existe la clave %d en el diccionario\n", i)
 		} else {
-			fmt.Printf("Pedido leer clave: %d. Valor recibido: %s valor esperado v%d", i, *reply.ValorADevolver, i)
+			fmt.Printf("Pedido leer clave: %d. Valor recibido: %s valor esperado v%d\n", i, *reply.ValorADevolver, i)
 		}
 	}
 	// sometidas tres operaciones al líder estable
