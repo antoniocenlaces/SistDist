@@ -40,8 +40,10 @@ const (
 	// Aseguraros de poner kEnableDebugLogs a false antes de la entrega
 	kEnableDebugLogs = false
 	// Poner a true para logear a stdout en lugar de a fichero
-	kLogToStdout  = false
-	kLogOutputDir = "/misc/alumnos/sd/sd2526/a143045/SistDist/practica3/raft/cmd/srvraft/logs_raft/"
+	kLogToStdout = false
+	// Para llevar los logs de salida
+	// kLogOutputDir = "/misc/alumnos/sd/sd2526/a143045/SistDist/practica3/raft/cmd/srvraft/logs_raft/"
+	kLogOutputDir = "./logs_raft/"
 
 	// timers / rates (ajustables)
 	baseTimer     = 450
@@ -50,12 +52,17 @@ const (
 	heartbeatRate = 90
 	Deadline      = 2500
 
+	// Operaciones permitidas en esta versión
+	OP1 = "escribir"
+	OP2 = "leer"
+
 	Follower state = iota
 	Candidate
 	Leader
 )
 
 // TipoOperacion expuesto a cliente
+// Solo se permiten valores de Operacion: OP1 = "escribir" / OP2 = "leer"
 type TipoOperacion struct {
 	Operacion string
 	Clave     string
@@ -83,7 +90,8 @@ type NodoRaft struct {
 	// persistente
 	currentTerm int
 	votedFor    int
-	logEntries  []logEntry // index base 1 (logEntries[0] es hueco)
+	logEntries  []logEntry        // index base 1 (logEntries[0] es hueco)
+	logStore    map[string]string // Diccionario clave valor
 
 	// volátil
 	commitIndex int
@@ -187,6 +195,7 @@ func NuevoNodo(nodos []rpctimeout.HostPort, yo int, canalAplicarOperacion chan A
 		currentTerm:              0,
 		votedFor:                 IntNOINICIALIZADO,
 		logEntries:               make([]logEntry, 1),
+		logStore:                 make(map[string]string),
 		commitIndex:              0,
 		lastApplied:              0,
 		nextIndex:                make(map[int]int),
@@ -274,13 +283,16 @@ func (nr *NodoRaft) ObtenerEstadoParaTest(args Vacio, reply *EstadoNodo) error {
 	return nil
 }
 
+// En caso de OP2 = leer si la clave requerida no existe se devuelve nil
 type ResultadoRemoto struct {
-	ValorADevolver string
+	ValorADevolver *string
 	IndiceRegistro int
 	EstadoParcial
 }
 
 // someterOperacion RPC: cliente somete una operación al nodo local
+// en el call-back a este método RPC en caso de operación "leer"
+// si reply.ValorADevolver es nil es que la clave solicitada no existe
 func (nr *NodoRaft) SometerOperacionRaft(operacion TipoOperacion, reply *ResultadoRemoto) error {
 	idx, term, esLider, idLider, valor := nr.someterOperacion(operacion)
 	reply.IndiceRegistro = idx
@@ -314,18 +326,31 @@ func (nr *NodoRaft) ActivarTimers(args Vacio, reply *Vacio) error {
 	return nil
 }
 
+// para OP1 = escribir
 // someterOperacion: si soy líder, se añade la entrada localmente y se devuelve índice.
-// Replciación posterior la realiza pushLoop/EnviarLatido
-func (nr *NodoRaft) someterOperacion(operacion TipoOperacion) (int, int, bool, int, string) {
+// Replicación posterior la realiza pushLoop/EnviarLatido
+// para OP2 = leer se devuelve el valor asociado a esa clave, si existe, de lo contrario
+// devuelve nil en último valor devuelto
+func (nr *NodoRaft) someterOperacion(operacion TipoOperacion) (int, int, bool, int, *string) {
 	nr.Mux.Lock()
 	defer nr.Mux.Unlock()
 
 	mandato := nr.currentTerm
 	idLider := nr.IdLider
 	if nr.role != Leader {
-		return -1, mandato, false, idLider, ""
+		return -1, mandato, false, idLider, nil
 	}
 
+	// Operación OP2 = lectura
+	if operacion.Operacion == OP2 {
+		valor, ok := nr.logStore[operacion.Clave]
+		if !ok {
+			return -1, mandato, true, nr.Yo, nil // clave no existe
+		}
+		return -1, mandato, true, nr.Yo, &valor
+	}
+	// solo operaciones que añaden registros clave-valor van a nr.logEntries
+	// OP1 = escritura => añadir a logEntries
 	entry := logEntry{Term: nr.currentTerm, Operacion: operacion}
 	nr.logEntries = append(nr.logEntries, entry)
 	indice := len(nr.logEntries) - 1
@@ -335,7 +360,7 @@ func (nr *NodoRaft) someterOperacion(operacion TipoOperacion) (int, int, bool, i
 	nr.matchIndex[nr.Yo] = indice
 
 	// la replicación queda en pushLoop()
-	return indice, mandato, true, nr.Yo, ""
+	return indice, mandato, true, nr.Yo, nil
 }
 
 // === RPCs del protocolo Raft ===
@@ -705,6 +730,8 @@ func (nr *NodoRaft) actualizarCommitLocked() {
 	}
 }
 
+// Envía a la máquina de estados de cada nodo la operación
+// siguiente a nr.lastApplied en el log
 func (nr *NodoRaft) aplicarEntradas() {
 	for {
 		nr.Mux.Lock()
@@ -714,6 +741,11 @@ func (nr *NodoRaft) aplicarEntradas() {
 		}
 		nr.lastApplied++
 		entry := nr.logEntries[nr.lastApplied]
+		// Solo operaciones que añaden nuevos valores KV son actualizadas en logStore
+		// para todos los nodos
+		if entry.Operacion.Operacion == OP1 {
+			nr.logStore[entry.Operacion.Clave] = entry.Operacion.Valor
+		}
 		nr.Mux.Unlock()
 
 		op := AplicaOperacion{Indice: nr.lastApplied, Operacion: entry.Operacion}

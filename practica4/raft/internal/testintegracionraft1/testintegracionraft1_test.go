@@ -299,6 +299,25 @@ func (cfg *configDespliegue) tresOperacionesComprometidasEstable(t *testing.T) {
 		)
 		check.CheckError(err, "Error RPC SometerOperacion")
 	}
+	// prueba de lectura:
+	for i := 1; i <= 3; i++ {
+		op := raft.TipoOperacion{
+			Operacion: "leer",
+			Clave:     fmt.Sprintf("k%d", i),
+		}
+		err := cfg.nodosRaft[liderActual].CallTimeout(
+			"NodoRaft.SometerOperacionRaft",
+			op,
+			&reply,
+			30*time.Millisecond,
+		)
+		check.CheckError(err, "Error RPC SometerOperacion")
+		if reply.ValorADevolver == nil {
+			fmt.Printf("No existe la clave %d en el diccionario", i)
+		} else {
+			fmt.Printf("Pedido leer clave: %d. Valor recibido: %s valor esperado v%d", i, *reply.ValorADevolver, i)
+		}
+	}
 	// sometidas tres operaciones al líder estable
 	// espera para dar tiempo a resto de nodos replicar
 	time.Sleep(2000 * time.Millisecond)
