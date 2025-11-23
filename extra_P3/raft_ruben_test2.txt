@@ -1,3 +1,6 @@
+// esta versión tiene una estructura diferente de func (nr *NodoRaft) tryAdvanceCommitIndexLocked()
+// pero aún así falla en Test 5.2
+
 // Escribir vuestro código de funcionalidad Raft en este fichero
 //
 // Implementación base del algoritmo Raft siguiendo el documento adjunto (RaftDoc.pdf).
