@@ -329,33 +329,45 @@ func (nr *NodoRaft) lastLogTerm() int {
 // ===== Helpers de commit y replicación (Práctica 3) =====
 // En esta práctica NO aplicamos a la máquina de estados (eso será en la 5).
 // Aun así, avanzamos commitIndex cuando exista mayoría.
+// ===== Parche: Versión corregida =====
 func (nr *NodoRaft) tryAdvanceCommitIndexLocked() {
-	if nr.role != Leader { // solo líder
-		return
-	}
-	N := nr.commitIndex + 1
-	for N <= nr.lastLogIndex() {
-		cont := 1 // el líder cuenta
-		for i := range nr.Nodos {
-			if i == nr.Yo {
-				continue
-			}
-			if nr.matchIndex[i] >= N {
-				cont++
-			}
-		}
-		// En la práctica 3 no exigen la regla del término actual explícitamente (§5.4.1 es para la 4),
-		// pero la mantenemos para seguridad: solo avanzar entradas de este término
-		if cont > len(nr.Nodos)/2 && nr.logEntries[N].Term == nr.currentTerm {
-			nr.commitIndex = N
-			N++
-		} else {
-			break
-		}
-	}
-	// APLICAR entradas comprometidas recién alcanzadas
-	nr.applyCommittedEntriesLocked()
+    if nr.role != Leader {
+        return
+    }
+
+    lastIndex := nr.lastLogIndex()
+
+    // Intentamos avanzar commitIndex desde el siguiente
+    for N := nr.commitIndex + 1; N <= lastIndex; N++ {
+
+        // Entradas de líder siempre se pueden commitear
+        if nr.logEntries[N].Term != nr.currentTerm {
+            continue
+        }
+
+        // Contar nodos que realmente tienen matchIndex >= N
+        count := 1 // líder
+
+        for peer := range nr.Nodos {
+            if peer == nr.Yo {
+                continue
+            }
+            // condición crítica:
+            // un nodo solo se cuenta si matchIndex fue actualizado recientemente
+            if nr.matchIndex[peer] >= N {
+                count++
+            }
+        }
+
+        // ¿mayoría real?
+        if count > len(nr.Nodos)/2 {
+            nr.commitIndex = N
+        }
+    }
+
+    nr.applyCommittedEntriesLocked()
 }
+
 
 // Aplica en la máquina de estados (vía canalAplicarOperacion) todas las
 // entradas comprometidas que aún no han sido aplicadas.
