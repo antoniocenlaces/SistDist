@@ -698,6 +698,8 @@ func (nr *NodoRaft) actualizarCommitLocked() {
 		}
 		if cont > len(nr.Nodos)/2 && nr.logEntries[i].Term == nr.currentTerm {
 			nr.commitIndex = i
+			// al devolver el control al caller debe liberar Mutex
+			// aplicarEntradas() lo vuelve a bloquear
 			go nr.aplicarEntradas()
 		}
 	}

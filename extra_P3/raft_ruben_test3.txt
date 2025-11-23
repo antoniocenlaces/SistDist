@@ -365,37 +365,6 @@ func (nr *NodoRaft) aplicarEntradas() {
 	}
 }
 
-// Aplica en la máquina de estados (vía canalAplicarOperacion) todas las
-// entradas comprometidas que aún no han sido aplicadas.
-// Debe llamarse SIEMPRE con el mutex tomado.
-func (nr *NodoRaft) applyCommittedEntriesLocked() {
-	if nr.lastApplied >= nr.commitIndex {
-		return
-	}
-
-	start := nr.lastApplied + 1
-	end := nr.commitIndex
-
-	// Preparamos fuera del candado qué operaciones enviar
-	applies := make([]AplicaOperacion, 0, end-start+1)
-	for i := start; i <= end; i++ {
-		applies = append(applies, AplicaOperacion{
-			Indice:    i,
-			Operacion: nr.logEntries[i].Operacion,
-		})
-	}
-	nr.lastApplied = end
-
-	// Enviar por el canal fuera de la sección crítica
-
-	go func(ops []AplicaOperacion) {
-		for _, op := range ops {
-			nr.Logger.Printf("Nodo %d Mando aplicar %v", nr.Yo, op)
-			nr.canalAplicarOperacion <- op
-		}
-	}(applies)
-}
-
 // Empuja log a un peer: maneja conflictos (retrocede nextIndex) y reintenta
 func (nr *NodoRaft) pushLogToPeer(peer int) {
 	for {
