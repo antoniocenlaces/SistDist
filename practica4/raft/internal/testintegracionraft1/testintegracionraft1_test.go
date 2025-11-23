@@ -299,6 +299,7 @@ func (cfg *configDespliegue) tresOperacionesComprometidasEstable(t *testing.T) {
 		)
 		check.CheckError(err, "Error RPC SometerOperacion")
 	}
+	time.Sleep(4000 * time.Millisecond)
 	// prueba de lectura:
 	for i := 1; i <= 3; i++ {
 		op := raft.TipoOperacion{
@@ -320,7 +321,7 @@ func (cfg *configDespliegue) tresOperacionesComprometidasEstable(t *testing.T) {
 	}
 	// sometidas tres operaciones al líder estable
 	// espera para dar tiempo a resto de nodos replicar
-	time.Sleep(2000 * time.Millisecond)
+	// time.Sleep(2000 * time.Millisecond)
 	// recupera situación de los tres nodos
 	estadoNodo := make([]raft.EstadoNodo, 3)
 	for i := 0; i < 3; i++ {

@@ -360,6 +360,10 @@ func (nr *NodoRaft) someterOperacion(operacion TipoOperacion) (int, int, bool, i
 	nr.matchIndex[nr.Yo] = indice
 
 	// la replicación queda en pushLoop()
+	// que replica logEntry a los otros nodos
+	// y también se encarga de someter a SM las entradas comprometidas
+	// al someter a SM es cuando también se almacena en logStore
+	// de forma a poder responder a las lecturas
 	return indice, mandato, true, nr.Yo, nil
 }
 
@@ -608,6 +612,7 @@ func (nr *NodoRaft) iniciarEleccion() {
 }
 
 // pushLoop: una goroutine por follower desde líder, gestiona heartbeats y replicación
+// punto único de avance de commitIndex y nextIndex[]
 func (nr *NodoRaft) pushLoop(node int, peer rpctimeout.HostPort) {
 	heartbeatTicker := time.NewTicker(heartbeatRate * time.Millisecond)
 	defer heartbeatTicker.Stop()
@@ -691,7 +696,10 @@ func (nr *NodoRaft) pushLoop(node int, peer rpctimeout.HostPort) {
 	}
 }
 
+// nuevo líder comienza a enviar latidos a los followers
 // enviarLatido: crea pushLoop por cada follower (no bloquea)
+// pushLoop rutina es la que hace la replicación del log
+// y actualiza logStore
 func (nr *NodoRaft) enviarLatido() {
 	nr.Mux.Lock()
 	if nr.role != Leader {
