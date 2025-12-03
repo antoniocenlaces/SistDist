@@ -1,0 +1,4 @@
+FROM scratch
+COPY nodoRaft /nodoRaft
+EXPOSE 29280
+ENTRYPOINT ["/nodoRaft"]
