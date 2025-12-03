@@ -23,7 +23,7 @@ func activarTimers(nodos []rpctimeout.HostPort) {
 }
 
 func main() {
-	log.Println("⏳ Esperando que Raft esté Ready...")
+	log.Println("Esperando que Raft esté Ready...")
 
 	cmd := exec.Command("kubectl", "wait",
 		"--for=condition=Ready", "pod",
