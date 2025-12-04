@@ -29,13 +29,11 @@ spec:
     spec:
       containers:
       - name: raft-node
-        image: localhost:5001/nodoraft:5000
-        imagePullPolicy: Always
+        image: localhost:5001/nodoraft:latest
+        imagePullPolicy: IfNotPresent
+        command: ["/bin/sh", "-c"]
         args:
-        - "$(MY_ID)"
-        - "raft-0.raft-svc:29280"
-        - "raft-1.raft-svc:29280"
-        - "raft-2.raft-svc:29280"
+        - "./srvraft \"$MY_ID\" raft-0.raft-svc:29280 raft-1.raft-svc:29280 raft-2.raft-svc:29280"
         env:
         - name: MY_ID
           valueFrom:
@@ -43,10 +41,23 @@ spec:
               fieldPath: metadata.name
         ports:
         - containerPort: 29280
+          name: rpc
         readinessProbe:
           tcpSocket:
-            port: 29280
+            port: rpc
           initialDelaySeconds: 3
           periodSeconds: 3
-          failureThreshold: 100
-
+          failureThreshold: 10
+        livenessProbe:
+          tcpSocket:
+            port: rpc
+          initialDelaySeconds: 30
+          periodSeconds: 10
+      # opcional: intentar distribuir pods en distintos nodos (si el cluster tiene varios workers)
+      affinity:
+        podAntiAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+          - labelSelector:
+              matchLabels:
+                app: raft
+            topologyKey: "kubernetes.io/hostname"
