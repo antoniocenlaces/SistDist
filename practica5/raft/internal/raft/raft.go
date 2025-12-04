@@ -26,6 +26,7 @@ import (
 	"math/rand"
 	"os"
 	"sync"
+	"sync/atomic"
 	"time"
 
 	"raft/internal/comun/rpctimeout"
@@ -108,6 +109,7 @@ type NodoRaft struct {
 	timer                    *time.Timer
 	rng                      *rand.Rand
 	initialElectionDelayUsed bool
+	readyFlag                uint32 // 0 = not ready, 1 = ready
 	canalAplicarOperacion    chan AplicaOperacion
 }
 
@@ -140,8 +142,7 @@ func (nr *NodoRaft) isCandidateUpToDate(cLastIdx, cLastTerm int) bool {
 func (nr *NodoRaft) resetTimer() {
 	var dur time.Duration
 	if !nr.initialElectionDelayUsed {
-		nr.initialElectionDelayUsed = true
-		dur = time.Duration(1500+nr.rng.Intn(500)) * time.Millisecond
+		dur = time.Duration(30000+nr.rng.Intn(500)) * time.Millisecond
 	} else {
 		dur = time.Duration(baseTimer+nr.rng.Intn(ceilTimer-baseTimer)) * time.Millisecond
 	}
@@ -160,25 +161,29 @@ func (nr *NodoRaft) resetTimer() {
 	nr.timer = time.AfterFunc(dur, func() {
 		// Llamada fuera de lock: iniciarEleccion gestionará locking internamente.
 		nr.iniciarEleccion()
+		nr.initialElectionDelayUsed = true
 	})
 }
 
 func (nr *NodoRaft) runWatchdog() {
+
 	ticker := time.NewTicker(100 * time.Millisecond)
 	defer ticker.Stop()
 	deadline := Deadline * time.Millisecond
 	lastOk := time.Now()
 	for range ticker.C {
-		nr.Mux.Lock()
-		ok := nr.role == Leader || time.Since(nr.electionReset) < deadline
-		nr.Mux.Unlock()
-		if ok {
-			lastOk = time.Now()
-			continue
-		}
-		if time.Since(lastOk) >= deadline {
-			nr.para()
-			log.Fatalf("[WATCHDOG] Sin líder tras %v: abortando", deadline)
+		if nr.initialElectionDelayUsed {
+			nr.Mux.Lock()
+			ok := nr.role == Leader || time.Since(nr.electionReset) < deadline
+			nr.Mux.Unlock()
+			if ok {
+				lastOk = time.Now()
+				continue
+			}
+			if time.Since(lastOk) >= deadline {
+				nr.para()
+				log.Fatalf("[WATCHDOG] Sin líder tras %v: abortando", deadline)
+			}
 		}
 	}
 }
@@ -187,6 +192,13 @@ func (nr *NodoRaft) para() {
 	go func() { time.Sleep(5 * time.Millisecond); os.Exit(0) }()
 }
 
+func (nr *NodoRaft) setReady() {
+	atomic.StoreUint32(&nr.readyFlag, 1)
+}
+
+func (nr *NodoRaft) isReady() bool {
+	return atomic.LoadUint32(&nr.readyFlag) == 1
+}
 func NuevoNodo(nodos []rpctimeout.HostPort, yo int, canalAplicarOperacion chan AplicaOperacion) *NodoRaft {
 	nr := &NodoRaft{
 		Nodos:                    nodos,
@@ -205,6 +217,7 @@ func NuevoNodo(nodos []rpctimeout.HostPort, yo int, canalAplicarOperacion chan A
 		initialElectionDelayUsed: false,
 		electionReset:            time.Now(),
 		rng:                      rand.New(rand.NewSource(time.Now().UnixNano() + int64(yo)*10007)),
+		readyFlag:                0,
 		canalAplicarOperacion:    canalAplicarOperacion,
 	}
 
@@ -235,6 +248,8 @@ func NuevoNodo(nodos []rpctimeout.HostPort, yo int, canalAplicarOperacion chan A
 	nr.Logger.Printf("Nodo: %d valores de Term: %d IdLider: %d", yo, nr.currentTerm, nr.IdLider)
 	// nr.resetTimer()
 	// go nr.runWatchdog()
+	// Inicialización terminada. Señalado en readyFlag
+	nr.setReady()
 	return nr
 }
 
@@ -323,6 +338,21 @@ func (nr *NodoRaft) ActivarTimers(args Vacio, reply *Vacio) error {
 	nr.resetTimer()
 	nr.Mux.Unlock()
 	go nr.runWatchdog()
+	return nil
+}
+
+// Para datos devueltos por Ping
+type PingReply struct {
+	NodeId int  // nodo que responde
+	Ready  bool // si ya está listo
+}
+
+// Método RPC Ping para descubrir si un nodo está inicializado
+func (nr *NodoRaft) Ping(args Vacio, reply *PingReply) error {
+	*reply = PingReply{
+		NodeId: nr.Yo,
+		Ready:  nr.isReady(),
+	}
 	return nil
 }
 

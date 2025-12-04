@@ -1,7 +1,7 @@
 #!/bin/bash
 
 kubectl delete job raft-boot --ignore-not-found
-kubectl delete deployment cliente --ignore-not-found
+kubectl delete pod cliente --ignore-not-found
 kubectl delete statefulset raft --ignore-not-found
 kubectl delete service raft-svc --ignore-not-found
 

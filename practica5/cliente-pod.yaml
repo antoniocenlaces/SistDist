@@ -6,8 +6,8 @@ spec:
   containers:
   - name: cliente
     image: localhost:5001/cliente:latest
-    imagePullPolicy: IfNotPresent
-    command: ["/bin/sh", "-c"]
     args:
-      - "./cliente 0 raft-0.raft-svc:29280 raft-1.raft-svc:29280 raft-2.raft-svc:29280"
-
+    - "0"
+    - "raft-0.raft-svc:29280"
+    - "raft-1.raft-svc:29280"
+    - "raft-2.raft-svc:29280"
