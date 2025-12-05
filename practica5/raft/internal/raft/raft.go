@@ -142,7 +142,7 @@ func (nr *NodoRaft) isCandidateUpToDate(cLastIdx, cLastTerm int) bool {
 func (nr *NodoRaft) resetTimer() {
 	var dur time.Duration
 	if !nr.initialElectionDelayUsed {
-		nr.initialElectionDelayUsed = true
+
 		dur = time.Duration(10000+nr.rng.Intn(500)) * time.Millisecond
 	} else {
 		dur = time.Duration(baseTimer+nr.rng.Intn(ceilTimer-baseTimer)) * time.Millisecond
@@ -162,6 +162,7 @@ func (nr *NodoRaft) resetTimer() {
 	nr.timer = time.AfterFunc(dur, func() {
 		// Llamada fuera de lock: iniciarEleccion gestionará locking internamente.
 		nr.iniciarEleccion()
+		nr.initialElectionDelayUsed = true
 	})
 }
 
