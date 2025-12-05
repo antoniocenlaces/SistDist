@@ -142,7 +142,8 @@ func (nr *NodoRaft) isCandidateUpToDate(cLastIdx, cLastTerm int) bool {
 func (nr *NodoRaft) resetTimer() {
 	var dur time.Duration
 	if !nr.initialElectionDelayUsed {
-		dur = time.Duration(30000+nr.rng.Intn(500)) * time.Millisecond
+		nr.initialElectionDelayUsed = true
+		dur = time.Duration(10000+nr.rng.Intn(500)) * time.Millisecond
 	} else {
 		dur = time.Duration(baseTimer+nr.rng.Intn(ceilTimer-baseTimer)) * time.Millisecond
 	}
@@ -161,7 +162,6 @@ func (nr *NodoRaft) resetTimer() {
 	nr.timer = time.AfterFunc(dur, func() {
 		// Llamada fuera de lock: iniciarEleccion gestionará locking internamente.
 		nr.iniciarEleccion()
-		nr.initialElectionDelayUsed = true
 	})
 }
 
@@ -246,10 +246,10 @@ func NuevoNodo(nodos []rpctimeout.HostPort, yo int, canalAplicarOperacion chan A
 		nr.matchIndex[i] = 0
 	}
 	nr.Logger.Printf("Nodo: %d valores de Term: %d IdLider: %d", yo, nr.currentTerm, nr.IdLider)
-	// nr.resetTimer()
-	// go nr.runWatchdog()
+	nr.resetTimer()
+	go nr.runWatchdog()
 	// Inicialización terminada. Señalado en readyFlag
-	nr.setReady()
+	//nr.setReady()
 	return nr
 }
 

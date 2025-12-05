@@ -3,7 +3,6 @@ package main
 import (
 	//"errors"
 	"fmt"
-	"sync"
 	"time"
 
 	//"log"
@@ -58,69 +57,71 @@ func main() {
 		time.Sleep(2 * time.Second)
 	}
 
-	go rpc.Accept(l)
+	rpc.Accept(l)
+	/*
+	   // ---------- Goroutine que hace ping periódicamente a todos los nodos ----------
 
-	// ---------- Goroutine que hace ping periódicamente a todos los nodos ----------
-	go func() {
-		pingTimeout := 1 * time.Second         // timeout para cada llamada Ping
-		pollInterval := 500 * time.Millisecond // intervalo entre rondas de ping
-		globalTimeout := 30 * time.Second      // tiempo máximo esperando a todos ready
+	   	go func() {
+	   		pingTimeout := 1 * time.Second         // timeout para cada llamada Ping
+	   		pollInterval := 500 * time.Millisecond // intervalo entre rondas de ping
+	   		globalTimeout := 30 * time.Second      // tiempo máximo esperando a todos ready
 
-		deadline := time.Now().Add(globalTimeout)
-		up := make(map[rpctimeout.HostPort]bool)
-		var mu sync.Mutex
+	   		deadline := time.Now().Add(globalTimeout)
+	   		up := make(map[rpctimeout.HostPort]bool)
+	   		var mu sync.Mutex
 
-		var replyAct raft.Vacio
+	   		var replyAct raft.Vacio
 
-		for {
-			// comprobar timeout global
-			if time.Now().After(deadline) {
-				fmt.Println("Timeout esperando que todos los nodos estén READY; activando timers local igualmente")
-				// decisión: activar timers aún si no todos están listos
-				nr.ActivarTimers(raft.Vacio{}, &replyAct)
-				return
-			}
+	   		for {
+	   			// comprobar timeout global
+	   			if time.Now().After(deadline) {
+	   				fmt.Println("Timeout esperando que todos los nodos estén READY; activando timers local igualmente")
+	   				// decisión: activar timers aún si no todos están listos
+	   				nr.ActivarTimers(raft.Vacio{}, &replyAct)
+	   				return
+	   			}
 
-			var wg sync.WaitGroup
-			for _, hp := range nodos {
-				h := hp
-				wg.Add(1)
-				go func() {
-					defer wg.Done()
-					var reply raft.PingReply
-					err := h.CallTimeout("NodoRaft.Ping", raft.Vacio{}, &reply, pingTimeout)
-					mu.Lock()
-					if err == nil && reply.Ready {
-						up[h] = true
-					} else {
-						up[h] = false
-					}
-					mu.Unlock()
-				}()
-			}
-			wg.Wait()
+	   			var wg sync.WaitGroup
+	   			for _, hp := range nodos {
+	   				h := hp
+	   				wg.Add(1)
+	   				go func() {
+	   					defer wg.Done()
+	   					var reply raft.PingReply
+	   					err := h.CallTimeout("NodoRaft.Ping", raft.Vacio{}, &reply, pingTimeout)
+	   					mu.Lock()
+	   					if err == nil && reply.Ready {
+	   						up[h] = true
+	   					} else {
+	   						up[h] = false
+	   					}
+	   					mu.Unlock()
+	   				}()
+	   			}
+	   			wg.Wait()
 
-			// comprobar si todos están up
-			allUp := true
-			mu.Lock()
-			for _, h := range nodos {
-				if !up[h] {
-					allUp = false
-					break
-				}
-			}
-			mu.Unlock()
+	   			// comprobar si todos están up
+	   			allUp := true
+	   			mu.Lock()
+	   			for _, h := range nodos {
+	   				if !up[h] {
+	   					allUp = false
+	   					break
+	   				}
+	   			}
+	   			mu.Unlock()
 
-			if allUp {
-				fmt.Println("Todos los nodos responden READY → activando timers")
-				nr.ActivarTimers(raft.Vacio{}, &replyAct)
-				return
-			}
+	   			if allUp {
+	   				fmt.Println("Todos los nodos responden READY → activando timers")
+	   				nr.ActivarTimers(raft.Vacio{}, &replyAct)
+	   				return
+	   			}
 
-			time.Sleep(pollInterval)
-		}
-	}()
+	   			time.Sleep(pollInterval)
+	   		}
+	   	}()
 
-	// Evitamos que main termine
-	select {}
+	   // Evitamos que main termine
+	   select {
+	*/
 }
